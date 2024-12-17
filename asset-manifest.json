@@ -1,16 +1,10 @@
 {
   "files": {
-    "main.css": "/phlox-website/static/css/main.f855e6bc.css",
-    "main.js": "/phlox-website/static/js/main.24201b87.js",
-    "static/js/488.01d1c38e.chunk.js": "/phlox-website/static/js/488.01d1c38e.chunk.js",
-    "static/media/logo.svg": "/phlox-website/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.js": "/phlox-website/static/js/main.50a4f7d7.js",
     "index.html": "/phlox-website/index.html",
-    "main.f855e6bc.css.map": "/phlox-website/static/css/main.f855e6bc.css.map",
-    "main.24201b87.js.map": "/phlox-website/static/js/main.24201b87.js.map",
-    "488.01d1c38e.chunk.js.map": "/phlox-website/static/js/488.01d1c38e.chunk.js.map"
+    "main.50a4f7d7.js.map": "/phlox-website/static/js/main.50a4f7d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.24201b87.js"
+    "static/js/main.50a4f7d7.js"
   ]
 }
