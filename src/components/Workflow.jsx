@@ -1,0 +1,258 @@
+import React from "react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Stack,
+  useColorMode,
+  Circle,
+  Image,
+} from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import {
+  FaMicrophone,
+  FaRobot,
+  FaRegFileAlt,
+  FaTasks,
+  FaEnvelope,
+} from "react-icons/fa";
+import Screenshots from "./Screenshots";
+import theme from "../theme";
+
+// Update these imports with actual screenshots when available
+import transcriptionImg from "../assets/screenshots/screenshot-dark.png";
+import templateImg from "../assets/screenshots/screenshot-dark.png";
+import chatImg from "../assets/screenshots/screenshot-dark.png";
+import correspondenceImg from "../assets/screenshots/screenshot-dark.png";
+import tasksImg from "../assets/screenshots/tasks-dark.gif";
+
+const MotionBox = motion(Box);
+
+const PixelatedDivider = () => {
+  const { colorMode } = useColorMode();
+
+  return (
+    <Box
+      my={0}
+      mx="auto"
+      maxW="80%"
+      height="60px"
+      display="flex"
+      justifyContent="center"
+    >
+      <Box
+        width="2px"
+        height="100%"
+        style={{
+          background: `repeating-linear-gradient(
+            to bottom,
+            ${colorMode === "dark" ? "#666666" : "#CCCCCC"} 0px,
+            ${colorMode === "dark" ? "#666666" : "#CCCCCC"} 4px,
+            transparent 4px,
+            transparent 8px
+          )`,
+        }}
+      />
+    </Box>
+  );
+};
+
+const WorkflowSection = ({
+  number,
+  title,
+  description,
+  icon,
+  imageSrc,
+  isReversed,
+}) => {
+  const { colorMode } = useColorMode();
+  return (
+    <MotionBox
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      mb={0}
+      maxW="80%"
+      mx="auto"
+      position="relative"
+    >
+      <MotionBox
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.2 },
+        }}
+      >
+        <Flex
+          direction={{ base: "column", md: isReversed ? "row-reverse" : "row" }}
+          align="center"
+          justify="space-between"
+          p={8}
+          bg={
+            colorMode === "dark"
+              ? theme.colors.dark.secondary
+              : theme.colors.light.secondary
+          }
+          borderRadius="xl"
+          boxShadow="none"
+          position="relative"
+          overflow="hidden"
+        >
+          <Stack
+            spacing={4}
+            mb={{ base: 8, md: 0 }}
+            maxW={{ base: "100%", md: "50%" }}
+            textAlign={{ base: "center", md: isReversed ? "right" : "left" }}
+            position="relative"
+            zIndex={1}
+          >
+            {/* Background number */}
+            <Text
+              position="absolute"
+              left={isReversed ? "auto" : "-8px"}
+              right={isReversed ? "-8px" : "auto"}
+              top="50%"
+              transform="translateY(-50%)"
+              fontSize="180px"
+              fontWeight="900"
+              color={colorMode === "dark" ? "whiteAlpha.100" : "blackAlpha.50"}
+              lineHeight="1"
+              userSelect="none"
+              zIndex={-1}
+            >
+              {number}
+            </Text>
+
+            <Box
+              textAlign={{ base: "center", md: isReversed ? "right" : "left" }}
+              display="flex"
+              alignItems="center"
+              gap={2}
+            >
+              <Box
+                color={
+                  colorMode === "dark"
+                    ? "dark.textSecondary"
+                    : "light.textSecondary"
+                }
+                fontSize="3xl"
+              >
+                {icon}
+              </Box>
+              <Heading
+                as="h3"
+                size="lg"
+                color={
+                  colorMode === "dark"
+                    ? "dark.textPrimary"
+                    : "light.textPrimary"
+                }
+                display="inline"
+              >
+                {title}
+              </Heading>
+            </Box>
+            <Text
+              color={
+                colorMode === "dark"
+                  ? "dark.textSecondary"
+                  : "light.textSecondary"
+              }
+            >
+              {description}
+            </Text>
+          </Stack>
+          <Box
+            maxW={{ base: "100%", md: "45%" }}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            position="relative"
+            zIndex={1}
+          >
+            <Image
+              src={imageSrc}
+              alt={title}
+              borderRadius="md"
+              boxShadow="none"
+              w="full"
+            />
+          </Box>
+        </Flex>
+      </MotionBox>
+    </MotionBox>
+  );
+};
+
+const Workflow = ({ bgColor }) => {
+  const workflow = [
+    {
+      number: "01",
+      title: "Record or Upload Audio",
+      description:
+        "Record your patient consultation directly in the browser or upload an audio file. Phlox uses Whisper to transcribe the audio into text.",
+      icon: <FaMicrophone />,
+      imageSrc: transcriptionImg,
+    },
+    {
+      number: "02",
+      title: "Generate Structured Notes",
+      description:
+        "Phlox processes the transcript through your selected template, creating a structured clinical note with all the required fields and formatting.",
+      icon: <FaRegFileAlt />,
+      imageSrc: templateImg,
+    },
+    {
+      number: "03",
+      title: "Get AI Assistance",
+      description:
+        "Discuss cases with the AI assistant, which can reference your clinical notes and uploaded medical documents to help inform decisions.",
+      icon: <FaRobot />,
+      imageSrc: chatImg,
+    },
+    {
+      number: "04",
+      title: "Generate Correspondence",
+      description:
+        "Create detailed referral letters and other documents based on your consultation notes, with AI refinement to ensure quality.",
+      icon: <FaEnvelope />,
+      imageSrc: correspondenceImg,
+    },
+    {
+      number: "05",
+      title: "Manage Tasks & Follow-up",
+      description:
+        "Automatically extract tasks from your notes to track follow-up items. View all tasks by clinic day or outstanding items.",
+      icon: <FaTasks />,
+      imageSrc: tasksImg,
+    },
+  ];
+
+  return (
+    <Box mb={10} id="workflow" bg={bgColor}>
+      <Heading as="h2" variant="h2" sx={{ textAlign: "center" }}>
+        The Phlox Workflow
+      </Heading>
+      <Text textAlign="center" variant="body" mb={10} maxW="60%" mx="auto">
+        Phlox integrates seamlessly into your practice, handling documentation
+        and providing assistant while keeping all your data local and secure.
+      </Text>
+      {workflow.map((step, index) => (
+        <React.Fragment key={index}>
+          <WorkflowSection
+            number={step.number}
+            title={step.title}
+            description={step.description}
+            icon={step.icon}
+            imageSrc={step.imageSrc}
+            isReversed={index % 2 === 1}
+          />
+          {index < workflow.length - 1 && <PixelatedDivider />}
+        </React.Fragment>
+      ))}
+    </Box>
+  );
+};
+
+export default Workflow;
