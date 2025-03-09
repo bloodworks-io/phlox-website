@@ -36,9 +36,6 @@ const FeatureItem = ({ title, description, icon, accentColor }) => {
         fontSize="3xl"
         mb={4}
         color={accentColor}
-        _hover={{
-          transform: "rotate(360deg)",
-        }}
         transition="transform 0.5s ease-in-out"
       />
       <Heading
@@ -68,9 +65,9 @@ const Features = ({ bgColor }) => {
 
   const features = [
     {
-      title: "Medical Transcription",
+      title: "AI Transcription",
       description:
-        "Convert audio to structured clinical notes using Whisper and templates",
+        "Convert audio to structured clinic notes using Whisper and templates",
       icon: FaMicrophone,
       accentColor,
     },
