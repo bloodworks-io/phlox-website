@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.b9dc40ba.js",
+    "main.js": "/static/js/main.6b3895e0.js",
     "static/media/tasks-dark.gif": "/static/media/tasks-dark.a851b4b49182e50bddb8.gif",
     "static/media/bg.webp": "/static/media/bg.aa6e73dd6cb8753ae21b.webp",
     "static/media/screenshot-dark.png": "/static/media/screenshot-dark.778192997f0b38f9e9d6.png",
@@ -14,9 +14,9 @@
     "static/media/chakra-logo.png": "/static/media/chakra-logo.b1316a82db2b2e8eabe6.png",
     "static/media/logo.webp": "/static/media/logo.1297ce8e35d2ed6a1f2d.webp",
     "index.html": "/index.html",
-    "main.b9dc40ba.js.map": "/static/js/main.b9dc40ba.js.map"
+    "main.6b3895e0.js.map": "/static/js/main.6b3895e0.js.map"
   },
   "entrypoints": [
-    "static/js/main.b9dc40ba.js"
+    "static/js/main.6b3895e0.js"
   ]
 }

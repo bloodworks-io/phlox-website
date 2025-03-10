@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 const SEO = () => {
-  const siteTitle = "Phlox - Healthcare AI Assistant";
+  const siteTitle = "Phlox - Free, Open Source Healthcare AI Assistant";
   const siteDescription =
     "An open-source, local-first AI assistant for healthcare professionals with transcription, task management, and decision support.";
   const siteUrl = "https://phlox.bloodworks.io";
