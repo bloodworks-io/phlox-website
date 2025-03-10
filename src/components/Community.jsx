@@ -261,7 +261,7 @@ const FeaturePoint = ({ icon, title, description, colorMode }) => (
         colorMode === "dark" ? "dark.primaryButton" : "light.primaryButton"
       }
     />
-    <Box>
+    <Box align="justify">
       <Heading
         as="h4"
         size="md"

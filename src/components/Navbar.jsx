@@ -27,6 +27,7 @@ const Navbar = ({ activeSection }) => {
     <Box
       bg={theme.colors.dark.secondary}
       py={4}
+      minH={{ base: "4vh", md: "auto" }}
       boxShadow="none"
       position="sticky"
       top="0"

@@ -69,7 +69,7 @@ const Hero = () => {
 
   return (
     <Flex
-      direction={{ base: "column", md: "row" }}
+      direction="column"
       align="center"
       justify="center"
       mb={5}
@@ -92,76 +92,82 @@ const Hero = () => {
         zIndex="0"
       />
 
-      <Box maxWidth="70%" width="100%" position="relative" zIndex="1">
-        <Flex
-          align="center"
-          justify="center"
-          direction="column"
-          textAlign="center"
-        >
-          <Box maxWidth="100%">
-            <Heading
-              as="h1"
-              size={{ base: "2xl", md: "3xl" }}
-              mb={4}
-              fontWeight="bold"
-              color="white"
-              textAlign="center"
+      {/* Content container */}
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        width="100%"
+        maxWidth="90%" // Wider max width
+        position="relative"
+        zIndex="1"
+      >
+        {/* First Box for the heading */}
+        <Box width="100%" textAlign="center">
+          <Heading
+            as="h1"
+            size={{ base: "2xl", sm: "3xl", md: "3xl" }}
+            mb={4}
+            fontWeight="bold"
+            color="white"
+            lineHeight="1.5"
+          >
+            Your Local AI
+            <br />
+            <Box
+              as="span"
+              bgGradient="linear(to-r, orange.400, orange.600)"
+              bgClip="text"
+              display="inline-block"
               lineHeight="1.5"
+              whiteSpace="nowrap" // Prevent text from wrapping
             >
-              Your Local AI
-              <br />
-              <Box
-                as="span"
-                bgGradient="linear(to-r, orange.400, orange.600)"
-                bgClip="text"
-                display="inline-block"
-                lineHeight="1.5"
-              >
-                {text}
-                <Box as="span" opacity={showCursor ? 1 : 0} color="orange.400">
-                  |
-                </Box>
+              {text}
+              <Box as="span" opacity={showCursor ? 1 : 0} color="orange.400">
+                |
               </Box>
-            </Heading>
-            <Text
-              fontSize={{ base: "sm", md: "s" }}
-              mb={6}
-              color="whiteAlpha.900"
-              textAlign="center"
+            </Box>
+          </Heading>
+        </Box>
+
+        {/* Second Box for the rest of the content */}
+        <Box width="100%" maxWidth="90%" textAlign="center">
+          <Text
+            fontSize={{ base: "sm", md: "s" }}
+            mb={6}
+            color="whiteAlpha.900"
+          >
+            A free, open-source patient management and AI assistant that helps
+            clinicians with transcription, task management, and decision support
+            - all running locally for complete privacy and control.
+          </Text>
+          <Stack
+            direction={{ base: "column", sm: "row" }}
+            spacing={4}
+            justify="center"
+            mb={{ base: 8, md: 0 }}
+          >
+            <Button
+              as={Link}
+              href="https://github.com/bloodworks-io/phlox"
+              isExternal
+              size="lg"
+              variant="primary"
+              leftIcon={<FaGithub />}
             >
-              A free, open-source patient management and AI assistant that helps
-              clinicians with transcription, task management, and decision
-              support - all running locally for complete privacy and control.
-            </Text>
-            <Stack
-              direction={{ base: "column", sm: "row" }}
-              spacing={4}
-              justify="center"
-              mb={{ base: 8, md: 0 }}
+              View on GitHub
+            </Button>
+            <Button
+              as={Link}
+              href="https://github.com/bloodworks-io/phlox/blob/main/README.md"
+              isExternal
+              size="lg"
+              variant="secondary"
+              leftIcon={<FaBook />}
             >
-              <Button
-                as={Link}
-                href="https://github.com/bloodworks-io/phlox"
-                isExternal
-                size="lg"
-                variant="primary"
-                leftIcon={<FaGithub />}
-              >
-                View on GitHub
-              </Button>
-              <Button
-                as={Link}
-                href="https://github.com/bloodworks-io/phlox/blob/main/README.md"
-                isExternal
-                size="lg"
-                variant="secondary"
-                leftIcon={<FaBook />}
-              >
-                See The Docs
-              </Button>
-            </Stack>
-          </Box>
+              See The Docs
+            </Button>
+          </Stack>
 
           <Box
             maxWidth={{ base: "90%", md: "90%" }}
@@ -193,8 +199,8 @@ const Hero = () => {
               />
             </Box>
           </Box>
-        </Flex>
-      </Box>
+        </Box>
+      </Flex>
     </Flex>
   );
 };
