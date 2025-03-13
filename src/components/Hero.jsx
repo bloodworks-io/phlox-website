@@ -175,6 +175,8 @@ const Hero = () => {
             position="relative"
             display="flex"
             alignItems="flex-end"
+            mx="auto"
+            justifyContent="center"
           >
             <Box
               p={0}
