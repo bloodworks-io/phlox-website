@@ -137,9 +137,13 @@ const Hero = () => {
             mb={6}
             color="whiteAlpha.900"
           >
-            A free, open-source patient management and AI assistant that helps
-            clinicians with transcription, task management, and decision support
-            - all running locally for complete privacy and control.
+            An open-source <Text as="strong">experimental project</Text> for exploring local AI concepts
+            like transcription and text organization. <Text as="strong">This is intended for educational and
+            personal experimentation ONLY.</Text> It is <Text as="strong">NOT A CERTIFIED MEDICAL DEVICE</Text> and
+            <Text as="strong">MUST NOT BE USED IN ACTUAL CLINICAL SETTINGS or FOR CLINICAL DECISION-MAKING.</Text>
+            Any appearance of functionality related to patient management or clinical assistance is purely for
+            demonstrative purposes within this experimental context. Offers a glimpse into local AI, but provides
+            <Text as="strong">NO guarantees of privacy, accuracy, or control for any serious or clinical purpose.</Text>
           </Text>
           <Stack
             direction={{ base: "column", sm: "row" }}

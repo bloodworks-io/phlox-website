@@ -66,9 +66,7 @@ const PoweredBy = () => {
       color={colorMode === "dark" ? "dark.textPrimary" : "light.textPrimary"}
     >
       <Text maxW="container.md" mx="auto" mb={8}>
-        Phlox is built with free and open-source technologies that prioritize
-        privacy, local processing, and user control. All components run on your
-        own hardware.
+        Phlox is an experimental project built with free and open-source technologies to explore concepts of privacy and local processing. These are for demonstration and educational purposes ONLY, not for production or real-world use. Components are intended to run on your own hardware for testing.
       </Text>
 
       <Flex justify="center" flexWrap="wrap" gap={12} mb={12}>
