@@ -38,9 +38,7 @@ const Community = ({ bgColor }) => {
           Open Source & Local-First
         </Heading>
         <Text textAlign="center" variant="body" mb={10} maxW="60%" mx="auto">
-          Phlox is built on the belief that tools for healthcare professionals
-          should be free, open, and put privacy first. You maintain complete
-          control over your data and workflow.
+          Phlox is an open-source experimental project exploring local-first concepts. While it aims to demonstrate privacy-conscious design, it is intended for educational and personal experimentation ONLY and does NOT guarantee control or security for real data or workflows.
         </Text>
         <Flex
           direction={{ base: "column", lg: "row" }}
@@ -55,7 +53,7 @@ const Community = ({ bgColor }) => {
                 icon={FaLock}
                 title={
                   <Flex align="center" gap={2}>
-                    <Box>Privacy & Security</Box>
+                    <Box>Experiment in Local Data Handling</Box>
                     <Tooltip
                       label="Phlox's security ultimately depends on your system's security. Ensure your machine is protected with strong passwords, encryption, and up-to-date software."
                       hasArrow
@@ -87,13 +85,13 @@ const Community = ({ bgColor }) => {
                     </Tooltip>
                   </Flex>
                 }
-                description="All data stays on your machine. No cloud storage, no external access. Your patient information never leaves your control."
+                description="Demonstrates keeping data on your machine for experimental purposes. This is illustrative only and NOT a secure system. Not for use with real or sensitive patient information."
                 colorMode={colorMode}
               />
               <FeaturePoint
                 icon={FaTools}
                 title="Local-First Architecture"
-                description="Uses Ollama for LLMs, local Whisper for transcription, and SQLite for storage - everything runs on your hardware."
+                description="Experiments with local tools like Ollama, Whisper, and SQLite. Performance and reliability will vary; for educational and testing purposes ONLY."
                 colorMode={colorMode}
               />
               <FeaturePoint
@@ -148,6 +146,9 @@ const Community = ({ bgColor }) => {
             borderRadius="lg"
             bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
           >
+            <Text fontStyle="italic" fontSize="md" mb={4}>
+              The following section shares the personal motivation and journey behind this experimental project from its creator:
+            </Text>
             <Flex align="center" gap={4} mb={6}>
               <Image
                 src={filipeImage}

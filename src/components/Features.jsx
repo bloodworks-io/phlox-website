@@ -66,57 +66,49 @@ const Features = ({ bgColor }) => {
   const features = [
     {
       title: "AI Transcription",
-      description:
-        "Convert audio to structured clinic notes using Whisper and templates",
+      description: "Demonstrates audio-to-text experimentation using Whisper. For educational and personal experimentation ONLY. Not for reliable note-taking or clinical use.",
       icon: FaMicrophone,
       accentColor,
     },
     {
       title: "Flexible Templates",
-      description:
-        "Create customizable templates with fields, prompts, and formatting rules",
+      description: "Allows exploration of text template creation. Functionality is for experimental purposes ONLY and may not work as expected.",
       icon: FaRegFileAlt,
       accentColor,
     },
     {
       title: "Task Manager",
-      description:
-        "Automatically extract and track action items from clinical notes",
+      description: "Illustrates an attempt to parse text for tasks. Highly experimental; NOT FOR REAL-WORLD USE or clinical task management.",
       icon: FaTasks,
       accentColor,
     },
     {
       title: "Correspondence",
-      description:
-        "Generate patient letters from notes using templates and LLM refinement",
+      description: "Shows text generation based on notes. Output is for illustrative and experimental purposes ONLY; not for actual correspondence.",
       icon: FaEnvelope,
       accentColor,
     },
     {
       title: "AI Assistant",
-      description:
-        "Chat with clinical notes and uploaded medical documents using RAG",
+      description: "Basic chat interface to experiment with RAG. For educational exploration ONLY. DO NOT use with real or sensitive data; highly experimental.",
       icon: FaRobot,
       accentColor,
     },
     {
       title: "Dashboard & RSS",
-      description:
-        "Track tasks and get LLM-generated summaries of medical articles",
+      description: "Simple display for text processing experiments (tasks, RSS). Summaries are illustrative and for experimentation ONLY.",
       icon: FaRss,
       accentColor,
     },
     {
       title: "Patient Records",
-      description:
-        "Basic database for patient demographics and clinical history",
+      description: "Rudimentary data storage fields for experimental purposes. Absolutely NOT for real patient data; insecure and not for clinical use.",
       icon: FaDatabase,
       accentColor,
     },
     {
       title: "Clinical Reasoning",
-      description:
-        "Generate structured clinical analysis with differential diagnoses",
+      description: "Attempts to generate text in a clinical analysis format. Purely an EXPERIMENTAL FEATURE, NOT actual clinical reasoning. NOT FOR CLINICAL DECISION-MAKING.",
       icon: FaUserMd,
       accentColor,
     },
@@ -125,7 +117,7 @@ const Features = ({ bgColor }) => {
   return (
     <Box as="section" py={16} bg={bgColor} id="features">
       <Heading as="h2" variant="h2" sx={{ textAlign: "center" }} mb={8}>
-        Key Features
+        Experimental Modules & Concepts
       </Heading>
       <Grid
         templateColumns={{

@@ -11,8 +11,7 @@ import {
   VStack,
   UnorderedList,
   ListItem,
-  Box,
-  Heading
+  Heading // Box is not used in the new version
 } from '@chakra-ui/react';
 
 const UsageWarningModal = ({ isOpen, onClose }) => {

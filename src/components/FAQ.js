@@ -16,18 +16,15 @@ const FAQ = ({ bgColor }) => {
   const faqData = [
     {
       question: "What is Phlox?",
-      answer:
-        "Phlox is an open-source, local-first clinical tool with features including patient records, medical transcription using Whisper + Ollama, task management, RSS reader with LLM summaries, and an AI assistant with RAG capabilities.",
+      answer: "Phlox is an open-source experimental project intended for educational and personal experimentation. It explores concepts like local AI for text processing (Whisper + Ollama) and text organization. It is NOT a certified medical device and MUST NOT be used for clinical decision-making."
     },
     {
       question: "What are the main features of Phlox?",
-      answer:
-        "Key features include medical transcription with note summarization, flexible template system, task manager for tracking action items, correspondence generation, AI chat with documents and clinical notes, and a dashboard with RSS reader for medical updates.",
+      answer: "Phlox includes several experimental modules for demonstration, such as audio transcription, text templating, rudimentary task parsing, and example text generation. These are for educational and personal experimentation ONLY, not for real-world use."
     },
     {
       question: "How does Phlox handle privacy?",
-      answer:
-        "Phlox is designed to be local-first, with all data staying on your machine. It uses SQLite for database storage (with encryption), local LLMs via Ollama, and local Whisper for transcription. No data is sent to external services unless you configure it to do so.",
+      answer: "Phlox is designed around local-first principles for experimental purposes. However, it does not guarantee privacy or security for any real-world application. Any data handling (SQLite, local models) is for testing within an experimental context and should NOT be considered secure for sensitive or clinical information."
     },
     {
       question: "What are the prerequisites for running Phlox?",
@@ -41,39 +38,32 @@ const FAQ = ({ bgColor }) => {
     },
     {
       question: "Is Phlox suitable for clinical use?",
-      answer:
-        "Phlox is provided for educational and research purposes only. It is NOT intended for direct clinical use in its current state without rigorous validation, security hardening, and adherence to all applicable regulations. All AI-generated outputs MUST be independently verified.",
+      answer: "NO. Phlox is an experimental project intended for educational and personal experimentation ONLY. It is NOT a certified medical device and MUST NOT be used in actual clinical settings or for clinical decision-making. It has not undergone validation or security hardening and does not meet regulatory standards."
     },
     {
       question: "What are the limitations of Phlox?",
-      answer:
-        "Phlox is experimental software that may contain bugs and security vulnerabilities. LLMs can hallucinate and generate incorrect information, especially smaller locally-run models. It lacks advanced security features and user authentication required for regulatory compliance.",
+      answer: "Phlox is experimental software and may contain bugs and inconsistencies. AI outputs can be unreliable and inaccurate; always verify information. It lacks security features and user authentication suitable for regulated environments or clinical use."
     },
     {
       question:
         "Is Phlox compliant with healthcare regulations (HIPAA, GDPR, etc)?",
-      answer:
-        "No. Phlox, in its default configuration, does not comply with regulations such as HIPAA, GDPR, or other patient data privacy or medical device regulations. It lacks required security features, user authentication, audit logs, and access controls.",
+      answer: "NO. Phlox, as an experimental project, does not comply with regulations such as HIPAA or GDPR. It lacks the necessary security, authentication, and audit features for handling protected health information."
     },
     {
       question: "How does the transcription process work?",
-      answer:
-        "Audio is recorded or uploaded, then processed by a Whisper endpoint. The transcript is broken into template fields and processed by Ollama to extract key points as structured JSON. After refinement and formatting, the fields are combined into a complete note.",
+      answer: "The system demonstrates experimental audio transcription using Whisper, followed by text processing with Ollama via templates. This is for illustrative purposes within an educational context; results are not guaranteed for reliability or accuracy."
     },
     {
       question: "How do AI features like Document Chat and Case Chat work?",
-      answer:
-        "Document Chat lets you upload and query medical documents with citations to sources. Case Chat enables discussion of patient cases with reference to clinical notes. The Clinical Reasoning Assistant generates structured analyses with differentials and recommendations.",
+      answer: "These are experimental modules demonstrating text interaction with an AI. They are for educational and personal experimentation ONLY and are not intended for real document analysis, case discussion, or clinical reasoning."
     },
     {
       question: "What template features are available?",
-      answer:
-        "Templates have customizable fields with system prompts, format specifications, persistence flags, and post-processing rules. You can create templates manually or generate them from example notes, with version control for tracking changes.",
+      answer: "The project includes experimental features for text templating, allowing for exploration of field definition and prompting. This is not a robust or complete system for production use."
     },
     {
       question: "How does the task manager work?",
-      answer:
-        "Tasks are automatically extracted from numbered items in the Plan section of clinical notes. You can view tasks by clinic day or all outstanding tasks, and mark them complete with checkboxes.",
+      answer: "This is an experimental feature attempting to parse tasks from text. It is rudimentary and not reliable for actual task management or clinical use."
     },
   ];
 
