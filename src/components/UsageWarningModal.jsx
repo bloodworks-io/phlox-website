@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -9,21 +9,26 @@ import {
   Button,
   Text,
   VStack,
-  UnorderedList,
-  ListItem,
-  Heading // Box is not used in the new version
-} from '@chakra-ui/react';
+  Heading,
+  useTheme,
+  useColorMode,
+} from "@chakra-ui/react";
 
 const UsageWarningModal = ({ isOpen, onClose }) => {
   const [countdown, setCountdown] = useState(10);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const theme = useTheme();
+  const { colorMode } = useColorMode();
+
+  // Get theme colors based on current color mode
+  const colors = colorMode === "light" ? theme.colors.light : theme.colors.dark;
 
   useEffect(() => {
     if (isOpen) {
-      setCountdown(10); // Reset countdown when modal opens
+      setCountdown(5); // Reset countdown when modal opens
       setIsButtonDisabled(true);
       const timer = setInterval(() => {
-        setCountdown(prevCountdown => {
+        setCountdown((prevCountdown) => {
           if (prevCountdown <= 1) {
             clearInterval(timer);
             setIsButtonDisabled(false);
@@ -37,59 +42,107 @@ const UsageWarningModal = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   const handleAccept = () => {
-    localStorage.setItem('phloxWarningAccepted', 'true');
+    localStorage.setItem("phloxWarningAccepted", "true");
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false} closeOnEsc={false} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Usage Warning</ModalHeader>
-        <ModalBody>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnOverlayClick={false}
+      closeOnEsc={false}
+      isCentered
+      size={{ base: "xs", sm: "sm", md: "md", lg: "lg", xl: "xl" }}
+    >
+      <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(4px)" />
+      <ModalContent
+        bg={colors.base}
+        borderColor={colors.secondary}
+        borderWidth="1px"
+        borderRadius="md"
+        boxShadow="xl"
+        mx={4}
+      >
+        <ModalHeader
+          bg={colors.secondary}
+          borderTopRadius="md"
+          borderBottomWidth="1px"
+          borderBottomColor={colors.secondary}
+          py={4}
+        >
+          <Heading
+            as="h3"
+            size="lg"
+            color={colors.textPrimary}
+            fontFamily={theme.fonts.heading}
+            textAlign="center"
+          >
+            ⚠️ Usage Warning
+          </Heading>
+        </ModalHeader>
+
+        <ModalBody py={6} px={6}>
           <VStack spacing={4} align="stretch">
-            <Text>
-              Phlox is an experimental project intended for educational and personal <Text as="strong">experimentation</Text> ONLY.
+            <Text color={colors.textPrimary} fontSize="md" lineHeight="1.6">
+              Phlox is an experimental project intended for educational and
+              personal{" "}
+              <Text as="strong" color={colors.textTeriary}>
+                experimentation
+              </Text>{" "}
+              ONLY.
             </Text>
-            <Text fontWeight="bold">
-              AS PROVIDED, IT IS NOT A CERTIFIED MEDICAL DEVICE AND MUST NOT BE USED IN ACTUAL CLINICAL SETTINGS or FOR CLINICAL DECISION-MAKING.
+
+            <Text
+              fontWeight="bold"
+              color={colors.dangerButton}
+              fontSize="md"
+              lineHeight="1.6"
+              bg={colorMode === "light" ? "red.50" : "red.900"}
+              p={3}
+              borderRadius="md"
+              borderLeft="4px solid"
+              borderLeftColor={colors.dangerButton}
+            >
+              AS PROVIDED, IT IS NOT A CERTIFIED MEDICAL DEVICE AND MUST NOT BE
+              USED IN ACTUAL CLINICAL SETTINGS or FOR CLINICAL DECISION-MAKING.
             </Text>
-            <Text>
-              AI outputs can be unreliable and inaccurate. Always verify information and use professional clinical judgment.
+
+            <Text color={colors.textSecondary} fontSize="md" lineHeight="1.6">
+              AI outputs can be unreliable and inaccurate. Always verify
+              information and use professional clinical judgment.
             </Text>
-            <Text>
-              For full details on limitations and risks, please read the <Text as="strong">Usage Warning</Text> section carefully before proceeding.
-            </Text>
-            <Heading as="h3" size="sm">Key limitations:</Heading>
-            <UnorderedList spacing={2}>
-              <ListItem>
-                <Text as="strong">Experimental Code:</Text> The software is under active development and may contain bugs or behave unexpectedly.
-              </ListItem>
-              <ListItem>
-                <Text as="strong">AI Hallucinations:</Text> The AI can generate incorrect or misleading information. Outputs are not a substitute for professional medical advice.
-              </ListItem>
-              <ListItem>
-                <Text as="strong">No User Authentication:</Text> The current version lacks user login/security features, making it unsuitable for sensitive data.
-              </ListItem>
-              <ListItem>
-                <Text as="strong">Not HIPAA/GDPR Compliant:</Text> The system does not meet regulatory standards for handling patient data.
-              </ListItem>
-            </UnorderedList>
-            <Text fontWeight="bold">
-              Use at your own risk and only for non-clinical, educational purposes unless you have implemented robust security measures and undertaken thorough validation.
+
+            <Text color={colors.textPrimary} fontSize="md" lineHeight="1.6">
+              For full details on limitations and risks, please read the{" "}
+              <Text as="strong" color={colors.textTeriary}>
+                Usage Warning
+              </Text>{" "}
+              section carefully before proceeding.
             </Text>
           </VStack>
         </ModalBody>
-        <ModalFooter>
-          <Text mr={3}>
-            {isButtonDisabled ? `Accept button unlocks in ${countdown}s` : "You can now accept."}
-          </Text>
+
+        <ModalFooter
+          bg={colors.secondary}
+          borderBottomRadius="md"
+          borderTopWidth="1px"
+          borderTopColor={colors.secondary}
+          justifyContent="center"
+          py={4}
+        >
           <Button
-            colorScheme="blue"
+            variant="secondary"
             onClick={handleAccept}
             isDisabled={isButtonDisabled}
+            size="lg"
+            minW="120px"
+            _disabled={{
+              opacity: 0.6,
+              cursor: "not-allowed",
+            }}
           >
-            Accept
+            {isButtonDisabled ? `Wait ${countdown}s` : "I Understand & Accept"}
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -38,7 +38,10 @@ const Community = ({ bgColor }) => {
           Open Source & Local-First
         </Heading>
         <Text textAlign="center" variant="body" mb={10} maxW="60%" mx="auto">
-          Phlox is an open-source experimental project exploring local-first concepts. While it aims to demonstrate privacy-conscious design, it is intended for educational and personal experimentation ONLY and does NOT guarantee control or security for real data or workflows.
+          Phlox is built on open-source principles with a local-first
+          architecture. All data stays on your machine, using only free and
+          open-source tools. No subscriptions, no vendor lock-in, and complete
+          transparency through open source code.
         </Text>
         <Flex
           direction={{ base: "column", lg: "row" }}
@@ -53,7 +56,7 @@ const Community = ({ bgColor }) => {
                 icon={FaLock}
                 title={
                   <Flex align="center" gap={2}>
-                    <Box>Experiment in Local Data Handling</Box>
+                    <Box>100% Local</Box>
                     <Tooltip
                       label="Phlox's security ultimately depends on your system's security. Ensure your machine is protected with strong passwords, encryption, and up-to-date software."
                       hasArrow
@@ -85,13 +88,13 @@ const Community = ({ bgColor }) => {
                     </Tooltip>
                   </Flex>
                 }
-                description="Demonstrates keeping data on your machine for experimental purposes. This is illustrative only and NOT a secure system. Not for use with real or sensitive patient information."
+                description="Runs entirely on your machine with no third-party services. All data stays local using only free, open-source tools for complete privacy control."
                 colorMode={colorMode}
               />
               <FeaturePoint
                 icon={FaTools}
                 title="Local-First Architecture"
-                description="Experiments with local tools like Ollama, Whisper, and SQLite. Performance and reliability will vary; for educational and testing purposes ONLY."
+                description="Built with local tools like Ollama, Whisper, SQLite, and ChromaDB. No cloud dependencies means you control your data and workflow completely."
                 colorMode={colorMode}
               />
               <FeaturePoint
@@ -102,8 +105,8 @@ const Community = ({ bgColor }) => {
               />
               <FeaturePoint
                 icon={FaExclamationTriangle}
-                title="Use With Caution"
-                description="LLMs can hallucinate or produce incorrect information. Always verify AI outputs against trusted sources."
+                title="Experimental Software"
+                description="This is experimental software for educational use. Always verify AI outputs and use professional judgment for any clinical decisions."
                 colorMode={colorMode}
               />
             </Stack>
@@ -126,15 +129,15 @@ const Community = ({ bgColor }) => {
               </Button>
               <Button
                 as={Link}
-                href="https://github.com/bloodworks-io/phlox/blob/main/docs/warnings.md"
+                href="https://github.com/bloodworks-io/phlox/blob/main/README.md#usage-warning-️"
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="outline"
                 size="lg"
-                colorScheme={colorMode === "dark" ? "red" : "red"}
+                colorScheme={colorMode === "dark" ? "orange" : "orange"}
                 leftIcon={<FaExclamationTriangle />}
               >
-                Read Warnings
+                Usage Guidelines
               </Button>
             </Stack>
           </Box>
@@ -146,9 +149,6 @@ const Community = ({ bgColor }) => {
             borderRadius="lg"
             bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
           >
-            <Text fontStyle="italic" fontSize="md" mb={4}>
-              The following section shares the personal motivation and journey behind this experimental project from its creator:
-            </Text>
             <Flex align="center" gap={4} mb={6}>
               <Image
                 src={filipeImage}

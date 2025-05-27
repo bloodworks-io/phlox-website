@@ -9,6 +9,7 @@ import {
   Stack,
   Flex,
   Link,
+  Tooltip,
 } from "@chakra-ui/react";
 import { FaGithub, FaBook } from "react-icons/fa";
 import halfScreenDark from "../assets/half-screen-dark.webp";
@@ -92,6 +93,65 @@ const Hero = () => {
         zIndex="0"
       />
 
+      {/* Disclaimer Badge */}
+      <Box
+        position="absolute"
+        top="20px"
+        right="20px"
+        bg="rgba(0, 0, 0, 0.8)"
+        backdropFilter="blur(10px)"
+        color="white"
+        px={3}
+        py={2}
+        borderRadius="lg"
+        fontSize="sm"
+        fontWeight="medium"
+        maxWidth="250px"
+        textAlign="center"
+        border="1px solid rgba(255, 255, 255, 0.1)"
+        boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+        zIndex="2"
+        display={{ base: "none", md: "block" }}
+      >
+        ⚠️ Experimental - Phlox is not ready for use in the clinic.
+      </Box>
+
+      {/* Mobile Warning Tooltip */}
+      <Tooltip
+        label="Experimental project for educational and personal use - not a certified medical device"
+        hasArrow
+        placement="bottom"
+        bg="gray.700"
+        color="white"
+        fontSize="sm"
+        maxWidth="250px"
+        textAlign="center"
+        display={{ base: "block", md: "none" }}
+      >
+        <Box
+          position="absolute"
+          top="20px"
+          right="20px"
+          bg="rgba(0, 0, 0, 0.8)"
+          backdropFilter="blur(10px)"
+          color="white"
+          p={2}
+          borderRadius="full"
+          fontSize="lg"
+          border="1px solid rgba(255, 255, 255, 0.1)"
+          boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+          zIndex="2"
+          cursor="pointer"
+          display={{ base: "flex", md: "none" }}
+          alignItems="center"
+          justifyContent="center"
+          width="40px"
+          height="40px"
+        >
+          ⚠️
+        </Box>
+      </Tooltip>
+
       {/* Content container */}
       <Flex
         direction="column"
@@ -137,13 +197,10 @@ const Hero = () => {
             mb={6}
             color="whiteAlpha.900"
           >
-            An open-source <Text as="strong">experimental project</Text> for exploring local AI concepts
-            like transcription and text organization. <Text as="strong">This is intended for educational and
-            personal experimentation ONLY.</Text> It is <Text as="strong">NOT A CERTIFIED MEDICAL DEVICE</Text> and
-            <Text as="strong">MUST NOT BE USED IN ACTUAL CLINICAL SETTINGS or FOR CLINICAL DECISION-MAKING.</Text>
-            Any appearance of functionality related to patient management or clinical assistance is purely for
-            demonstrative purposes within this experimental context. Offers a glimpse into local AI, but provides
-            <Text as="strong">NO guarantees of privacy, accuracy, or control for any serious or clinical purpose.</Text>
+            An open-source patient management system integrating AI-powered
+            medical transcription, clinical note generation, and an AI chatbot
+            interface. Designed to run locally with privacy-first principles,
+            using only free and open-source tools.
           </Text>
           <Stack
             direction={{ base: "column", sm: "row" }}

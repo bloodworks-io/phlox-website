@@ -189,36 +189,36 @@ const Workflow = ({ bgColor }) => {
   const workflow = [
     {
       number: "01",
-      title: "Experiment with Audio Input",
-      description: "Experiment with recording or uploading audio for transcription via Whisper. Reliability and quality will vary; for educational/experimental use ONLY.",
+      title: "Record or Upload Audio",
+      description: "Capture patient encounters through audio recording or upload existing audio files for transcription using Whisper-compatible services.",
       icon: <FaMicrophone />,
       imageSrc: transcriptionImg,
     },
     {
       number: "02",
-      title: "Attempt Note Structuring",
-      description: "Demonstrates how transcribed text *might* be processed by a template. This is a basic experimental feature, not for clinical note generation.",
+      title: "Structure Clinical Notes",
+      description: "Transform transcribed audio into structured clinical notes using customizable templates that match your documentation style and requirements.",
       icon: <FaRegFileAlt />,
       imageSrc: templateImg,
     },
     {
       number: "03",
-      title: "Interact with the Experimental AI",
-      description: "Engage with the experimental AI. For educational exploration ONLY. DO NOT rely on it for any decisions or clinical information.",
+      title: "Chat with AI Assistant",
+      description: "Ask questions about cases, explore differential diagnoses, or discuss treatment options with the AI assistant backed by your local knowledge base.",
       icon: <FaRobot />,
       imageSrc: chatImg,
     },
     {
       number: "04",
-      title: "Experiment with Text Generation",
-      description: "Illustrates how text *could be* generated from notes. This feature is for experimental purposes ONLY, not for producing real documents.",
+      title: "Generate Correspondence",
+      description: "Create patient letters, referrals, and discharge summaries automatically based on your clinical notes with one-click generation.",
       icon: <FaEnvelope />,
       imageSrc: correspondenceImg,
     },
     {
       number: "05",
-      title: "Explore Task Extraction Ideas",
-      description: "Shows an attempt to find tasks in text. Highly experimental and unreliable; NOT for actual task management or clinical follow-up.",
+      title: "Manage Clinical Tasks",
+      description: "Extract actionable tasks from clinical notes automatically and track follow-ups, investigations, and patient care plans in an organized dashboard.",
       icon: <FaTasks />,
       imageSrc: tasksImg,
     },
@@ -227,10 +227,10 @@ const Workflow = ({ bgColor }) => {
   return (
     <Box mb={10} id="workflow" bg={bgColor}>
       <Heading as="h2" variant="h2" sx={{ textAlign: "center" }}>
-        Exploring a Potential Workflow (Experimental Concept)
+        How Phlox Works
       </Heading>
       <Text textAlign="center" variant="body" mb={10} maxW="60%" mx="auto">
-        The following illustrates an experimental workflow concept within Phlox. This is for educational and personal experimentation ONLY, not for actual practice use. It demonstrates how one *might* interact with such a system, but remember, any data handling is for testing only and NOT suitable for real-world or clinical data.
+        Phlox integrates several AI-powered tools into a streamlined workflow for clinical documentation and patient management. Everything runs locally on your machine for complete privacy and control.
       </Text>
       {workflow.map((step, index) => (
         <React.Fragment key={index}>
