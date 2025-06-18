@@ -27,7 +27,7 @@ const Navbar = ({ activeSection }) => {
     <Box
       bg={theme.colors.dark.secondary}
       py={4}
-      minH={{ base: "4vh", md: "auto" }}
+      minH={{ base: "4vh", md: "5vh", lg: "auto" }}
       boxShadow="none"
       position="sticky"
       top="0"
@@ -44,16 +44,47 @@ const Navbar = ({ activeSection }) => {
           src={logo}
           alt="Phlox Logo"
           w={{ base: "100px", sm: "120px", md: "150px" }}
-          mt={{ base: 5, md: 0, lg: 0 }}
+          mt={{ base: 7, sm: 8, md: 10, lg: 0 }}
           position="absolute"
-          left={{ base: "8px", md: "50px" }}
+          left={{ base: "8px", sm: "20px", md: "50px" }}
           cursor="pointer" // Add cursor pointer for better UX
           onClick={scrollToTop} // Scroll to top on click
         />
+
+        <Box
+          position="absolute"
+          right={{ base: "8px", sm: "25px", md: "50px" }}
+          mt={{
+            base: "30px!important",
+            md: "45px!important",
+            lg: "10px!important",
+          }}
+          display={{ base: "none", sm: "block" }}
+          transform={{
+            base: "scale(0.6)",
+            sm: "scale(0.7)",
+            md: "scale(0.7)",
+            lg: "scale(0.9)",
+          }}
+          transformOrigin="right center"
+        >
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=bloodworks-io&repo=phlox&type=star&count=true&size=large"
+            frameBorder="0"
+            scrolling="0"
+            width="170"
+            height="40"
+            title="GitHub Star Button"
+            style={{
+              border: "none",
+              colorScheme: "light",
+            }}
+          />
+        </Box>
         <HStack
           spacing={8}
           align="center"
-          display={{ base: "none", sm: "none", md: "flex" }}
+          display={{ base: "none", sm: "none", md: "none", lg: "flex" }}
           justify="center"
           width="100%"
         >
