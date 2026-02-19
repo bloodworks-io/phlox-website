@@ -21,6 +21,7 @@ import ColorModeToggle from "./ColorModeToggle";
 import Navbar from "./Navbar";
 import FAQ from "./FAQ";
 import Community from "./Community"; // Import the new component
+import Footer from "./Footer";
 
 const Landing = () => {
   const { colorMode } = useColorMode();
@@ -83,6 +84,8 @@ const Landing = () => {
         <Box id="faq">
           <FAQ bgColor={secondaryColor} />
         </Box>
+
+        <Footer />
       </Box>
     </Box>
   );

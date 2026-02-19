@@ -29,31 +29,49 @@ import tasksImg from "../assets/screenshots/tasks-dark.gif";
 
 const MotionBox = motion(Box);
 
-const PixelatedDivider = () => {
+const PixelatedDivider = ({ isLast }) => {
   const { colorMode } = useColorMode();
+  const dividerColor = colorMode === "dark" ? "#666666" : "#CCCCCC";
+  const accentColor = colorMode === "dark" ? "#f5a97f" : "#fe640b";
 
   return (
     <Box
       my={0}
       mx="auto"
       maxW="80%"
-      height="60px"
+      height="80px"
       display="flex"
+      flexDirection="column"
+      alignItems="center"
       justifyContent="center"
+      position="relative"
     >
+      {/* Dashed line */}
       <Box
         width="2px"
         height="100%"
         style={{
           background: `repeating-linear-gradient(
             to bottom,
-            ${colorMode === "dark" ? "#666666" : "#CCCCCC"} 0px,
-            ${colorMode === "dark" ? "#666666" : "#CCCCCC"} 4px,
+            ${dividerColor} 0px,
+            ${dividerColor} 4px,
             transparent 4px,
             transparent 8px
           )`,
         }}
       />
+      {/* Connecting dot */}
+      {!isLast && (
+        <Box
+          position="absolute"
+          bottom="-6px"
+          width="12px"
+          height="12px"
+          borderRadius="full"
+          bg={accentColor}
+          boxShadow={`0 0 10px ${accentColor}`}
+        />
+      )}
     </Box>
   );
 };
@@ -242,7 +260,7 @@ const Workflow = ({ bgColor }) => {
             imageSrc={step.imageSrc}
             isReversed={index % 2 === 1}
           />
-          {index < workflow.length - 1 && <PixelatedDivider />}
+          {index < workflow.length - 1 && <PixelatedDivider isLast={index === workflow.length - 2} />}
         </React.Fragment>
       ))}
     </Box>

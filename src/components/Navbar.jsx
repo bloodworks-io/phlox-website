@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -7,7 +7,18 @@ import {
   Button,
   useTheme,
   useColorMode,
+  IconButton,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  VStack,
+  useDisclosure,
+  Icon,
 } from "@chakra-ui/react";
+import { FaBars } from "react-icons/fa";
 import logo from "../assets/logo.webp";
 import theme from "../theme";
 const { light, dark } = theme.colors;
@@ -15,12 +26,33 @@ const { light, dark } = theme.colors;
 const Navbar = ({ activeSection }) => {
   const theme = useTheme();
   const { colorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Smooth scrolling
+      behavior: "smooth",
     });
+  };
+
+  const navItems = [
+    { id: "workflow", label: "Workflow" },
+    { id: "features", label: "Features" },
+    { id: "community", label: "Community" },
+    { id: "faq", label: "FAQ" },
+  ];
+
+  const handleNavClick = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const offset = id === "workflow" ? 10 : -50;
+      const sectionTop = section.offsetTop - offset;
+      window.scrollTo({
+        top: sectionTop,
+        behavior: "smooth",
+      });
+    }
+    onClose();
   };
 
   return (
@@ -47,10 +79,31 @@ const Navbar = ({ activeSection }) => {
           mt={{ base: 7, sm: 8, md: 10, lg: 0 }}
           position="absolute"
           left={{ base: "8px", sm: "20px", md: "50px" }}
-          cursor="pointer" // Add cursor pointer for better UX
-          onClick={scrollToTop} // Scroll to top on click
+          cursor="pointer"
+          onClick={scrollToTop}
         />
 
+        {/* Mobile hamburger menu */}
+        <Box
+          position="absolute"
+          right={{ base: "50px", sm: "80px" }}
+          mt={{ base: "30px", md: "45px", lg: "10px" }}
+          display={{ base: "block", md: "block", lg: "none" }}
+        >
+          <IconButton
+            aria-label="Open menu"
+            icon={<Icon as={FaBars} />}
+            onClick={onOpen}
+            variant="ghost"
+            color="white"
+            fontSize="24px"
+            _hover={{
+              bg: "whiteAlpha.200",
+            }}
+          />
+        </Box>
+
+        {/* GitHub Star Button */}
         <Box
           position="absolute"
           right={{ base: "8px", sm: "25px", md: "50px" }}
@@ -81,6 +134,8 @@ const Navbar = ({ activeSection }) => {
             }}
           />
         </Box>
+
+        {/* Desktop Navigation */}
         <HStack
           spacing={8}
           align="center"
@@ -88,42 +143,64 @@ const Navbar = ({ activeSection }) => {
           justify="center"
           width="100%"
         >
-          <NavButton
-            id="workflow"
-            activeSection={activeSection}
-            label="Workflow"
-            colors={dark}
-          />
-          <NavButton
-            id="features"
-            activeSection={activeSection}
-            label="Features"
-            colors={dark}
-          />
-          <NavButton
-            id="community"
-            activeSection={activeSection}
-            label="Community"
-            colors={dark}
-          />
-          <NavButton
-            id="faq"
-            activeSection={activeSection}
-            label="FAQ"
-            colors={dark}
-          />
+          {navItems.map((item) => (
+            <NavButton
+              key={item.id}
+              id={item.id}
+              activeSection={activeSection}
+              label={item.label}
+              colors={dark}
+            />
+          ))}
         </HStack>
       </Flex>
+
+      {/* Mobile Drawer */}
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="full">
+        <DrawerOverlay />
+        <DrawerContent bg={dark.secondary}>
+          <DrawerCloseButton color={dark.textPrimary} />
+          <DrawerHeader color={dark.textPrimary} borderBottomWidth="1px">
+            Menu
+          </DrawerHeader>
+          <DrawerBody>
+            <VStack spacing={6} mt={8}>
+              {navItems.map((item) => (
+                <Button
+                  key={item.id}
+                  variant="ghost"
+                  fontSize="xl"
+                  fontWeight="medium"
+                  color={
+                    activeSection === item.id
+                      ? dark.textTeriary
+                      : dark.textPrimary
+                  }
+                  onClick={() => handleNavClick(item.id)}
+                  _hover={{
+                    color: dark.textTeriary,
+                    transform: "translateX(4px)",
+                  }}
+                  transition="all 0.2s"
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Box>
   );
 };
+
 // Helper component for nav buttons
 const NavButton = ({ id, activeSection, label, colors }) => (
   <Button
     onClick={() => {
       const section = document.getElementById(id);
       if (section) {
-        const offset = id === "workflow" ? 10 : -50; // Apply offset only for workflow
+        const offset = id === "workflow" ? 10 : -50;
         const sectionTop = section.offsetTop - offset;
         window.scrollTo({
           top: sectionTop,

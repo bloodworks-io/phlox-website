@@ -17,6 +17,7 @@ import {
   Tooltip,
   Icon as ChakraIcon,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import {
   FaGithub,
   FaHeart,
@@ -27,6 +28,9 @@ import {
   FaInfoCircle,
 } from "react-icons/fa";
 import filipeImage from "../assets/filipe.jpg"; // Import your image
+
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
 
 const Community = ({ bgColor }) => {
   const { colorMode } = useColorMode();
@@ -43,14 +47,25 @@ const Community = ({ bgColor }) => {
           open-source tools. No subscriptions, no vendor lock-in, and complete
           transparency through open source code.
         </Text>
-        <Flex
+        <MotionFlex
           direction={{ base: "column", lg: "row" }}
           align="center"
           justify="space-between"
           gap={10}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
           {/* Left Column: Text Content */}
-          <Box flex="1" textAlign={{ base: "center", lg: "left" }}>
+          <MotionBox
+            flex="1"
+            textAlign={{ base: "center", lg: "left" }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <Stack spacing={6} mb={8}>
               <FeaturePoint
                 icon={FaLock}
@@ -140,14 +155,18 @@ const Community = ({ bgColor }) => {
                 Usage Guidelines
               </Button>
             </Stack>
-          </Box>
+          </MotionBox>
 
           {/* Right Column: Built by a Clinician */}
-          <Box
+          <MotionBox
             flex="1"
             p={6}
             borderRadius="lg"
             bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Flex align="center" gap={4} mb={6}>
               <Image
@@ -245,8 +264,8 @@ const Community = ({ bgColor }) => {
                 - To have fun building something useful
               </Text>
             </Stack>
-          </Box>
-        </Flex>
+          </MotionBox>
+        </MotionFlex>
       </Box>
     </Box>
   );

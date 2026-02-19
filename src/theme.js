@@ -34,6 +34,48 @@ const fonts = {
   body: `'Open Sans', sans-serif`,
 };
 
+// Gradients for hero and section accents
+const gradients = {
+  hero: {
+    light:
+      "linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ff8c42 50%, #ffa62b 75%, #ff6b35 100%)",
+    dark: "linear-gradient(135deg, #cc4125 0%, #cc5500 25%, #e65c00 50%, #cc4125 75%, #cc5500 100%)",
+  },
+  heroRadial1: {
+    light:
+      "radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,53,0.4) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(247,147,30,0.4) 0%, transparent 40%)",
+    dark: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,53,0.2) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(247,147,30,0.2) 0%, transparent 40%)",
+  },
+  heroRadial2: {
+    light:
+      "radial-gradient(circle at 60% 40%, rgba(255,166,43,0.3) 0%, transparent 45%), radial-gradient(circle at 40% 60%, rgba(255,107,53,0.3) 0%, transparent 45%)",
+    dark: "radial-gradient(circle at 60% 40%, rgba(255,166,43,0.15) 0%, transparent 45%), radial-gradient(circle at 40% 60%, rgba(255,107,53,0.15) 0%, transparent 45%)",
+  },
+  sectionAccent: {
+    light: "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.03) 100%)",
+    dark: "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.02) 100%)",
+  },
+};
+
+// Shadow scale
+const shadows = {
+  sm: "0 1px 2px rgba(0, 0, 0, 0.05)",
+  md: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  lg: "0 10px 15px rgba(0, 0, 0, 0.1)",
+  xl: "0 20px 25px rgba(0, 0, 0, 0.15)",
+  glow: {
+    light: "0 0 20px rgba(255, 107, 53, 0.3)",
+    dark: "0 0 20px rgba(255, 107, 53, 0.2)",
+  },
+};
+
+// Transition presets
+const transitions = {
+  fast: "0.15s ease",
+  normal: "0.3s ease",
+  slow: "0.5s ease",
+};
+
 const textStyles = {
   h1: {
     fontSize: ["2xl", "3xl", "4xl"],
@@ -189,3 +231,6 @@ const theme = extendTheme({
 });
 
 export default theme;
+
+// Export design tokens for use in components
+export { gradients, shadows, transitions };

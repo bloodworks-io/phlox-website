@@ -15,6 +15,7 @@ import { FaGithub, FaBook } from "react-icons/fa";
 import halfScreenDark from "../assets/half-screen-dark.webp";
 import halfScreenLight from "../assets/half-screen-light.webp";
 import bgDark from "../assets/bg.webp";
+import { gradients } from "../theme";
 
 const Hero = () => {
   const { colorMode } = useColorMode();
@@ -77,8 +78,61 @@ const Hero = () => {
       px={{ base: 6, md: 40 }}
       paddingTop={8}
       pos="relative"
-      bgColor="dark.secondary"
+      overflow="hidden"
+      sx={{
+        background:
+          colorMode === "light" ? gradients.hero.light : gradients.hero.dark,
+      }}
     >
+      <Box
+        position="absolute"
+        top="-50%"
+        left="-50%"
+        width="200%"
+        height="200%"
+        zIndex="0"
+        sx={{
+          background:
+            colorMode === "light"
+              ? gradients.heroRadial1.light
+              : gradients.heroRadial1.dark,
+          animation: "swirl 20s ease-in-out infinite",
+          borderRadius: "40%",
+        }}
+      />
+      <Box
+        position="absolute"
+        top="-50%"
+        left="-50%"
+        width="200%"
+        height="200%"
+        zIndex="0"
+        sx={{
+          background:
+            colorMode === "light"
+              ? gradients.heroRadial2.light
+              : gradients.heroRadial2.dark,
+          animation: "swirl 25s ease-in-out infinite reverse",
+          borderRadius: "40%",
+        }}
+      />
+      <style>
+        {`
+          @keyframes swirl {
+            0% {
+              transform: rotate(0deg);
+            }
+            50% {
+              transform: rotate(180deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        `}
+      </style>
+
+      {/* Dots background overlay */}
       <Box
         position="absolute"
         top="0"
@@ -89,8 +143,9 @@ const Hero = () => {
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
-        opacity={0.2}
-        zIndex="0"
+        opacity={0.15}
+        zIndex="1"
+        pointerEvents="none"
       />
 
       {/* Disclaimer Badge */}

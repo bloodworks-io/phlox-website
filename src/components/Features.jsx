@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Grid, Heading, Text, Icon, useColorMode } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import {
   FaMicrophone,
   FaRegFileAlt,
@@ -12,11 +13,13 @@ import {
 } from "react-icons/fa";
 import theme from "../theme";
 
-const FeatureItem = ({ title, description, icon, accentColor }) => {
+const MotionBox = motion(Box);
+
+const FeatureItem = ({ title, description, icon, accentColor, index }) => {
   const { colorMode } = useColorMode();
 
   return (
-    <Box
+    <MotionBox
       p={6}
       textAlign="center"
       borderRadius="lg"
@@ -26,17 +29,25 @@ const FeatureItem = ({ title, description, icon, accentColor }) => {
         boxShadow: "xl",
         borderColor: accentColor,
         borderWidth: "1px",
+        "& .feature-icon": {
+          transform: "scale(1.1) rotate(5deg)",
+        },
       }}
       transition="all 0.3s ease-in-out"
       position="relative"
       overflow="hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
     >
       <Icon
         as={icon}
         fontSize="3xl"
         mb={4}
         color={accentColor}
-        transition="transform 0.5s ease-in-out"
+        className="feature-icon"
+        transition="transform 0.3s ease-in-out"
       />
       <Heading
         as="h3"
@@ -55,7 +66,7 @@ const FeatureItem = ({ title, description, icon, accentColor }) => {
       >
         {description}
       </Text>
-    </Box>
+    </MotionBox>
   );
 };
 
@@ -139,7 +150,7 @@ const Features = ({ bgColor }) => {
         px={{ base: 4, md: 8 }}
       >
         {features.map((feature, index) => (
-          <FeatureItem key={index} {...feature} />
+          <FeatureItem key={index} {...feature} index={index} />
         ))}
       </Grid>
     </Box>
