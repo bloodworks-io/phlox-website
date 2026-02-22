@@ -1,268 +1,148 @@
 import React from "react";
 import {
   Box,
-  Flex,
   Heading,
   Text,
-  Stack,
+  Icon,
   useColorMode,
-  Circle,
-  Image,
+  Flex,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import {
-  FaMicrophone,
-  FaRobot,
-  FaRegFileAlt,
-  FaTasks,
-  FaEnvelope,
+  FaExchangeAlt,
+  FaCloudUploadAlt,
+  FaMicrochip,
+  FaLock,
 } from "react-icons/fa";
-import Screenshots from "./Screenshots";
 import theme from "../theme";
-
-// Update these imports with actual screenshots when available
-import transcriptionImg from "../assets/screenshots/screenshot-dark.png";
-import templateImg from "../assets/screenshots/screenshot-dark.png";
-import chatImg from "../assets/screenshots/screenshot-dark.png";
-import correspondenceImg from "../assets/screenshots/screenshot-dark.png";
-import tasksImg from "../assets/screenshots/tasks-dark.gif";
 
 const MotionBox = motion(Box);
 
-const PixelatedDivider = ({ isLast }) => {
+const ContentBlock = ({ number, icon, title, children, index }) => {
   const { colorMode } = useColorMode();
-  const dividerColor = colorMode === "dark" ? "#666666" : "#CCCCCC";
-  const accentColor = colorMode === "dark" ? "#f5a97f" : "#fe640b";
+  const accentColor =
+    colorMode === "dark"
+      ? theme.colors.dark.textTeriary
+      : theme.colors.light.textTeriary;
 
-  return (
-    <Box
-      my={0}
-      mx="auto"
-      maxW="80%"
-      height="80px"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      position="relative"
-    >
-      {/* Dashed line */}
-      <Box
-        width="2px"
-        height="100%"
-        style={{
-          background: `repeating-linear-gradient(
-            to bottom,
-            ${dividerColor} 0px,
-            ${dividerColor} 4px,
-            transparent 4px,
-            transparent 8px
-          )`,
-        }}
-      />
-      {/* Connecting dot */}
-      {!isLast && (
-        <Box
-          position="absolute"
-          bottom="-6px"
-          width="12px"
-          height="12px"
-          borderRadius="full"
-          bg={accentColor}
-          boxShadow={`0 0 10px ${accentColor}`}
-        />
-      )}
-    </Box>
-  );
-};
-
-const WorkflowSection = ({
-  number,
-  title,
-  description,
-  icon,
-  imageSrc,
-  isReversed,
-}) => {
-  const { colorMode } = useColorMode();
   return (
     <MotionBox
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      mb={0}
-      maxW="80%"
-      mx="auto"
-      position="relative"
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      p={6}
     >
-      <MotionBox
-        whileHover={{
-          scale: 1.02,
-          transition: { duration: 0.2 },
-        }}
-      >
-        <Flex
-          direction={{ base: "column", md: isReversed ? "row-reverse" : "row" }}
-          align="center"
-          justify="space-between"
-          p={8}
-          bg={
-            colorMode === "dark"
-              ? theme.colors.dark.secondary
-              : theme.colors.light.secondary
-          }
-          borderRadius="xl"
-          boxShadow="none"
-          position="relative"
-          overflow="hidden"
-        >
-          <Stack
-            spacing={4}
-            mb={{ base: 8, md: 0 }}
-            maxW={{ base: "100%", md: "50%" }}
-            textAlign={{ base: "center", md: isReversed ? "right" : "left" }}
-            position="relative"
-            zIndex={1}
-          >
-            {/* Background number */}
-            <Text
-              position="absolute"
-              left={isReversed ? "auto" : "-8px"}
-              right={isReversed ? "-8px" : "auto"}
-              top="50%"
-              transform="translateY(-50%)"
-              fontSize="180px"
-              fontWeight="900"
-              color={colorMode === "dark" ? "whiteAlpha.100" : "blackAlpha.50"}
-              lineHeight="1"
-              userSelect="none"
-              zIndex={-1}
-            >
-              {number}
-            </Text>
-
-            <Box
-              textAlign={{ base: "center", md: isReversed ? "right" : "left" }}
-              display="flex"
-              alignItems="center"
-              gap={2}
-            >
-              <Box
-                color={
-                  colorMode === "dark"
-                    ? "dark.textSecondary"
-                    : "light.textSecondary"
-                }
-                fontSize="3xl"
-              >
-                {icon}
-              </Box>
-              <Heading
-                as="h3"
-                size="lg"
-                color={
-                  colorMode === "dark"
-                    ? "dark.textPrimary"
-                    : "light.textPrimary"
-                }
-                display="inline"
-              >
-                {title}
-              </Heading>
-            </Box>
-            <Text
-              color={
-                colorMode === "dark"
-                  ? "dark.textSecondary"
-                  : "light.textSecondary"
-              }
-            >
-              {description}
-            </Text>
-          </Stack>
-          <Box
-            maxW={{ base: "100%", md: "45%" }}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            position="relative"
-            zIndex={1}
-          >
-            <Image
-              src={imageSrc}
-              alt={title}
-              borderRadius="md"
-              boxShadow="none"
-              w="full"
-            />
-          </Box>
+      <Flex align="flex-start" gap={4}>
+        <Flex direction="column" align="center" minW="40px">
+          <Text fontSize="sm" fontWeight="bold" color={accentColor} mb={2}>
+            {number}
+          </Text>
+          <Icon as={icon} fontSize="2xl" color={accentColor} />
         </Flex>
-      </MotionBox>
+        <Box>
+          <Heading
+            as="h3"
+            size="md"
+            mb={2}
+            color={
+              colorMode === "dark"
+                ? theme.colors.dark.textPrimary
+                : theme.colors.light.textPrimary
+            }
+          >
+            {title}
+          </Heading>
+          <Text
+            fontSize="md"
+            lineHeight="1.8"
+            color={
+              colorMode === "dark"
+                ? theme.colors.dark.textSecondary
+                : theme.colors.light.textSecondary
+            }
+          >
+            {children}
+          </Text>
+        </Box>
+      </Flex>
     </MotionBox>
   );
 };
 
 const Workflow = ({ bgColor }) => {
-  const workflow = [
+  const { colorMode } = useColorMode();
+
+  const blocks = [
     {
       number: "01",
-      title: "Record or Upload Audio",
-      description: "Capture patient encounters through audio recording or upload existing audio files for transcription using Whisper-compatible services.",
-      icon: <FaMicrophone />,
-      imageSrc: transcriptionImg,
-    },
-    {
-      number: "02",
-      title: "Structure Clinical Notes",
-      description: "Transform transcribed audio into structured clinical notes using customizable templates that match your documentation style and requirements.",
-      icon: <FaRegFileAlt />,
-      imageSrc: templateImg,
+      icon: FaExchangeAlt,
+      title: "How AI Scribes Work",
+      content:
+        "AI scribing is straightforward: your audio gets transcribed, then a language model (like ChatGPT) structures it into notes. That's it. No magic, just good technology. Many services just send data to the same servers that ChatGPT or Claude run on.",
     },
     {
       number: "03",
-      title: "Chat with AI Assistant",
-      description: "Ask questions about cases, explore differential diagnoses, or discuss treatment options with the AI assistant backed by your local knowledge base.",
-      icon: <FaRobot />,
-      imageSrc: chatImg,
+      icon: FaMicrochip,
+      title: "Your Hardware Is Ready",
+      content:
+        "Modern computers—especially Apple Silicon or systems with a decent GPU—are more than capable of running language models locally. You don't need enterprise hardware or a massive server. A laptop from the last few years is likely all you need.",
+    },
+    {
+      number: "02",
+      icon: FaCloudUploadAlt,
+      title: "The Privacy Question",
+      content:
+        "When you send audio to a cloud service, you're trusting them with sensitive information. Do you know where that data goes? Who has access? How long it's stored?",
     },
     {
       number: "04",
-      title: "Generate Correspondence",
-      description: "Create patient letters, referrals, and discharge summaries automatically based on your clinical notes with one-click generation.",
-      icon: <FaEnvelope />,
-      imageSrc: correspondenceImg,
-    },
-    {
-      number: "05",
-      title: "Manage Clinical Tasks",
-      description: "Extract actionable tasks from clinical notes automatically and track follow-ups, investigations, and patient care plans in an organized dashboard.",
-      icon: <FaTasks />,
-      imageSrc: tasksImg,
+      icon: FaLock,
+      title: "Keep It Close",
+      content:
+        "Phlox runs entirely on your machine. Your audio, your transcripts, your notes—they never leave your computer. Nothing is uploaded, nothing is logged remotely. Your data stays yours, period.",
     },
   ];
 
   return (
-    <Box mb={10} id="workflow" bg={bgColor}>
-      <Heading as="h2" variant="h2" sx={{ textAlign: "center" }}>
-        How Phlox Works
+    <Box as="section" py={10} bg={bgColor}>
+      <Heading as="h2" variant="h2" sx={{ textAlign: "center" }} mb={4}>
+        Why Run It Locally?
       </Heading>
-      <Text textAlign="center" variant="body" mb={10} maxW="60%" mx="auto">
-        Phlox integrates several AI-powered tools into a streamlined workflow for clinical documentation and patient management. Everything runs locally on your machine for complete privacy and control.
+      <Text
+        textAlign="center"
+        fontSize="lg"
+        maxW="600px"
+        mx="auto"
+        mb={{ base: 10, md: 16 }}
+        color={
+          colorMode === "dark"
+            ? theme.colors.dark.textSecondary
+            : theme.colors.light.textSecondary
+        }
+      >
+        A different approach to AI-powered documentation.
       </Text>
-      {workflow.map((step, index) => (
-        <React.Fragment key={index}>
-          <WorkflowSection
-            number={step.number}
-            title={step.title}
-            description={step.description}
-            icon={step.icon}
-            imageSrc={step.imageSrc}
-            isReversed={index % 2 === 1}
-          />
-          {index < workflow.length - 1 && <PixelatedDivider isLast={index === workflow.length - 2} />}
-        </React.Fragment>
-      ))}
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        spacing={8}
+        maxW="container.xl"
+        mx="auto"
+        px={{ base: 4, md: 8 }}
+      >
+        {blocks.map((block, index) => (
+          <ContentBlock
+            key={index}
+            number={block.number}
+            icon={block.icon}
+            title={block.title}
+            index={index}
+          >
+            {block.content}
+          </ContentBlock>
+        ))}
+      </SimpleGrid>
     </Box>
   );
 };

@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/static/js/main.6b3895e0.js",
+    "main.js": "/static/js/main.ffbc97db.js",
     "static/media/tasks-dark.gif": "/static/media/tasks-dark.a851b4b49182e50bddb8.gif",
     "static/media/bg.webp": "/static/media/bg.aa6e73dd6cb8753ae21b.webp",
     "static/media/screenshot-dark.png": "/static/media/screenshot-dark.778192997f0b38f9e9d6.png",
     "static/media/ollama-logo.png": "/static/media/ollama-logo.f6890d951470f9e165b0.png",
     "static/media/half-screen-dark.webp": "/static/media/half-screen-dark.33315e9f27a4bb24a949.webp",
     "static/media/half-screen-light.webp": "/static/media/half-screen-light.c535984af9bdcc921b55.webp",
-    "static/media/llama-logo.png": "/static/media/llama-logo.a38a34ce8cc44c9d6900.png",
+    "static/media/vllm-logo.png": "/static/media/vllm-logo.bcd1ddaf3d4805abed0a.png",
     "static/media/filipe.jpg": "/static/media/filipe.8ce478f11aec3f46d9e0.jpg",
     "static/media/chroma-logo.png": "/static/media/chroma-logo.29bb3eaf67b9e009d610.png",
-    "static/media/whisper-logo.webp": "/static/media/whisper-logo.b0438eda0e478c813ef9.webp",
     "static/media/chakra-logo.png": "/static/media/chakra-logo.b1316a82db2b2e8eabe6.png",
     "static/media/logo.webp": "/static/media/logo.1297ce8e35d2ed6a1f2d.webp",
+    "static/media/llamacpp-logo.svg": "/static/media/llamacpp-logo.7d2ce714c386c724c503661e1e9d6dc0.svg",
     "index.html": "/index.html",
-    "main.6b3895e0.js.map": "/static/js/main.6b3895e0.js.map"
+    "main.ffbc97db.js.map": "/static/js/main.ffbc97db.js.map"
   },
   "entrypoints": [
-    "static/js/main.6b3895e0.js"
+    "static/js/main.ffbc97db.js"
   ]
 }

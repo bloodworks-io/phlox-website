@@ -29,7 +29,17 @@ jobs:
       
       - name: Install dependencies
         run: npm ci
-      
+
+      - name: Fetch latest release version
+        id: fetch-version
+        run: |
+          LATEST_VERSION=$(curl -s "https://api.github.com/repos/bloodworks-io/phlox/releases/latest" | grep '"tag_name"' | cut -d'"' -f4)
+          echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
+
+      - name: Create version file
+        run: |
+          echo "export const LATEST_VERSION = '${{ env.LATEST_VERSION }}';" > src/version.js
+
       - name: Build React app
         run: CI=false npm run build
           

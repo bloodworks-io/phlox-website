@@ -6,7 +6,6 @@ import {
   HStack,
   Button,
   useTheme,
-  useColorMode,
   IconButton,
   Drawer,
   DrawerBody,
@@ -21,11 +20,11 @@ import {
 import { FaBars } from "react-icons/fa";
 import logo from "../assets/logo.webp";
 import theme from "../theme";
-const { light, dark } = theme.colors;
+import ColorModeToggle from "./ColorModeToggle";
+const { dark } = theme.colors;
 
 const Navbar = ({ activeSection }) => {
   const theme = useTheme();
-  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const scrollToTop = () => {
@@ -45,7 +44,8 @@ const Navbar = ({ activeSection }) => {
   const handleNavClick = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      const offset = id === "workflow" ? 10 : -50;
+      const navbarHeight = 80;
+      const offset = id === "workflow" ? navbarHeight : navbarHeight - 40;
       const sectionTop = section.offsetTop - offset;
       window.scrollTo({
         top: sectionTop,
@@ -57,13 +57,20 @@ const Navbar = ({ activeSection }) => {
 
   return (
     <Box
-      bg={theme.colors.dark.secondary}
-      py={4}
-      minH={{ base: "4vh", md: "5vh", lg: "auto" }}
-      boxShadow="none"
-      position="sticky"
-      top="0"
-      zIndex="sticky"
+      bg="rgba(30, 32, 48, 0.85)"
+      backdropFilter="blur(12px)"
+      py={3}
+      mx="auto"
+      w={{ base: "95%", md: "90%", lg: "80%", xl: "1200px" }}
+      borderRadius="full"
+      boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+      border="1px solid"
+      borderColor="whiteAlpha.200"
+      position="fixed"
+      left="50%"
+      transform="translateX(-50%)"
+      top={4}
+      zIndex="9999"
     >
       <Flex
         maxW="100%"
@@ -71,69 +78,71 @@ const Navbar = ({ activeSection }) => {
         justify="center"
         align="center"
         position="relative"
+        minH="40px"
       >
         <Image
           src={logo}
           alt="Phlox Logo"
           w={{ base: "100px", sm: "120px", md: "150px" }}
-          mt={{ base: 7, sm: 8, md: 10, lg: 0 }}
           position="absolute"
-          left={{ base: "8px", sm: "20px", md: "50px" }}
+          left={{ base: "16px", sm: "24px", md: "32px" }}
+          top="50%"
+          transform="translateY(-50%)"
           cursor="pointer"
           onClick={scrollToTop}
         />
 
-        {/* Mobile hamburger menu */}
-        <Box
+        {/* Right side actions */}
+        <HStack
           position="absolute"
-          right={{ base: "50px", sm: "80px" }}
-          mt={{ base: "30px", md: "45px", lg: "10px" }}
-          display={{ base: "block", md: "block", lg: "none" }}
+          right={{ base: "16px", sm: "24px", md: "32px" }}
+          top="50%"
+          transform="translateY(-50%)"
+          spacing={{ base: 2, md: 4 }}
         >
-          <IconButton
-            aria-label="Open menu"
-            icon={<Icon as={FaBars} />}
-            onClick={onOpen}
-            variant="ghost"
-            color="white"
-            fontSize="24px"
-            _hover={{
-              bg: "whiteAlpha.200",
+          {/* GitHub Star Button */}
+          <Box
+            display={{ base: "none", sm: "block" }}
+            transform={{
+              base: "scale(0.6)",
+              sm: "scale(0.7)",
+              md: "scale(0.7)",
+              lg: "scale(0.9)",
             }}
-          />
-        </Box>
+            transformOrigin="right center"
+            mt={2}
+          >
+            <iframe
+              src="https://ghbtns.com/github-btn.html?user=bloodworks-io&repo=phlox&type=star&count=true&size=large"
+              frameBorder="0"
+              scrolling="0"
+              width="170"
+              height="40"
+              title="GitHub Star Button"
+              style={{
+                border: "none",
+                colorScheme: "light",
+              }}
+            />
+          </Box>
 
-        {/* GitHub Star Button */}
-        <Box
-          position="absolute"
-          right={{ base: "8px", sm: "25px", md: "50px" }}
-          mt={{
-            base: "30px!important",
-            md: "45px!important",
-            lg: "10px!important",
-          }}
-          display={{ base: "none", sm: "block" }}
-          transform={{
-            base: "scale(0.6)",
-            sm: "scale(0.7)",
-            md: "scale(0.7)",
-            lg: "scale(0.9)",
-          }}
-          transformOrigin="right center"
-        >
-          <iframe
-            src="https://ghbtns.com/github-btn.html?user=bloodworks-io&repo=phlox&type=star&count=true&size=large"
-            frameBorder="0"
-            scrolling="0"
-            width="170"
-            height="40"
-            title="GitHub Star Button"
-            style={{
-              border: "none",
-              colorScheme: "light",
-            }}
-          />
-        </Box>
+          <ColorModeToggle />
+
+          {/* Mobile hamburger menu */}
+          <Box display={{ base: "block", md: "block", lg: "none" }}>
+            <IconButton
+              aria-label="Open menu"
+              icon={<Icon as={FaBars} />}
+              onClick={onOpen}
+              variant="ghost"
+              color={theme.colors.dark.textPrimary}
+              fontSize="24px"
+              _hover={{
+                bg: "whiteAlpha.200",
+              }}
+            />
+          </Box>
+        </HStack>
 
         {/* Desktop Navigation */}
         <HStack
@@ -149,7 +158,7 @@ const Navbar = ({ activeSection }) => {
               id={item.id}
               activeSection={activeSection}
               label={item.label}
-              colors={dark}
+              colors={theme.colors.dark}
             />
           ))}
         </HStack>
@@ -158,9 +167,12 @@ const Navbar = ({ activeSection }) => {
       {/* Mobile Drawer */}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="full">
         <DrawerOverlay />
-        <DrawerContent bg={dark.secondary}>
-          <DrawerCloseButton color={dark.textPrimary} />
-          <DrawerHeader color={dark.textPrimary} borderBottomWidth="1px">
+        <DrawerContent bg={theme.colors.dark.secondary}>
+          <DrawerCloseButton color={theme.colors.dark.textPrimary} />
+          <DrawerHeader
+            color={theme.colors.dark.textPrimary}
+            borderBottomWidth="1px"
+          >
             Menu
           </DrawerHeader>
           <DrawerBody>
@@ -173,12 +185,12 @@ const Navbar = ({ activeSection }) => {
                   fontWeight="medium"
                   color={
                     activeSection === item.id
-                      ? dark.textTeriary
-                      : dark.textPrimary
+                      ? theme.colors.dark.textTeriary
+                      : theme.colors.dark.textPrimary
                   }
                   onClick={() => handleNavClick(item.id)}
                   _hover={{
-                    color: dark.textTeriary,
+                    color: theme.colors.dark.textTeriary,
                     transform: "translateX(4px)",
                   }}
                   transition="all 0.2s"
@@ -200,7 +212,8 @@ const NavButton = ({ id, activeSection, label, colors }) => (
     onClick={() => {
       const section = document.getElementById(id);
       if (section) {
-        const offset = id === "workflow" ? 10 : -50;
+        const navbarHeight = 100;
+        const offset = id === "workflow" ? navbarHeight : navbarHeight - 60;
         const sectionTop = section.offsetTop - offset;
         window.scrollTo({
           top: sectionTop,
@@ -209,6 +222,7 @@ const NavButton = ({ id, activeSection, label, colors }) => (
       }
     }}
     variant="navButton"
+    color={colors.textPrimary}
     sx={{
       _after: {
         content: '""',

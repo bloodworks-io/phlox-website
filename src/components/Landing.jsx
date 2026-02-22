@@ -17,7 +17,6 @@ import Hero from "./Hero";
 import Features from "./Features";
 import logo from "../assets/logo.webp";
 import PoweredBy from "./PoweredBy";
-import ColorModeToggle from "./ColorModeToggle";
 import Navbar from "./Navbar";
 import FAQ from "./FAQ";
 import Community from "./Community"; // Import the new component
@@ -32,26 +31,33 @@ const Landing = () => {
     colorMode === "dark" ? "dark.secondary" : "light.secondary";
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+    const sectionIds = ["hero", "workflow", "features", "community", "faq"];
+
+    const handleScroll = () => {
+      const navbarHeight = 100;
+      const scrollPosition = window.scrollY + navbarHeight;
+
+      let currentSection = "hero";
+
+      sectionIds.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = id;
           }
-        });
-      },
-      {
-        threshold: 0.6, // Lower threshold for taller sections
-        rootMargin: "-60px 0px 0px 0px", // Adjust for navbar height
-      },
-    );
+        }
+      });
 
-    const sections = document.querySelectorAll(
-      "#hero, #workflow, #features, #opensource, #community, #faq",
-    );
-    sections.forEach((section) => observer.observe(section));
+      setActiveSection(currentSection);
+    };
 
-    return () => sections.forEach((section) => observer.unobserve(section));
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Call once on mount
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -60,8 +66,7 @@ const Landing = () => {
       bg={colorMode === "dark" ? "dark.base" : "light.base"}
       color={colorMode === "dark" ? "dark.textPrimary" : "light.textPrimary"}
     >
-      <ColorModeToggle />
-      <Navbar activeSection={activeSection} />
+      
 
       <Box maxW="100%" position="relative">
         <Box id="hero">
@@ -87,6 +92,7 @@ const Landing = () => {
 
         <Footer />
       </Box>
+      <Navbar activeSection={activeSection} />
     </Box>
   );
 };

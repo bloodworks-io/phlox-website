@@ -22,7 +22,7 @@ const FeatureItem = ({ title, description, icon, accentColor, index }) => {
     <MotionBox
       p={6}
       textAlign="center"
-      borderRadius="lg"
+      borderRadius="xl"
       bg={colorMode === "dark" ? "dark.base" : "light.base"}
       _hover={{
         transform: "translateY(-5px)",
@@ -106,7 +106,7 @@ const Features = ({ bgColor }) => {
     {
       title: "AI Chat & RAG",
       description:
-        "Chat with an LLM about cases, backed by a local document knowledge base using ChromaDB for retrieval-augmented generation.",
+        "Built-in reference tool to query medical guidelines, literature, and documentation backed by a local knowledge base.",
       icon: FaRobot,
       accentColor,
     },
@@ -125,9 +125,9 @@ const Features = ({ bgColor }) => {
       accentColor,
     },
     {
-      title: "Clinical Reasoning",
+      title: "Encounter Summarization",
       description:
-        "AI-assisted differential diagnosis and investigation planning to support your clinical decision-making process.",
+        "Automatically extract and organize key findings from patient encounters into clear, structured clinical documentation.",
       icon: FaUserMd,
       accentColor,
     },

@@ -7,8 +7,9 @@ const colors = {
     textPrimary: "#4c4f69", // Latte Text
     textSecondary: "#6c6f85", // Latte Subtext0
     textTeriary: "#fe640b", // Latte Peach
+    invertedText: "#e6e9ef", // Light text for buttons
     primaryButton: "#179299", // Latte Teal
-    secondaryButton: "#162694", // Secondary color
+    secondaryButton: "#df8e1d", // Orange
     dangerButton: "#d20f39", // Latte Red
     successButton: "#40a02b", // Latte Green
     neutralButton: "#7287fd", // Latte Lavender
@@ -20,8 +21,9 @@ const colors = {
     textPrimary: "#cad3f5", // Macchiato Text
     textSecondary: "#a5adcb", // Macchiato Subtext0
     textTeriary: "#f5a97f", // Machiatto Peach
+    invertedText: "#24273a", // Dark text for buttons
     primaryButton: "#8aadf4", // Macchiato Blue
-    secondaryButton: "#ADB3E4", // Secondary color
+    secondaryButton: "#eed49f", // Yellow
     dangerButton: "#ed8796", // Macchiato Red
     successButton: "#a6da95", // Macchiato Green
     neutralButton: "#b7bdf8", // Macchiato Lavender
@@ -52,7 +54,8 @@ const gradients = {
     dark: "radial-gradient(circle at 60% 40%, rgba(255,166,43,0.15) 0%, transparent 45%), radial-gradient(circle at 40% 60%, rgba(255,107,53,0.15) 0%, transparent 45%)",
   },
   sectionAccent: {
-    light: "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.03) 100%)",
+    light:
+      "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.03) 100%)",
     dark: "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.02) 100%)",
   },
 };
@@ -177,14 +180,15 @@ const theme = extendTheme({
     Button: {
       baseStyle: {
         fontWeight: "semibold",
-        borderRadius: "sm",
+        borderRadius: "xl",
       },
       variants: {
         primary: {
           bg: colors.light.primaryButton,
-          color: colors.light.base,
+          color: colors.light.invertedText,
           _dark: {
             bg: colors.dark.primaryButton,
+            color: colors.dark.invertedText,
           },
           _hover: {
             bg: colors.light.neutralButton,
@@ -195,9 +199,10 @@ const theme = extendTheme({
         },
         secondary: {
           bg: colors.light.secondaryButton,
-          color: colors.light.base,
+          color: colors.light.invertedText,
           _dark: {
             bg: colors.dark.secondaryButton,
+            color: colors.dark.invertedText,
           },
           _hover: {
             bg: colors.light.neutralButton,
@@ -208,17 +213,14 @@ const theme = extendTheme({
         },
         navButton: {
           bg: "transparent",
-          color: colors.light.base,
+          
           fontFamily: fonts.heading,
           fontWeight: "bold",
           borderRadius: "full",
           position: "relative",
           px: 6,
           py: 2,
-          _dark: {
-            color: colors.dark.textPrimary,
-          },
-          _hover: {
+                    _hover: {
             color: colors.light.textTeriary,
             _dark: {
               color: colors.dark.textTeriary,

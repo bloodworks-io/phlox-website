@@ -11,11 +11,12 @@ import {
   Link,
   Tooltip,
 } from "@chakra-ui/react";
-import { FaGithub, FaBook } from "react-icons/fa";
+import { FaDownload, FaBook, FaGitHub } from "react-icons/fa";
 import halfScreenDark from "../assets/half-screen-dark.webp";
 import halfScreenLight from "../assets/half-screen-light.webp";
 import bgDark from "../assets/bg.webp";
 import { gradients } from "../theme";
+import { LATEST_VERSION } from "../version";
 
 const Hero = () => {
   const { colorMode } = useColorMode();
@@ -76,7 +77,7 @@ const Hero = () => {
       justify="center"
       mb={5}
       px={{ base: 6, md: 40 }}
-      paddingTop={8}
+      paddingTop={{ base: 24, md: 28 }}
       pos="relative"
       overflow="hidden"
       sx={{
@@ -151,8 +152,8 @@ const Hero = () => {
       {/* Disclaimer Badge */}
       <Box
         position="absolute"
-        top="20px"
-        right="20px"
+        top={{ base: "100px", md: "120px" }}
+        right="20%"
         bg="rgba(0, 0, 0, 0.8)"
         backdropFilter="blur(10px)"
         color="white"
@@ -168,7 +169,7 @@ const Hero = () => {
         zIndex="2"
         display={{ base: "none", md: "block" }}
       >
-        ⚠️ Experimental - Phlox is not ready for use in the clinic.
+        ⚠️ Phlox is experimental software. Feedback welcome!
       </Box>
 
       {/* Mobile Warning Tooltip */}
@@ -231,14 +232,23 @@ const Hero = () => {
             <br />
             <Box
               as="span"
-              bgGradient="linear(to-r, orange.400, orange.600)"
+              bgGradient="linear(to-r, #1a1a2e, #16213e, #0f3460)"
               bgClip="text"
               display="inline-block"
               lineHeight="1.5"
-              whiteSpace="nowrap" // Prevent text from wrapping
+              whiteSpace="nowrap"
+              textShadow="0 2px 10px rgba(0,0,0,0.3)"
+              sx={{
+                filter: "drop-shadow(0 0 10px rgba(255,255,255,0.15))",
+              }}
             >
               {text}
-              <Box as="span" opacity={showCursor ? 1 : 0} color="orange.400">
+              <Box
+                as="span"
+                opacity={showCursor ? 1 : 0}
+                bgGradient="linear(to-b, #1a1a2e, #0f3460)"
+                bgClip="text"
+              >
                 |
               </Box>
             </Box>
@@ -265,17 +275,17 @@ const Hero = () => {
           >
             <Button
               as={Link}
-              href="https://github.com/bloodworks-io/phlox"
+              href="https://github.com/bloodworks-io/phlox/releases/latest"
               isExternal
               size="lg"
               variant="primary"
-              leftIcon={<FaGithub />}
+              leftIcon={<FaDownload />}
             >
-              View on GitHub
+              Download v{LATEST_VERSION}
             </Button>
             <Button
               as={Link}
-              href="https://github.com/bloodworks-io/phlox/blob/main/README.md"
+              href="https://github.com/bloodworks-io/phlox/tree/main/docs"
               isExternal
               size="lg"
               variant="secondary"
@@ -287,7 +297,7 @@ const Hero = () => {
 
           <Box
             maxWidth={{ base: "90%", md: "90%" }}
-            mt={{ base: 8, md: 20 }}
+            mt={{ base: 8, md: 10 }}
             position="relative"
             display="flex"
             alignItems="flex-end"

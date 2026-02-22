@@ -90,7 +90,7 @@ const FAQ = ({ bgColor }) => {
       </Heading>
 
       <Accordion
-        maxW="container.md"
+        maxW="container.lg"
         mx="auto"
         allowMultiple
         px={{ base: 2, md: 8 }}

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Phlox - Features Card (Light)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: 'Open Sans', sans-serif;
+      background: #eff1f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+    }
+
+    .blob-1 {
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, #fe640b 0%, transparent 70%);
+      top: -400px;
+      left: -200px;
+    }
+
+    .blob-2 {
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, #179299 0%, transparent 70%);
+      bottom: -350px;
+      right: -200px;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 80px 120px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    }
+
+    .header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: #4c4f69;
+      margin-bottom: 16px;
+    }
+
+    .header-line {
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #fe640b, #179299);
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(230, 233, 239, 0.6);
+      border: 1px solid rgba(76, 79, 105, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.8) translateY(40px);
+      animation: cardEntrance 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #fe640b, #179299);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.4s; }
+    .feature-card:nth-child(2) { animation-delay: 0.55s; }
+    .feature-card:nth-child(3) { animation-delay: 0.7s; }
+    .feature-card:nth-child(4) { animation-delay: 0.85s; }
+    .feature-card:nth-child(5) { animation-delay: 1s; }
+    .feature-card:nth-child(6) { animation-delay: 1.15s; }
+
+    @keyframes cardEntrance {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, rgba(254, 100, 11, 0.1), rgba(23, 146, 153, 0.1));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      transform: scale(0) rotate(-15deg);
+      animation: iconPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .feature-card:nth-child(1) .feature-icon { animation-delay: 0.7s; }
+    .feature-card:nth-child(2) .feature-icon { animation-delay: 0.85s; }
+    .feature-card:nth-child(3) .feature-icon { animation-delay: 1s; }
+    .feature-card:nth-child(4) .feature-icon { animation-delay: 1.15s; }
+    .feature-card:nth-child(5) .feature-icon { animation-delay: 1.3s; }
+    .feature-card:nth-child(6) .feature-icon { animation-delay: 1.45s; }
+
+    @keyframes iconPop {
+      0% {
+        transform: scale(0) rotate(-15deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .feature-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #4c4f69;
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: textFade 0.4s ease-out forwards;
+    }
+
+    .feature-card:nth-child(1) .feature-title { animation-delay: 0.9s; }
+    .feature-card:nth-child(2) .feature-title { animation-delay: 1.05s; }
+    .feature-card:nth-child(3) .feature-title { animation-delay: 1.2s; }
+    .feature-card:nth-child(4) .feature-title { animation-delay: 1.35s; }
+    .feature-card:nth-child(5) .feature-title { animation-delay: 1.5s; }
+    .feature-card:nth-child(6) .feature-title { animation-delay: 1.65s; }
+
+    .feature-description {
+      font-size: 16px;
+      color: #6c6f85;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: textFade 0.4s ease-out forwards;
+    }
+
+    .feature-card:nth-child(1) .feature-description { animation-delay: 1s; }
+    .feature-card:nth-child(2) .feature-description { animation-delay: 1.15s; }
+    .feature-card:nth-child(3) .feature-description { animation-delay: 1.3s; }
+    .feature-card:nth-child(4) .feature-description { animation-delay: 1.45s; }
+    .feature-card:nth-child(5) .feature-description { animation-delay: 1.6s; }
+    .feature-card:nth-child(6) .feature-description { animation-delay: 1.75s; }
+
+    @keyframes textFade {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover .glow {
+      opacity: 0.1;
+    }
+
+    .glow-1 {
+      background: radial-gradient(circle, #fe640b 0%, transparent 70%);
+      top: -50px;
+      right: -50px;
+    }
+
+    .glow-2 {
+      background: radial-gradient(circle, #179299 0%, transparent 70%);
+      bottom: -50px;
+      left: -50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="content">
+    <div class="header">
+      <h1>Key Features</h1>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="feature-icon">🎙️</div>
+        <h3 class="feature-title">AI Transcription</h3>
+        <p class="feature-description">Convert audio recordings to structured clinical notes with Whisper-compatible services</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="feature-icon">✅</div>
+        <h3 class="feature-title">Task Manager</h3>
+        <p class="feature-description">Parse clinical plans into actionable task lists with AI-generated summaries</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="feature-icon">🧠</div>
+        <h3 class="feature-title">Clinical Reasoning</h3>
+        <p class="feature-description">AI-assisted differential diagnosis and investigation planning support</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="feature-icon">📁</div>
+        <h3 class="feature-title">Patient Records</h3>
+        <p class="feature-description">Local SQLite database for storing patient information with full privacy</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">AI Chat & RAG</h3>
+        <p class="feature-description">Chat with an LLM about cases backed by ChromaDB knowledge retrieval</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="feature-icon">📝</div>
+        <h3 class="feature-title">Template System</h3>
+        <p class="feature-description">Flexible clinical note templates with versioning and automated generation</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

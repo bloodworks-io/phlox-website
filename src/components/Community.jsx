@@ -109,7 +109,7 @@ const Community = ({ bgColor }) => {
               <FeaturePoint
                 icon={FaTools}
                 title="Local-First Architecture"
-                description="Built with local tools like Ollama, Whisper, SQLite, and ChromaDB. No cloud dependencies means you control your data and workflow completely."
+                description="Built with local tools like llama.cpp, whisper.cpp, SQLite, and ChromaDB. No cloud dependencies means you control your data and workflow completely."
                 colorMode={colorMode}
               />
               <FeaturePoint
@@ -161,7 +161,7 @@ const Community = ({ bgColor }) => {
           <MotionBox
             flex="1"
             p={6}
-            borderRadius="lg"
+            borderRadius="xl"
             bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}

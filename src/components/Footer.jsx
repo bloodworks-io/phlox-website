@@ -11,7 +11,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { FaGithub, FaArrowUp } from "react-icons/fa";
-import logo from "../assets/logo.webp";
+import logo from "../assets/phlox-icon.png";
 
 const Footer = () => {
   const { colorMode } = useColorMode();
