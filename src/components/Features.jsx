@@ -23,7 +23,7 @@ const FeatureItem = ({ title, description, icon, accentColor, index }) => {
       p={6}
       textAlign="center"
       borderRadius="xl"
-      bg={colorMode === "dark" ? "dark.base" : "light.base"}
+      bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
       _hover={{
         transform: "translateY(-5px)",
         boxShadow: "xl",

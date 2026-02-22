@@ -12,7 +12,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
-import Workflow from "./Workflow";
+import Why from "./Why";
 import Hero from "./Hero";
 import Features from "./Features";
 import logo from "../assets/logo.webp";
@@ -31,7 +31,7 @@ const Landing = () => {
     colorMode === "dark" ? "dark.secondary" : "light.secondary";
 
   useEffect(() => {
-    const sectionIds = ["hero", "workflow", "features", "community", "faq"];
+    const sectionIds = ["hero", "features", "why", "community", "faq"];
 
     const handleScroll = () => {
       const navbarHeight = 100;
@@ -66,19 +66,17 @@ const Landing = () => {
       bg={colorMode === "dark" ? "dark.base" : "light.base"}
       color={colorMode === "dark" ? "dark.textPrimary" : "light.textPrimary"}
     >
-      
-
       <Box maxW="100%" position="relative">
         <Box id="hero">
           <Hero />
         </Box>
 
-        <Box id="workflow">
-          <Workflow bgColor={baseColor} />
+        <Box id="features">
+          <Features bgColor={baseColor} />
         </Box>
 
-        <Box id="features">
-          <Features bgColor={secondaryColor} />
+        <Box id="why">
+          <Why bgColor={secondaryColor} />
         </Box>
 
         <Box id="community">

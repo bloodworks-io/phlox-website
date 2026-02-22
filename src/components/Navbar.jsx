@@ -35,8 +35,8 @@ const Navbar = ({ activeSection }) => {
   };
 
   const navItems = [
-    { id: "workflow", label: "Workflow" },
     { id: "features", label: "Features" },
+    { id: "why", label: "Why Local" },
     { id: "community", label: "Community" },
     { id: "faq", label: "FAQ" },
   ];
@@ -45,7 +45,7 @@ const Navbar = ({ activeSection }) => {
     const section = document.getElementById(id);
     if (section) {
       const navbarHeight = 80;
-      const offset = id === "workflow" ? navbarHeight : navbarHeight - 40;
+      const offset = id === "why" ? navbarHeight : navbarHeight - 40;
       const sectionTop = section.offsetTop - offset;
       window.scrollTo({
         top: sectionTop,
@@ -213,7 +213,7 @@ const NavButton = ({ id, activeSection, label, colors }) => (
       const section = document.getElementById(id);
       if (section) {
         const navbarHeight = 100;
-        const offset = id === "workflow" ? navbarHeight : navbarHeight - 60;
+        const offset = id === "why" ? navbarHeight : navbarHeight - 60;
         const sectionTop = section.offsetTop - offset;
         window.scrollTo({
           top: sectionTop,

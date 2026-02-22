@@ -71,7 +71,7 @@ const ContentBlock = ({ number, icon, title, children, index }) => {
   );
 };
 
-const Workflow = ({ bgColor }) => {
+const Why = ({ bgColor }) => {
   const { colorMode } = useColorMode();
 
   const blocks = [
@@ -147,4 +147,4 @@ const Workflow = ({ bgColor }) => {
   );
 };
 
-export default Workflow;
+export default Why;

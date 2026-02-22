@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
   const navLinks = [
-    { label: "Workflow", href: "#workflow" },
+    { label: "Why Local", href: "why" },
     { label: "Features", href: "#features" },
     { label: "Community", href: "#community" },
     { label: "FAQ", href: "#faq" },
