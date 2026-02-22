@@ -281,7 +281,7 @@ const Hero = () => {
               variant="primary"
               leftIcon={<FaDownload />}
             >
-              Download v{LATEST_VERSION}
+              Download {LATEST_VERSION}
             </Button>
             <Button
               as={Link}
