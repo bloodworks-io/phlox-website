@@ -258,11 +258,11 @@ const Hero = () => {
         {/* Second Box for the rest of the content */}
         <Box width="100%" maxWidth="90%" textAlign="center">
           <Text
-            fontSize={{ base: "sm", md: "s" }}
+            fontSize={{ base: "sm", md: "lg" }}
             mb={6}
             color="whiteAlpha.900"
           >
-            An open-source patient management system integrating AI-powered
+            Free, open-source patient management system integrating AI-powered
             medical transcription, clinical note generation, and an AI chatbot
             interface. Designed to run locally with privacy-first principles,
             using only free and open-source tools.
