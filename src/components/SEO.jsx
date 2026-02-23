@@ -2,9 +2,9 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 const SEO = () => {
-  const siteTitle = "Phlox - Experimental Open Source AI Project";
+  const siteTitle = "Phlox - Free AI Medical Scribe";
   const siteDescription =
-    "An open-source experimental project for educational exploration of local AI concepts like transcription and text organization. Intended for educational and personal experimentation ONLY. NOT a certified medical device. Not for clinical use.";
+    "A free, open source AI medical scribe that runs entirely on your computer.";
   const siteUrl = "https://phlox.bloodworks.io"; // This can remain as is or be updated if the URL changes
 
   const structuredData = {
@@ -19,7 +19,7 @@ const SEO = () => {
       priceCurrency: "USD",
     },
     description:
-      "An open-source experimental project for educational exploration of local text processing. Intended for educational and personal experimentation ONLY. NOT a certified medical device or for clinical use.", // Updated
+      "A free, open source AI medical scribe that runs entirely on your computer.", // Updated
   };
 
   return (
@@ -28,7 +28,7 @@ const SEO = () => {
       <meta name="description" content={siteDescription} />
       <meta
         name="keywords"
-        content="experimental AI, educational AI, AI text processing, local AI demo, open source AI project" // Updated
+        content="AI medical scribe, medical transcription, clinical notes, AI scribe, free medical scribe, local AI, open source medical software, patient notes, medical documentation" // Updated
       />
       <link rel="canonical" href={siteUrl} />
 
