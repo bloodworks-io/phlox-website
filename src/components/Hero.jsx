@@ -149,11 +149,11 @@ const Hero = () => {
         pointerEvents="none"
       />
 
-      {/* Disclaimer Badge */}
+      {/* Disclaimer Badge - lg and up only */}
       <Box
         position="absolute"
-        top={{ base: "100px", md: "120px" }}
-        right="20%"
+        top="120px"
+        right={{ lg: "11%", xl: "calc((100% - 1200px) / 2 + 16px)" }}
         bg="rgba(0, 0, 0, 0.8)"
         backdropFilter="blur(10px)"
         color="white"
@@ -167,14 +167,14 @@ const Hero = () => {
         border="1px solid rgba(255, 255, 255, 0.1)"
         boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
         zIndex="2"
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "none", lg: "block" }}
       >
         ⚠️ Phlox is experimental software. Feedback welcome!
       </Box>
 
-      {/* Mobile Warning Tooltip */}
+      {/* Mobile/Tablet Warning Tooltip - md and below */}
       <Tooltip
-        label="Experimental project for educational and personal use - not a certified medical device"
+        label="Phlox is experimental software. Feedback welcome!"
         hasArrow
         placement="bottom"
         bg="gray.700"
@@ -182,12 +182,12 @@ const Hero = () => {
         fontSize="sm"
         maxWidth="250px"
         textAlign="center"
-        display={{ base: "block", md: "none" }}
+        display={{ base: "block", lg: "none" }}
       >
         <Box
           position="absolute"
-          top="20px"
-          right="20px"
+          top="120px"
+          right={{ base: "40px", md: "40px" }}
           bg="rgba(0, 0, 0, 0.8)"
           backdropFilter="blur(10px)"
           color="white"
@@ -198,7 +198,7 @@ const Hero = () => {
           boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
           zIndex="2"
           cursor="pointer"
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" }}
           alignItems="center"
           justifyContent="center"
           width="40px"
