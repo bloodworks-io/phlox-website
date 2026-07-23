@@ -23,58 +23,76 @@ const techLogos = [
 
 const PoweredBy = () => {
   const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   return (
     <Box
-      py={2}
-      mb={10}
+      pb={16}
       textAlign="center"
-      bg={colorMode === "dark" ? "dark.base" : "light.base"}
-      color={colorMode === "dark" ? "dark.textPrimary" : "light.textPrimary"}
+      bg={isDark ? "dark.base" : "light.base"}
+      color={isDark ? "dark.textPrimary" : "light.textPrimary"}
     >
-      <Text maxW="container.md" mx="auto" mb={8}>
-        Phlox is built with free and open-source technologies that prioritize privacy and local processing. Use any OpenAI-compatible endpoint including Ollama, vLLM, llama.cpp, and more. Run everything on your own hardware with complete control over your data and workflow.
+      <Text maxW="container.md" mx="auto" mb={10} px={{ base: 4, md: 0 }}>
+        Phlox is built with free and open-source technologies that prioritize
+        privacy and local processing. Use any OpenAI-compatible endpoint
+        including Ollama, vLLM, llama.cpp, and more.
       </Text>
 
-      <Flex justify="center" flexWrap="wrap" gap={12} mb={12}>
+      <Flex
+        justify="center"
+        align="center"
+        flexWrap="wrap"
+        gap={{ base: 8, md: 14 }}
+        mb={12}
+        px={4}
+      >
         {techLogos.map((tech, index) => (
-          <a
+          <Link
             href={tech.link}
             target="_blank"
             rel="noopener noreferrer"
             key={index}
+            lineHeight={0}
           >
             <Image
               src={tech.src}
               alt={tech.alt}
-              height="50px"
-              filter={colorMode === "dark" ? "brightness(0.8)" : "none"}
+              height={{ base: "36px", md: "44px" }}
+              filter={isDark ? "grayscale(1) brightness(0.9)" : "grayscale(1)"}
+              opacity={0.65}
+              transition="all 0.3s ease"
+              _hover={{
+                filter: isDark ? "grayscale(0) brightness(0.95)" : "grayscale(0)",
+                opacity: 1,
+                transform: "translateY(-2px)",
+              }}
             />
-          </a>
+          </Link>
         ))}
       </Flex>
 
       <Text
         fontSize="sm"
-        color={
-          colorMode === "dark" ? "dark.textSecondary" : "light.textSecondary"
-        }
+        color={isDark ? "dark.textSecondary" : "light.textSecondary"}
         maxW="container.sm"
         mx="auto"
+        px={{ base: 4, md: 0 }}
       >
         Licensed under{" "}
         <Link
           href="https://opensource.org/licenses/MIT"
           isExternal
-          color="blue.400"
+          color={isDark ? "dark.textTeriary" : "light.textTeriary"}
         >
           MIT License
         </Link>
-        . This is experimental software for educational use - always verify AI outputs and use professional judgment. Contributions are welcome! See our{" "}
+        . This is experimental software for educational use - always verify AI
+        outputs and use professional judgment. Contributions are welcome! See
+        our{" "}
         <Link
           href="https://github.com/bloodworks-io/phlox/blob/main/.github/CONTRIBUTING.md"
           isExternal
-          color="blue.400"
+          color={isDark ? "dark.textTeriary" : "light.textTeriary"}
         >
           Contributing Guidelines
         </Link>

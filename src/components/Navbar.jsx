@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Flex,
@@ -16,11 +16,13 @@ import {
   VStack,
   useDisclosure,
   Icon,
+  Link,
 } from "@chakra-ui/react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaDownload } from "react-icons/fa";
 import logo from "../assets/logo.webp";
 import theme from "../theme";
 import ColorModeToggle from "./ColorModeToggle";
+import { LATEST_VERSION } from "../version";
 const { dark } = theme.colors;
 
 const Navbar = ({ activeSection }) => {
@@ -125,6 +127,22 @@ const Navbar = ({ activeSection }) => {
               }}
             />
           </Box>
+
+          {/* Download CTA */}
+          <Button
+            as={Link}
+            href="https://github.com/bloodworks-io/phlox/releases/latest"
+            isExternal
+            size="sm"
+            variant="cta"
+            borderRadius="full"
+            px={4}
+            display={{ base: "none", md: "inline-flex" }}
+            leftIcon={<FaDownload />}
+            _hover={{ textDecoration: "none" }}
+          >
+            {LATEST_VERSION}
+          </Button>
 
           <ColorModeToggle />
 

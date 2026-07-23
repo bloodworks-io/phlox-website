@@ -1,5 +1,14 @@
 import React from "react";
-import { Box, Grid, Heading, Text, Icon, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
+  Icon,
+  Flex,
+  useColorMode,
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import {
   FaMicrophone,
@@ -11,146 +20,197 @@ import {
   FaDatabase,
   FaUserMd,
 } from "react-icons/fa";
-import theme from "../theme";
+import SectionHeading from "./SectionHeading";
+import MediaPlaceholder from "./MediaPlaceholder";
+import { glass } from "../theme";
 
-const MotionBox = motion(Box);
+const MotionGridItem = motion(GridItem);
 
-const FeatureItem = ({ title, description, icon, accentColor, index }) => {
+const IconTile = ({ icon, accentColor }) => (
+  <Flex
+    align="center"
+    justify="center"
+    boxSize="44px"
+    borderRadius="xl"
+    bg={`${accentColor}1f`}
+    border="1px solid"
+    borderColor={`${accentColor}40`}
+    mb={4}
+    className="feature-icon"
+    transition="transform 0.3s ease-in-out"
+  >
+    <Icon as={icon} fontSize="xl" color={accentColor} />
+  </Flex>
+);
+
+const FeatureCard = ({
+  title,
+  description,
+  icon,
+  accentColor,
+  placeholder,
+  ...props
+}) => {
   const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+  const g = isDark ? glass.dark : glass.light;
 
   return (
-    <MotionBox
-      p={6}
-      textAlign="center"
-      borderRadius="xl"
-      bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
+    <MotionGridItem
+      p={{ base: 6, md: 7 }}
+      borderRadius="2xl"
+      bg={g.bg}
+      border="1px solid"
+      borderColor={g.border}
+      backdropFilter="blur(10px)"
+      sx={{ transition: "border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease" }}
       _hover={{
-        transform: "translateY(-5px)",
+        transform: "translateY(-4px)",
         boxShadow: "xl",
-        borderColor: accentColor,
-        borderWidth: "1px",
+        borderColor: g.hoverBorder,
         "& .feature-icon": {
-          transform: "scale(1.1) rotate(5deg)",
+          transform: "scale(1.08) rotate(-4deg)",
         },
       }}
-      transition="all 0.3s ease-in-out"
-      position="relative"
-      overflow="hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      {...props}
     >
-      <Icon
-        as={icon}
-        fontSize="3xl"
-        mb={4}
-        color={accentColor}
-        className="feature-icon"
-        transition="transform 0.3s ease-in-out"
-      />
+      <IconTile icon={icon} accentColor={accentColor} />
       <Heading
         as="h3"
         size="md"
         mb={2}
         fontWeight="semibold"
-        color={colorMode === "dark" ? "dark.textPrimary" : "light.textPrimary"}
+        color={isDark ? "dark.textPrimary" : "light.textPrimary"}
       >
         {title}
       </Heading>
       <Text
         fontSize="sm"
-        color={
-          colorMode === "dark" ? "dark.textSecondary" : "light.textSecondary"
-        }
+        lineHeight="1.7"
+        mb={placeholder ? 5 : 0}
+        color={isDark ? "dark.textSecondary" : "light.textSecondary"}
       >
         {description}
       </Text>
-    </MotionBox>
+      {placeholder && (
+        <MediaPlaceholder
+          dark={isDark}
+          ratio={16 / 10}
+          label={placeholder.label}
+          dimensions="1200 × 750"
+          description={placeholder.description}
+        />
+      )}
+    </MotionGridItem>
   );
 };
 
 const Features = ({ bgColor }) => {
   const { colorMode } = useColorMode();
-  const accentColor = colorMode === "dark" ? "orange.400" : "orange.500";
+  const accentColor = colorMode === "dark" ? "#f5a97f" : "#fe640b";
 
-  const features = [
+  const largeFeatures = [
     {
       title: "AI Transcription",
       description:
-        "Convert audio recordings to structured clinical notes using Whisper-compatible transcription services with customizable templates.",
+        "Record a consult and watch it become a structured clinical note. Whisper-compatible transcription with customizable templates — all processed on your own hardware.",
       icon: FaMicrophone,
-      accentColor,
-    },
-    {
-      title: "Flexible Template System",
-      description:
-        "Structure clinical notes to your preferences with versioning and automated template generation from example notes.",
-      icon: FaRegFileAlt,
-      accentColor,
-    },
-    {
-      title: "Task Manager",
-      description:
-        "Parse clinical plans into actionable task lists with AI-generated summaries and automated follow-up tracking.",
-      icon: FaTasks,
-      accentColor,
-    },
-    {
-      title: "Correspondence Generation",
-      description:
-        "One-click generation of patient letters, referrals, and discharge summaries based on your clinical notes.",
-      icon: FaEnvelope,
-      accentColor,
+      placeholder: {
+        label: "Screenshot: Transcription View",
+        description:
+          "Encounter view mid-recording: live transcript panel, waveform/record button, patient header. Crop tight to the app window, no browser chrome. Save as public/images/feature-transcription.webp",
+      },
     },
     {
       title: "AI Chat & RAG",
       description:
-        "Built-in reference tool to query medical guidelines, literature, and documentation backed by a local knowledge base.",
+        "Query medical guidelines, literature, and your own documents through a local knowledge base. Ask questions, explore differentials, and discuss treatment options in context.",
       icon: FaRobot,
-      accentColor,
+      placeholder: {
+        label: "Screenshot: AI Chat View",
+        description:
+          "Chat interface with an answered clinical question showing cited sources from the RAG knowledge base. Crop tight to the app window. Save as public/images/feature-chat.webp",
+      },
+    },
+  ];
+
+  const smallFeatures = [
+    {
+      title: "Flexible Templates",
+      description:
+        "Structure notes to your preferences with versioning and automated template generation from example notes.",
+      icon: FaRegFileAlt,
     },
     {
-      title: "Dashboard & RSS Reader",
+      title: "Task Manager",
       description:
-        "Stay updated with LLM-summarized articles from medical RSS feeds and view your recent activity at a glance.",
+        "Parse clinical plans into actionable task lists with AI summaries and follow-up tracking.",
+      icon: FaTasks,
+    },
+    {
+      title: "Correspondence",
+      description:
+        "One-click patient letters, referrals, and discharge summaries from your clinical notes.",
+      icon: FaEnvelope,
+    },
+    {
+      title: "Dashboard & RSS",
+      description:
+        "LLM-summarized articles from medical RSS feeds and your recent activity at a glance.",
       icon: FaRss,
-      accentColor,
     },
     {
       title: "Patient Records",
       description:
-        "Local SQLite database for storing patient information, notes, and generated content with full privacy control.",
+        "Local SQLite database for patients, notes, and generated content with full privacy control.",
       icon: FaDatabase,
-      accentColor,
     },
     {
-      title: "Encounter Summarization",
+      title: "Encounter Summaries",
       description:
-        "Automatically extract and organize key findings from patient encounters into clear, structured clinical documentation.",
+        "Automatically extract key findings from encounters into clear, structured documentation.",
       icon: FaUserMd,
-      accentColor,
     },
   ];
 
   return (
-    <Box as="section" py={16} bg={bgColor} id="features">
-      <Heading as="h2" variant="h2" sx={{ textAlign: "center" }} mb={8}>
-        Key Features
-      </Heading>
+    <Box as="section" py={{ base: 16, md: 24 }} bg={bgColor} id="features">
+      <SectionHeading
+        eyebrow="Features"
+        title="Everything runs locally"
+        subtext="A complete clinical documentation toolkit built on free and open-source tools."
+      />
       <Grid
         templateColumns={{
           base: "repeat(1, 1fr)",
           md: "repeat(2, 1fr)",
-          lg: "repeat(4, 1fr)",
+          lg: "repeat(6, 1fr)",
         }}
-        gap={8}
+        gap={6}
         maxW="container.xl"
         mx="auto"
         px={{ base: 4, md: 8 }}
       >
-        {features.map((feature, index) => (
-          <FeatureItem key={index} {...feature} index={index} />
+        {largeFeatures.map((feature, index) => (
+          <FeatureCard
+            key={feature.title}
+            {...feature}
+            accentColor={accentColor}
+            colSpan={{ base: 1, md: 2, lg: 3 }}
+            transition={{ duration: 0.4, delay: index * 0.08 }}
+          />
+        ))}
+        {smallFeatures.map((feature, index) => (
+          <FeatureCard
+            key={feature.title}
+            {...feature}
+            accentColor={accentColor}
+            colSpan={{ base: 1, md: 1, lg: 2 }}
+            transition={{ duration: 0.4, delay: (index + 2) * 0.08 }}
+          />
         ))}
       </Grid>
     </Box>

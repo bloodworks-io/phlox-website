@@ -10,46 +10,40 @@ import {
   Icon,
   Link,
   Image,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
   Tooltip,
   Icon as ChakraIcon,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import {
   FaGithub,
-  FaHeart,
-  FaHandsHelping,
   FaTools,
   FaLock,
   FaExclamationTriangle,
   FaInfoCircle,
 } from "react-icons/fa";
-import filipeImage from "../assets/filipe.jpg"; // Import your image
+import SectionHeading from "./SectionHeading";
+import { glass } from "../theme";
+import filipeImage from "../assets/filipe.jpg";
 
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);
 
 const Community = ({ bgColor }) => {
   const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+  const g = isDark ? glass.dark : glass.light;
 
   return (
-    <Box id="community" py={16} bg={bgColor}>
+    <Box id="community" py={{ base: 16, md: 24 }} bg={bgColor}>
       <Box maxW="container.xl" mx="auto" px={{ base: 4, md: 8 }}>
-        <Heading as="h2" variant="h2" sx={{ textAlign: "center" }} mb={10}>
-          Open Source & Local-First
-        </Heading>
-        <Text textAlign="center" variant="body" mb={10} maxW="60%" mx="auto">
-          Phlox is built on open-source principles with a local-first
-          architecture. All data stays on your machine, using only free and
-          open-source tools. No subscriptions, no vendor lock-in, and complete
-          transparency through open source code.
-        </Text>
+        <SectionHeading
+          eyebrow="Community"
+          title="Open Source & Local-First"
+          subtext="No subscriptions, no vendor lock-in, and complete transparency through open source code. All data stays on your machine."
+        />
         <MotionFlex
           direction={{ base: "column", lg: "row" }}
-          align="center"
+          align="stretch"
           justify="space-between"
           gap={10}
           initial={{ opacity: 0 }}
@@ -66,7 +60,7 @@ const Community = ({ bgColor }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Stack spacing={6} mb={8}>
+            <Stack spacing={7} mb={10}>
               <FeaturePoint
                 icon={FaLock}
                 title={
@@ -77,16 +71,8 @@ const Community = ({ bgColor }) => {
                       hasArrow
                       placement="top"
                       fontSize="sm"
-                      bg={
-                        colorMode === "dark"
-                          ? "dark.secondary"
-                          : "light.secondary"
-                      }
-                      color={
-                        colorMode === "dark"
-                          ? "dark.textPrimary"
-                          : "light.textPrimary"
-                      }
+                      bg={isDark ? "dark.secondary" : "light.secondary"}
+                      color={isDark ? "dark.textPrimary" : "light.textPrimary"}
                     >
                       <span>
                         <ChakraIcon
@@ -94,9 +80,7 @@ const Community = ({ bgColor }) => {
                           w={4}
                           h={4}
                           color={
-                            colorMode === "dark"
-                              ? "dark.textTeriary"
-                              : "light.textTeriary"
+                            isDark ? "dark.textTeriary" : "light.textTeriary"
                           }
                         />
                       </span>
@@ -104,32 +88,32 @@ const Community = ({ bgColor }) => {
                   </Flex>
                 }
                 description="Runs entirely on your machine with no third-party services. All data stays local using only free, open-source tools for complete privacy control."
-                colorMode={colorMode}
+                isDark={isDark}
               />
               <FeaturePoint
                 icon={FaTools}
                 title="Local-First Architecture"
                 description="Built with local tools like llama.cpp, whisper.cpp, SQLite, and ChromaDB. No cloud dependencies means you control your data and workflow completely."
-                colorMode={colorMode}
+                isDark={isDark}
               />
               <FeaturePoint
                 icon={FaGithub}
                 title="Open Source Transparency"
                 description="Full source code available on GitHub. Audit, modify, and contribute - never be locked into proprietary systems."
-                colorMode={colorMode}
+                isDark={isDark}
               />
               <FeaturePoint
                 icon={FaExclamationTriangle}
                 title="Experimental Software"
                 description="This is experimental software for educational use. Always verify AI outputs and use professional judgment for any clinical decisions."
-                colorMode={colorMode}
+                isDark={isDark}
               />
             </Stack>
 
             <Stack
               direction={{ base: "column", sm: "row" }}
               spacing={4}
-              justify="center"
+              justify={{ base: "center", lg: "flex-start" }}
             >
               <Button
                 as={Link}
@@ -138,6 +122,7 @@ const Community = ({ bgColor }) => {
                 rel="noopener noreferrer"
                 colorScheme="green"
                 size="lg"
+                borderRadius="full"
                 leftIcon={<FaGithub />}
               >
                 View on GitHub
@@ -149,7 +134,8 @@ const Community = ({ bgColor }) => {
                 rel="noopener noreferrer"
                 variant="outline"
                 size="lg"
-                colorScheme={colorMode === "dark" ? "orange" : "orange"}
+                borderRadius="full"
+                colorScheme="orange"
                 leftIcon={<FaExclamationTriangle />}
               >
                 Usage Guidelines
@@ -160,9 +146,12 @@ const Community = ({ bgColor }) => {
           {/* Right Column: Built by a Clinician */}
           <MotionBox
             flex="1"
-            p={6}
-            borderRadius="xl"
-            bg={colorMode === "dark" ? "dark.secondary" : "light.secondary"}
+            p={{ base: 6, md: 8 }}
+            borderRadius="2xl"
+            bg={g.bg}
+            border="1px solid"
+            borderColor={g.border}
+            backdropFilter="blur(10px)"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -174,26 +163,20 @@ const Community = ({ bgColor }) => {
                 alt="Filipe Gonsalves"
                 borderRadius="full"
                 boxSize="60px"
+                border="2px solid"
+                borderColor={isDark ? "dark.textTeriary" : "light.textTeriary"}
               />
               <Box>
                 <Heading
                   as="h3"
                   size="lg"
-                  color={
-                    colorMode === "dark"
-                      ? "dark.textPrimary"
-                      : "light.textPrimary"
-                  }
+                  color={isDark ? "dark.textPrimary" : "light.textPrimary"}
                 >
                   Built for Clinicians, by a Clinician
                 </Heading>
                 <Text
                   fontSize="sm"
-                  color={
-                    colorMode === "dark"
-                      ? "dark.textSecondary"
-                      : "light.textSecondary"
-                  }
+                  color={isDark ? "dark.textSecondary" : "light.textSecondary"}
                 >
                   Filipe Gonsalves, Clinical and Laboratory Haematologist
                 </Text>
@@ -203,11 +186,7 @@ const Community = ({ bgColor }) => {
             <Text
               fontSize="lg"
               mb={6}
-              color={
-                colorMode === "dark"
-                  ? "dark.textSecondary"
-                  : "light.textSecondary"
-              }
+              color={isDark ? "dark.textSecondary" : "light.textSecondary"}
             >
               I built Phlox because I wanted a simple, practical tool that works
               for me - something that didn't overcomplicate things or charge
@@ -219,47 +198,27 @@ const Community = ({ bgColor }) => {
 
             <Stack spacing={4}>
               <Text
-                color={
-                  colorMode === "dark"
-                    ? "dark.textSecondary"
-                    : "light.textSecondary"
-                }
+                color={isDark ? "dark.textSecondary" : "light.textSecondary"}
               >
                 <strong>Why I built it:</strong>
               </Text>
               <Text
-                color={
-                  colorMode === "dark"
-                    ? "dark.textSecondary"
-                    : "light.textSecondary"
-                }
+                color={isDark ? "dark.textSecondary" : "light.textSecondary"}
               >
                 - To have a tool that's simple and gets the job done
               </Text>
               <Text
-                color={
-                  colorMode === "dark"
-                    ? "dark.textSecondary"
-                    : "light.textSecondary"
-                }
+                color={isDark ? "dark.textSecondary" : "light.textSecondary"}
               >
                 - To keep things local and under my control
               </Text>
               <Text
-                color={
-                  colorMode === "dark"
-                    ? "dark.textSecondary"
-                    : "light.textSecondary"
-                }
+                color={isDark ? "dark.textSecondary" : "light.textSecondary"}
               >
                 - To avoid the subscription traps of other tools
               </Text>
               <Text
-                color={
-                  colorMode === "dark"
-                    ? "dark.textSecondary"
-                    : "light.textSecondary"
-                }
+                color={isDark ? "dark.textSecondary" : "light.textSecondary"}
               >
                 - To have fun building something useful
               </Text>
@@ -272,34 +231,44 @@ const Community = ({ bgColor }) => {
 };
 
 // Reusable Feature Point Component
-const FeaturePoint = ({ icon, title, description, colorMode }) => (
-  <Flex align="center" gap={4}>
-    <Icon
-      as={icon}
-      fontSize="2xl"
-      color={
-        colorMode === "dark" ? "dark.primaryButton" : "light.primaryButton"
-      }
-    />
-    <Box align="justify">
-      <Heading
-        as="h4"
-        size="md"
-        mb={1}
-        color={colorMode === "dark" ? "dark.textPrimary" : "light.textPrimary"}
+const FeaturePoint = ({ icon, title, description, isDark }) => {
+  const accentColor = isDark
+    ? "dark.primaryButton"
+    : "light.primaryButton";
+
+  return (
+    <Flex align="flex-start" gap={4}>
+      <Flex
+        align="center"
+        justify="center"
+        boxSize="44px"
+        flexShrink={0}
+        borderRadius="xl"
+        bg={isDark ? "rgba(138,173,244,0.12)" : "rgba(23,146,153,0.1)"}
+        border="1px solid"
+        borderColor={isDark ? "rgba(138,173,244,0.25)" : "rgba(23,146,153,0.2)"}
       >
-        {title}
-      </Heading>
-      <Text
-        fontSize="sm"
-        color={
-          colorMode === "dark" ? "dark.textSecondary" : "light.textSecondary"
-        }
-      >
-        {description}
-      </Text>
-    </Box>
-  </Flex>
-);
+        <Icon as={icon} fontSize="lg" color={accentColor} />
+      </Flex>
+      <Box textAlign="left">
+        <Heading
+          as="h4"
+          size="md"
+          mb={1}
+          color={isDark ? "dark.textPrimary" : "light.textPrimary"}
+        >
+          {title}
+        </Heading>
+        <Text
+          fontSize="sm"
+          lineHeight="1.7"
+          color={isDark ? "dark.textSecondary" : "light.textSecondary"}
+        >
+          {description}
+        </Text>
+      </Box>
+    </Flex>
+  );
+};
 
 export default Community;

@@ -6,13 +6,16 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
-  Heading,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import SectionHeading from "./SectionHeading";
+import { glass } from "../theme";
 
 const FAQ = ({ bgColor }) => {
   const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+  const g = isDark ? glass.dark : glass.light;
   const faqData = [
     {
       question: "What is Phlox?",
@@ -84,21 +87,28 @@ const FAQ = ({ bgColor }) => {
   ];
 
   return (
-    <Box as="section" py={16} bg={bgColor} id="faq">
-      <Heading as="h2" variant="h2" sx={{ textAlign: "center" }} mb={10}>
-        Frequently Asked Questions
-      </Heading>
+    <Box as="section" py={{ base: 16, md: 24 }} bg={bgColor} id="faq">
+      <SectionHeading
+        eyebrow="FAQ"
+        title="Frequently Asked Questions"
+        subtext="Setup, privacy, supported backends, and limitations."
+      />
 
-      <Accordion
-        maxW="container.lg"
-        mx="auto"
-        allowMultiple
-        px={{ base: 2, md: 8 }}
-      >
+      <Accordion maxW="container.lg" mx="auto" allowMultiple px={{ base: 4, md: 8 }}>
         {faqData.map((item, index) => (
-          <AccordionItem key={index}>
+          <AccordionItem
+            key={index}
+            mb={3}
+            borderRadius="xl"
+            border="1px solid"
+            borderColor={g.border}
+            bg={g.bg}
+            backdropFilter="blur(10px)"
+            overflow="hidden"
+          >
             <h2>
               <AccordionButton
+                py={4}
                 _hover={{
                   bg:
                     colorMode === "dark" ? "dark.secondary" : "light.secondary",
@@ -126,12 +136,13 @@ const FAQ = ({ bgColor }) => {
               </AccordionButton>
             </h2>
             <AccordionPanel
-              pb={4}
+              pb={5}
               color={
                 colorMode === "dark"
                   ? "dark.textSecondary"
                   : "light.textSecondary"
               }
+              lineHeight="1.7"
             >
               <Text>{item.answer}</Text>
             </AccordionPanel>
