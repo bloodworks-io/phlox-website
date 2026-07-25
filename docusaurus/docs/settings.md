@@ -1,12 +1,17 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import settingsLight from "@site/static/img/settings-overview-light.png";
+import settingsDark from "@site/static/img/settings-overview-dark.png";
+import modelsLight from "@site/static/img/local-model-manager-light.png";
+import modelsDark from "@site/static/img/local-model-manager-dark.png";
+
 # Settings
 
 Phlox is configured almost entirely through the in-app **Settings** page. Configuration lives in the encrypted database (not in files), so changes persist with your data. Most settings autosave.
 
 Settings is divided into three top-level panels: **User Settings**, **Model Settings**, and **Prompt Settings**.
 
-:::note[Screenshot needed]
-_The Settings page — the three top-level panels (User / Model / Prompt)._
-:::
+{/* Screenshot: capture 1600x1000, light + dark; files: settings-overview-{light,dark}.png */}
+<ThemedShot light={settingsLight} dark={settingsDark} alt="Settings page" width={500} />
 
 ## User Settings
 
@@ -28,9 +33,8 @@ On desktop you can run inference locally. The panel toggles between **Local** an
 
 - **Models tab** — download and manage the bundled models: the primary **AI model** (with smart recommendations based on your RAM/cores, plus an estimated processing time), the **transcription** model (Omi Med STT v1), and the optional **embeddings** model (Qwen3-Embedding) used for RAG. A system-specs banner shows your available RAM and CPU cores, and a "Reset All Models" action is available.
 
-:::note[Screenshot needed]
-_The Local Model Manager — the AI model carousel with recommendation badges and the performance popover (RAM / params / est. time)._
-:::
+{/* Screenshot: capture 1600x1000, light + dark; files: local-model-manager-{light,dark}.png */}
+<ThemedShot light={modelsLight} dark={modelsDark} alt="Local Model Manager" width={500} />
 - **Tools tab** — see [Tools](#tools) below.
 
 ### Remote mode

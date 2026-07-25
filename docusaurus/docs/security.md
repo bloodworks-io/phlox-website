@@ -1,3 +1,7 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import auditLight from "@site/static/img/audit-log-light.png";
+import auditDark from "@site/static/img/audit-log-dark.png";
+
 # Security
 
 Phlox is a local-first, single-user application and is **not** a hardened, multi-user clinical system. This page describes the security and privacy controls that do exist so you can deploy it sensibly. Read it alongside [Limitations & Warnings](/limitations), which covers what Phlox is *not*.
@@ -16,12 +20,14 @@ Phlox has no built-in user accounts. Authentication depends on how you deploy:
 
 ## Encryption at rest
 
-All clinical data lives in a single SQLite database encrypted with **SQLCipher**. How the key is supplied depends on the deployment:
+All clinical data lives in a single SQLite database (`phlox_database.sqlite`) encrypted with **SQLCipher**. How the key is supplied depends on the deployment:
 
 - **Docker** — set `DB_ENCRYPTION_KEY` (or mount a Podman secret at `/run/secrets/db_encryption_key`, which is tried first).
 - **Desktop (Tauri)** — you set a **passphrase** (minimum 12 characters) on first run. The passphrase is hex-encoded and fed to the server; SQLCipher derives the key with PBKDF2-HMAC-SHA512.
 
 > **No keychain caching.** Earlier versions cached the passphrase in the OS keychain. This was **intentionally removed** — you must re-enter the passphrase every time you start the desktop app. This is by design so that physical access to the machine does not grant access to the database.
+
+> **Reference literature is stored separately and unencrypted.** Uploaded reference material (journal articles, guidelines) and its vector embeddings live in a second `documents.sqlite` file that is **not** encrypted. This is by design — it is intended for **non-PHI** material only. **Do not store PHI in document collections**, since that file is not encrypted at rest.
 
 ## Audit logging
 
@@ -32,9 +38,8 @@ Phlox records an **audit log** of API activity. This is useful for review and ac
 - Logs are retained for `AUDIT_RETENTION_DAYS` (default **90 days**) and purged daily.
 - View via the in-app audit view, or export with `GET /api/audit/export?format=csv|json`.
 
-:::note[Screenshot needed]
-_The in-app audit log view._
-:::
+{/* Screenshot: capture 1600x900, light + dark; files: audit-log-{light,dark}.png */}
+<ThemedShot light={auditLight} dark={auditDark} alt="Audit log" width={500} />
 
 > Audit logging is enabled automatically. It is not a substitute for the regulatory controls described in [Limitations & Warnings](/limitations).
 

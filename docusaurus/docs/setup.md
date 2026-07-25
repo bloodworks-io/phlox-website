@@ -1,3 +1,7 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import splashLight from "@site/static/img/splash-models-light.png";
+import splashDark from "@site/static/img/splash-models-dark.png";
+
 # Setup and Installation
 
 Phlox can be run as a **desktop application** (macOS or Linux) or as a **Docker/Podman container**. Pick the option that matches your hardware and use case.
@@ -57,9 +61,8 @@ The desktop app comes bundled with the LLM, transcription, and embedding inferen
 2. Set a **database passphrase** (minimum 12 characters). This encrypts your database — you will need to re-enter it on every launch (Phlox does not cache it in the keychain, by design).
 3. The splash wizard guides you through: **About You** (name & specialty), **Templates**, and **AI Models** (download the models you want).
 
-:::note[Screenshot needed]
-_The splash/onboarding wizard — the **AI Models** step downloading a model._
-:::
+{/* Screenshot: capture 1200x1000, light + dark; files: splash-models-{light,dark}.png */}
+<ThemedShot light={splashLight} dark={splashDark} alt="Onboarding wizard — AI Models step" width={500} />
 
 4. Once models are downloaded, Phlox is ready. You can switch between **Local** and **Remote** inference in [Settings → Model Settings](/settings).
 
@@ -113,10 +116,8 @@ Create a `.env` file (or set the environment directly). The variables Phlox read
 | `PROXY_AUTH_ALLOWED_USERS` | _(empty = any)_ | Comma-separated allow-list. |
 | `RATE_LIMIT_ENABLED` | `false` | Enable per-path rate limiting. |
 | `RATE_LIMIT_DESKTOP_MULTIPLIER` | `3` | Multiplier applied to limits outside Docker. |
-| `PHLOX_DEMO_MODE` | `false` | Seed demo data on desktop startup. |
+| `PHLOX_DEMO_MODE` | `false` | ⚠️ **Destructive** — deletes all patients, encounters, and templates and replaces them with demo data. Desktop only. |
 | `PHLOX_PARENT_PID` | — | Desktop only: server self-terminates if this parent PID dies. |
-
-> **About `TZ`:** the compose files set `TZ`, but Phlox itself does not read it — it is a standard container environment variable that the OS may pick up implicitly. Set it for correct timestamps in logs, but don't expect it to drive any Phlox-specific behaviour.
 
 ### Critical security warning
 

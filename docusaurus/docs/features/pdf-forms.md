@@ -1,3 +1,7 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import formBuilderLight from "@site/static/img/form-builder-light.png";
+import formBuilderDark from "@site/static/img/form-builder-dark.png";
+
 # PDF Form Templates
 
 Phlox can fill PDF forms — either manually by drawing fields on a template, or automatically via the AI chat. This is useful for filling in referral letters, request forms, and other structured documents from encounter data.
@@ -14,9 +18,8 @@ PDF Form Templates are managed alongside your document collections on the **Docu
    - **Date** — date value
    - **Number** — numeric value
 
-:::note[Screenshot needed]
-_The form builder — a PDF with text / checkbox / date / number fields drawn on it._
-:::
+{/* Screenshot: capture 1600x1000, light + dark; files: form-builder-{light,dark}.png */}
+<ThemedShot light={formBuilderLight} dark={formBuilderDark} alt="PDF form builder" width={500} />
 4. Name each field so the AI can map encounter data to it. Field names should be descriptive (e.g. `patient_name`, `date_of_birth`, `referring_clinic`).
 5. Save the template.
 

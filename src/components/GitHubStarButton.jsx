@@ -58,15 +58,14 @@ const GitHubStarButton = () => {
       leftIcon={<FaGithub />}
       _hover={{ textDecoration: "none" }}
     >
-      Star
       {stars !== null && (
         <Box
           as="span"
-          ml={2}
+          ml={0}
           display="inline-flex"
           alignItems="center"
           gap={1}
-          fontSize="xs"
+          fontSize="sm"
           opacity={0.85}
         >
           <Box as={FaStar} />

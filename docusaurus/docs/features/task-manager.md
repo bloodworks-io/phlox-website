@@ -1,4 +1,7 @@
 import jobsImg from '@site/static/img/jobs.png';
+import ThemedShot from "@site/src/components/ThemedShot";
+import wrapUpLight from "@site/static/img/wrap-up-modal-light.png";
+import wrapUpDark from "@site/static/img/wrap-up-modal-dark.png";
 
 # Task Manager
 
@@ -20,9 +23,8 @@ Jobs are auto-generated when you save an encounter. The extraction distinguishes
 
 The **Wrap Up** modal is the intended way to finish an encounter. It runs job extraction, shows the proposed action items and any excluded follow-up items, and lets you confirm and finish. Confirming also triggers the [adaptive refinement](/features/ai#adaptive-refinement) feedback pass.
 
-:::note[Screenshot needed]
-_The Wrap Up modal — proposed action items and the promotable review/follow-up items._
-:::
+{/* Screenshot: capture 1200x1000, light + dark; files: wrap-up-modal-{light,dark}.png */}
+<ThemedShot light={wrapUpLight} dark={wrapUpDark} alt="Wrap Up modal" width={500} />
 
 ## Workspace To-Dos
 

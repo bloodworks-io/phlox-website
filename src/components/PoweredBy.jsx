@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import chakraLogo from "../assets/chakra-logo.png";
 import ollamaLogo from "../assets/ollama-logo.png";
-import chromaLogo from "../assets/chroma-logo.png";
 import vllmLogo from "../assets/vllm-logo.png";
 import llamacppLogo from "../assets/llamacpp-logo.svg";
 
@@ -18,7 +17,6 @@ const techLogos = [
   { src: ollamaLogo, alt: "Ollama Logo", link: "https://ollama.com/" },
   { src: vllmLogo, alt: "vLLM Logo", link: "https://docs.vllm.ai/" },
   { src: llamacppLogo, alt: "llama.cpp Logo", link: "https://github.com/ggml-org/llama.cpp" },
-  { src: chromaLogo, alt: "ChromaDB Logo", link: "https://www.trychroma.com/" },
 ];
 
 const PoweredBy = () => {

@@ -1,3 +1,7 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import demographicsLight from "@site/static/img/demographics-modal-light.png";
+import demographicsDark from "@site/static/img/demographics-modal-dark.png";
+
 # Patients, Encounters & Demographics
 
 Phlox organises clinical data around two concepts: **patient profiles** (stable, identifying information) and **encounters** (individual visits/notes). This split keeps demographics stable across visits while letting each encounter carry its own note, transcript, and tasks.
@@ -31,9 +35,8 @@ Creating a new note for an existing UR number links the new encounter to that pa
 
 Demographics can be entered or edited via the **Demographics** modal on the encounter workspace. A specialty-aware field set is used.
 
-:::note[Screenshot needed]
-_The Demographics modal — fields and a document dragged in for auto-fill._
-:::
+{/* Screenshot: capture 1200x1000, light + dark; files: demographics-modal-{light,dark}.png */}
+<ThemedShot light={demographicsLight} dark={demographicsDark} alt="Demographics modal" width={500} />
 
 ### Auto-fill from a dropped document
 

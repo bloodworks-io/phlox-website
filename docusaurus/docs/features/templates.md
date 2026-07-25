@@ -1,3 +1,7 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import templateLight from "@site/static/img/template-editor-light.png";
+import templateDark from "@site/static/img/template-editor-dark.png";
+
 # Flexible Template System
 
 Phlox uses templates to structure clinical notes and correspondence. A template consists of **fields**, each with its own prompt, formatting rules, and persistence behaviour. There are separate template types for **notes** and **letters** (see [Correspondence](/features/correspondence)).
@@ -10,9 +14,8 @@ Templates are managed in [Settings → User Settings → Note Templates](/settin
 - **Generate from example** — paste an example note and Phlox generates a matching template; review and adjust before saving.
 - **Edit** any custom template in the split Editor / Preview.
 
-:::note[Screenshot needed]
-_The Template Editor — field list on the left, live preview on the right, with the field configuration (prompt / format / persistence)._
-:::
+{/* Screenshot: capture 1600x1000, light + dark; files: template-editor-{light,dark}.png */}
+<ThemedShot light={templateLight} dark={templateDark} alt="Template editor" width={500} />
 - **Delete** custom templates.
 
 > Phlox ships with a set of protected default templates (e.g. `phlox_*`, `soap_*`, `progress_*`). Defaults can be used and selected but not deleted.

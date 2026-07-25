@@ -1,6 +1,9 @@
 import documentsImg from '@site/static/img/documents.png';
 import chatImg from '@site/static/img/chat.png';
 import reasoningImg from '@site/static/img/reasoning.png';
+import ThemedShot from "@site/src/components/ThemedShot";
+import activityLight from "@site/static/img/activity-trace-light.png";
+import activityDark from "@site/static/img/activity-trace-dark.png";
 
 # AI Features
 
@@ -68,9 +71,8 @@ When the per-server **Allow sensitive data** toggle is **off** (the default), Ph
 
 Tool-calling turns are shown as a collapsible **activity trace** with per-step cards: iterations, tool calls, tool results, pre-tool reasoning, and final reasoning, each with an elapsed-time label (e.g. "Thought for 12s"). Reasoning tokens are wrapped in `<think>` blocks.
 
-:::note[Screenshot needed]
-_The activity trace — collapsible iteration / tool call / tool result / reasoning cards within a chat turn._
-:::
+{/* Screenshot: capture 1200x1000, light + dark; files: activity-trace-{light,dark}.png */}
+<ThemedShot light={activityLight} dark={activityDark} alt="Activity trace" width={500} />
 
 ## Citations
 

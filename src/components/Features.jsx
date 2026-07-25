@@ -4,6 +4,7 @@ import {
   Grid,
   GridItem,
   Heading,
+  Image,
   Text,
   Icon,
   Flex,
@@ -49,11 +50,16 @@ const FeatureCard = ({
   icon,
   accentColor,
   placeholder,
+  imageLight,
+  imageDark,
   ...props
 }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
   const g = isDark ? glass.dark : glass.light;
+  const resolvedImage = isDark
+    ? imageDark || imageLight
+    : imageLight || imageDark;
 
   return (
     <MotionGridItem
@@ -90,12 +96,29 @@ const FeatureCard = ({
       <Text
         fontSize="sm"
         lineHeight="1.7"
-        mb={placeholder ? 5 : 0}
+        mb={placeholder || resolvedImage ? 5 : 0}
         color={isDark ? "dark.textSecondary" : "light.textSecondary"}
       >
         {description}
       </Text>
-      {placeholder && (
+      {resolvedImage ? (
+        <Box
+          w="100%"
+          sx={{ aspectRatio: "16 / 10" }}
+          borderRadius="lg"
+          overflow="hidden"
+          border="1px solid"
+          borderColor={g.border}
+        >
+          <Image
+            src={resolvedImage}
+            alt={`${title} screenshot`}
+            w="100%"
+            h="100%"
+            objectFit="cover"
+          />
+        </Box>
+      ) : placeholder ? (
         <MediaPlaceholder
           dark={isDark}
           ratio={16 / 10}
@@ -103,7 +126,7 @@ const FeatureCard = ({
           dimensions="1200 × 750"
           description={placeholder.description}
         />
-      )}
+      ) : null}
     </MotionGridItem>
   );
 };
@@ -118,22 +141,16 @@ const Features = ({ bgColor }) => {
       description:
         "Record a consult and watch it become a structured clinical note. Whisper-compatible transcription with customizable templates — all processed on your own hardware.",
       icon: FaMicrophone,
-      placeholder: {
-        label: "Screenshot: Transcription View",
-        description:
-          "Encounter view mid-recording: live transcript panel, waveform/record button, patient header. Crop tight to the app window, no browser chrome. Save as public/images/feature-transcription.webp",
-      },
+      imageLight: "/images/feature-transcription-light.webp",
+      imageDark: "/images/feature-transcription-dark.webp",
     },
     {
       title: "AI Chat & RAG",
       description:
-        "Query medical guidelines, literature, and your own documents through a local knowledge base. Ask questions, explore differentials, and discuss treatment options in context.",
+        "Build a private knowledge base from medical guidelines, literature, and your own PDFs. Search across your references with cited source passages — all on your own hardware.",
       icon: FaRobot,
-      placeholder: {
-        label: "Screenshot: AI Chat View",
-        description:
-          "Chat interface with an answered clinical question showing cited sources from the RAG knowledge base. Crop tight to the app window. Save as public/images/feature-chat.webp",
-      },
+      imageLight: "/images/feature-chat-light.webp",
+      imageDark: "/images/feature-chat-dark.webp",
     },
   ];
 

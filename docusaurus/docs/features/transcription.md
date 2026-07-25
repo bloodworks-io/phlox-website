@@ -1,3 +1,7 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import scribeLight from "@site/static/img/scribe-pillbox-light.png";
+import scribeDark from "@site/static/img/scribe-pillbox-dark.png";
+
 # Medical Transcription
 
 Phlox converts audio recordings into structured clinical notes. You can record ambient audio, dictate, or upload audio files; in each case the audio is transcribed and the transcript is turned into a note based on your selected [template](/features/templates).
@@ -9,9 +13,8 @@ Phlox converts audio recordings into structured clinical notes. You can record a
 
 Toggle between modes in the scribe controls on the encounter workspace. You can also **drag and drop an audio file** directly onto the scribe pill box to transcribe it.
 
-:::note[Screenshot needed]
-_The scribe pill box — the Ambient / Dictate toggle and record/pause controls._
-:::
+{/* Screenshot: capture 1200x500, light + dark; files: scribe-pillbox-{light,dark}.png */}
+<ThemedShot light={scribeLight} dark={scribeDark} alt="Scribe pill box" width={500} />
 
 ### Transcription engines
 

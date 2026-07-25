@@ -4,15 +4,18 @@ title: Overview
 sidebar_label: Overview
 ---
 
+import ThemedShot from "@site/src/components/ThemedShot";
+import heroLight from "@site/static/img/hero-dashboard-light.png";
+import heroDark from "@site/static/img/hero-dashboard-dark.png";
+
 # Phlox Overview
 
 Welcome to the Phlox documentation. Phlox is a free, open-source, **local-first AI scribe** with a built-in patient management system and agentic AI capabilities. It is designed as a local alternative to SaaS medical scribes that you can run on your own hardware.
 
 > **Before using Phlox, read [Limitations & Warnings](/limitations).** Phlox is experimental, is **not** a certified medical device, and is **not** suitable for production clinical use as provided.
 
-:::note[Screenshot needed]
-_A hero screenshot of the Phlox app — the Agent Dashboard with the chat and to-do panel._
-:::
+{/* Screenshot: capture 1600x1000, light + dark; files: hero-dashboard-{light,dark}.png */}
+<ThemedShot light={heroLight} dark={heroDark} alt="Phlox Agent Dashboard" width={720} />
 
 ## What is Phlox?
 
@@ -35,7 +38,7 @@ Phlox is a local-first clinical tool with the following capabilities:
 
 - Runs locally on standard hardware (GPU or Apple Silicon strongly recommended).
 - Customisable templates, prompts, and LLM settings.
-- All data stays on your machine, encrypted at rest with SQLCipher.
+- Clinical data is encrypted at rest with SQLCipher (reference literature lives in a separate file — see [Security](/security#encryption-at-rest)).
 - Extensible via MCP server integration for custom tools and agentic workflows.
 
 ## Philosophy

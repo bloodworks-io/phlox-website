@@ -1,10 +1,13 @@
+import ThemedShot from "@site/src/components/ThemedShot";
+import dashboardLight from "@site/static/img/agent-dashboard-light.png";
+import dashboardDark from "@site/static/img/agent-dashboard-dark.png";
+
 # Agent Dashboard
 
 The **Agent Dashboard** (the app's home screen) is a chat-driven hub for clinic management. It combines a conversational AI interface with a workspace to-do panel and specialty-aware suggestions.
 
-:::note[Screenshot needed]
-_The Agent Dashboard home — chat with specialty suggestion chips and the to-do panel expanded._
-:::
+{/* Screenshot: capture 1600x1000, light + dark; files: agent-dashboard-{light,dark}.png */}
+<ThemedShot light={dashboardLight} dark={dashboardDark} alt="Agent Dashboard" width={500} />
 
 ## Chat Interface
 
