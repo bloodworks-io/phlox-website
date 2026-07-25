@@ -1,0 +1,14 @@
+/*
+ * Phlox docs custom styles.
+ * Screenshots and any image embedded in doc content get a rounded corner.
+ * Tweak --phlox-screenshot-radius to change the radius globally.
+ */
+:root {
+  /* Chakra-equivalent "md" would be 0.375rem; we use a slightly larger radius
+     so the rounding reads clearly on large screenshots. */
+  --phlox-screenshot-radius: 0.75rem;
+}
+
+.theme-doc-markdown img {
+  border-radius: var(--phlox-screenshot-radius);
+}

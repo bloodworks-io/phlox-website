@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { FaGithub, FaArrowUp } from "react-icons/fa";
 import logo from "../assets/phlox-icon.png";
+import { docsHref, docsIsExternal } from "../docsLink";
 
 const Footer = () => {
   const { colorMode } = useColorMode();
@@ -26,6 +27,7 @@ const Footer = () => {
     { label: "Features", href: "#features" },
     { label: "Community", href: "#community" },
     { label: "FAQ", href: "#faq" },
+    { label: "Docs", href: docsHref, isExternal: docsIsExternal },
   ];
 
   return (
@@ -73,8 +75,9 @@ const Footer = () => {
           </Text>
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.label}
               href={link.href}
+              isExternal={link.isExternal}
               fontSize="sm"
               _hover={{
                 color: isDark ? "dark.textTeriary" : "light.textTeriary",
