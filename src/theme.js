@@ -18,6 +18,7 @@ const colors = {
   dark: {
     base: "#24273a", // Macchiato Base
     secondary: "#1e2030", // Macchiato Mantle
+    deep: "#181926", // Macchiato Crust — dark-first sections
     textPrimary: "#cad3f5", // Macchiato Text
     textSecondary: "#a5adcb", // Macchiato Subtext0
     textTeriary: "#f5a97f", // Machiatto Peach
@@ -36,26 +37,45 @@ const fonts = {
   body: `'Open Sans', sans-serif`,
 };
 
-// Gradients for hero and section accents
+// Aurora blobs used by the dark-first hero (and subtle accents elsewhere)
+const aurora = {
+  // Warm brand orange
+  orange:
+    "radial-gradient(circle at center, rgba(255, 140, 66, 0.55) 0%, rgba(255, 107, 53, 0.25) 35%, transparent 70%)",
+  // Cool counterpoint
+  blue: "radial-gradient(circle at center, rgba(138, 173, 244, 0.45) 0%, rgba(114, 135, 253, 0.2) 40%, transparent 70%)",
+  // Soft teal fill
+  teal: "radial-gradient(circle at center, rgba(23, 146, 153, 0.4) 0%, rgba(23, 146, 153, 0.15) 40%, transparent 70%)",
+};
+
+// Dot-grid texture overlay for dark sections
+const textures = {
+  dotGridDark:
+    "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",
+  dotGridLight:
+    "radial-gradient(circle, rgba(36,39,58,0.06) 1px, transparent 1px)",
+};
+
+// Glassmorphism surfaces
+const glass = {
+  dark: {
+    bg: "rgba(255, 255, 255, 0.04)",
+    border: "rgba(255, 255, 255, 0.09)",
+    hoverBorder: "rgba(245, 169, 127, 0.45)",
+  },
+  light: {
+    bg: "rgba(255, 255, 255, 0.55)",
+    border: "rgba(36, 39, 58, 0.08)",
+    hoverBorder: "rgba(254, 100, 11, 0.4)",
+  },
+};
+
+// Gradients for text accents and glows
 const gradients = {
-  hero: {
-    light:
-      "linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ff8c42 50%, #ffa62b 75%, #ff6b35 100%)",
-    dark: "linear-gradient(135deg, #cc4125 0%, #cc5500 25%, #e65c00 50%, #cc4125 75%, #cc5500 100%)",
-  },
-  heroRadial1: {
-    light:
-      "radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,53,0.4) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(247,147,30,0.4) 0%, transparent 40%)",
-    dark: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,53,0.2) 0%, transparent 40%), radial-gradient(circle at 20% 80%, rgba(247,147,30,0.2) 0%, transparent 40%)",
-  },
-  heroRadial2: {
-    light:
-      "radial-gradient(circle at 60% 40%, rgba(255,166,43,0.3) 0%, transparent 45%), radial-gradient(circle at 40% 60%, rgba(255,107,53,0.3) 0%, transparent 45%)",
-    dark: "radial-gradient(circle at 60% 40%, rgba(255,166,43,0.15) 0%, transparent 45%), radial-gradient(circle at 40% 60%, rgba(255,107,53,0.15) 0%, transparent 45%)",
-  },
+  accentText:
+    "linear-gradient(90deg, #f5a97f 0%, #ff8c42 50%, #ed8796 100%)",
   sectionAccent: {
-    light:
-      "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.03) 100%)",
+    light: "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.03) 100%)",
     dark: "linear-gradient(180deg, transparent 0%, rgba(255,107,53,0.02) 100%)",
   },
 };
@@ -66,10 +86,9 @@ const shadows = {
   md: "0 4px 6px rgba(0, 0, 0, 0.1)",
   lg: "0 10px 15px rgba(0, 0, 0, 0.1)",
   xl: "0 20px 25px rgba(0, 0, 0, 0.15)",
-  glow: {
-    light: "0 0 20px rgba(255, 107, 53, 0.3)",
-    dark: "0 0 20px rgba(255, 107, 53, 0.2)",
-  },
+  glow: "0 0 24px rgba(255, 140, 66, 0.35), 0 0 64px rgba(255, 107, 53, 0.15)",
+  glowSm: "0 0 12px rgba(255, 140, 66, 0.3)",
+  frameDark: "0 24px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255,255,255,0.06)",
 };
 
 // Transition presets
@@ -124,6 +143,12 @@ const textStyles = {
     lineHeight: "1.4",
     color: "textSecondary",
   },
+  eyebrow: {
+    fontSize: "xs",
+    fontWeight: "bold",
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+  },
 };
 
 const theme = extendTheme({
@@ -145,12 +170,30 @@ const theme = extendTheme({
         fontFamily: fonts.body,
       },
       "@keyframes spin": {
-        from: {
-          transform: "rotate(0deg)",
-        },
-        to: {
-          transform: "rotate(360deg)",
-        },
+        from: { transform: "rotate(0deg)" },
+        to: { transform: "rotate(360deg)" },
+      },
+      // Slow ambient drift for aurora blobs
+      "@keyframes auroraDrift1": {
+        "0%, 100%": { transform: "translate(0%, 0%) scale(1)" },
+        "33%": { transform: "translate(6%, -4%) scale(1.08)" },
+        "66%": { transform: "translate(-4%, 5%) scale(0.95)" },
+      },
+      "@keyframes auroraDrift2": {
+        "0%, 100%": { transform: "translate(0%, 0%) scale(1)" },
+        "50%": { transform: "translate(-7%, 6%) scale(1.1)" },
+      },
+      "@keyframes auroraDrift3": {
+        "0%, 100%": { transform: "translate(0%, 0%) scale(1)" },
+        "50%": { transform: "translate(5%, 7%) scale(1.05)" },
+      },
+      "@keyframes floatY": {
+        "0%, 100%": { transform: "translateY(0)" },
+        "50%": { transform: "translateY(8px)" },
+      },
+      "@keyframes caretBlink": {
+        "0%, 45%": { opacity: 1 },
+        "50%, 95%": { opacity: 0 },
       },
     }),
   },
@@ -175,6 +218,7 @@ const theme = extendTheme({
       variants: {
         body: textStyles.body,
         caption: textStyles.caption,
+        eyebrow: textStyles.eyebrow,
       },
     },
     Button: {
@@ -211,16 +255,48 @@ const theme = extendTheme({
             },
           },
         },
+        // Brand-orange CTA used on dark surfaces (hero, navbar)
+        cta: {
+          bg: "#ff8c42",
+          color: "#1a1b26",
+          borderRadius: "full",
+          boxShadow: shadows.glow,
+          transition: "all 0.25s ease",
+          _hover: {
+            bg: "#ffa25e",
+            transform: "translateY(-2px)",
+            boxShadow:
+              "0 0 32px rgba(255, 140, 66, 0.5), 0 0 80px rgba(255, 107, 53, 0.2)",
+          },
+          _active: {
+            transform: "translateY(0)",
+          },
+        },
+        // Ghost button with subtle border for dark surfaces
+        ghostDark: {
+          bg: "rgba(255, 255, 255, 0.04)",
+          color: "#cad3f5",
+          borderRadius: "full",
+          border: "1px solid",
+          borderColor: "rgba(255, 255, 255, 0.14)",
+          backdropFilter: "blur(8px)",
+          transition: "all 0.25s ease",
+          _hover: {
+            bg: "rgba(255, 255, 255, 0.09)",
+            borderColor: "rgba(255, 255, 255, 0.28)",
+            transform: "translateY(-2px)",
+          },
+        },
         navButton: {
           bg: "transparent",
-          
+
           fontFamily: fonts.heading,
           fontWeight: "bold",
           borderRadius: "full",
           position: "relative",
           px: 6,
           py: 2,
-                    _hover: {
+          _hover: {
             color: colors.light.textTeriary,
             _dark: {
               color: colors.dark.textTeriary,
@@ -235,4 +311,4 @@ const theme = extendTheme({
 export default theme;
 
 // Export design tokens for use in components
-export { gradients, shadows, transitions };
+export { aurora, textures, glass, gradients, shadows, transitions };

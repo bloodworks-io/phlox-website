@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/docusaurus/node_modules
 /.pnp
 .pnp.js
 
@@ -10,6 +11,9 @@
 
 # build
 /build
+/docusaurus/build
+/docusaurus/.docusaurus
+/docusaurus/.cache-loader
 
 # misc
 .DS_Store

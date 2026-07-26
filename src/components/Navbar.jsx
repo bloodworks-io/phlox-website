@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Flex,
@@ -16,11 +16,14 @@ import {
   VStack,
   useDisclosure,
   Icon,
+  Link,
 } from "@chakra-ui/react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaBook } from "react-icons/fa";
 import logo from "../assets/logo.webp";
 import theme from "../theme";
 import ColorModeToggle from "./ColorModeToggle";
+import { docsHref, docsIsExternal } from "../docsLink";
+import GitHubStarButton from "./GitHubStarButton";
 const { dark } = theme.colors;
 
 const Navbar = ({ activeSection }) => {
@@ -100,31 +103,24 @@ const Navbar = ({ activeSection }) => {
           transform="translateY(-50%)"
           spacing={{ base: 2, md: 4 }}
         >
-          {/* GitHub Star Button */}
-          <Box
-            display={{ base: "none", sm: "block" }}
-            transform={{
-              base: "scale(0.6)",
-              sm: "scale(0.7)",
-              md: "scale(0.7)",
-              lg: "scale(0.9)",
-            }}
-            transformOrigin="right center"
-            mt={2}
+          {/* Docs link */}
+          <Button
+            as={Link}
+            href={docsHref}
+            isExternal={docsIsExternal}
+            size="sm"
+            variant="ghostDark"
+            borderRadius="full"
+            px={4}
+            display={{ base: "none", md: "inline-flex" }}
+            leftIcon={<FaBook />}
+            _hover={{ textDecoration: "none" }}
           >
-            <iframe
-              src="https://ghbtns.com/github-btn.html?user=bloodworks-io&repo=phlox&type=star&count=true&size=large"
-              frameBorder="0"
-              scrolling="0"
-              width="170"
-              height="40"
-              title="GitHub Star Button"
-              style={{
-                border: "none",
-                colorScheme: "light",
-              }}
-            />
-          </Box>
+            Docs
+          </Button>
+
+          {/* GitHub Star + repo link (replaces the Download CTA) */}
+          <GitHubStarButton />
 
           <ColorModeToggle />
 
@@ -198,6 +194,24 @@ const Navbar = ({ activeSection }) => {
                   {item.label}
                 </Button>
               ))}
+              <Button
+                as={Link}
+                href={docsHref}
+                isExternal={docsIsExternal}
+                variant="ghost"
+                fontSize="xl"
+                fontWeight="medium"
+                color={theme.colors.dark.textPrimary}
+                leftIcon={<FaBook />}
+                _hover={{
+                  color: theme.colors.dark.textTeriary,
+                  transform: "translateX(4px)",
+                  textDecoration: "none",
+                }}
+                transition="all 0.2s"
+              >
+                Docs
+              </Button>
             </VStack>
           </DrawerBody>
         </DrawerContent>
