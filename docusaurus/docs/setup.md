@@ -1,6 +1,6 @@
 import ThemedShot from "@site/src/components/ThemedShot";
-import splashLight from "@site/static/img/splash-models-light.png";
-import splashDark from "@site/static/img/splash-models-dark.png";
+import splashLight from "@site/static/img/splash-models-light.webp";
+import splashDark from "@site/static/img/splash-models-dark.webp";
 
 # Setup and Installation
 
@@ -60,11 +60,9 @@ The desktop app comes bundled with the LLM, transcription, and embedding inferen
 1. Launch Phlox.
 2. Set a **database passphrase** (minimum 12 characters). This encrypts your database — you will need to re-enter it on every launch (Phlox does not cache it in the keychain, by design).
 3. The splash wizard guides you through: **About You** (name & specialty), **Templates**, and **AI Models** (download the models you want).
-
-{/* Screenshot: capture 1200x1000, light + dark; files: splash-models-{light,dark}.png */}
-<ThemedShot light={splashLight} dark={splashDark} alt="Onboarding wizard — AI Models step" width={500} />
-
 4. Once models are downloaded, Phlox is ready. You can switch between **Local** and **Remote** inference in [Settings → Model Settings](/settings).
+{/* Screenshot: capture 1200x1000, light + dark; files: splash-models-{light,dark}.webp */}
+{/* <ThemedShot light={splashLight} dark={splashDark} alt="Onboarding wizard — AI Models step" width={500} /> */}
 
 ## Option 2 — Docker / Podman
 

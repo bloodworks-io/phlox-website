@@ -1,8 +1,8 @@
 import ThemedShot from "@site/src/components/ThemedShot";
-import settingsLight from "@site/static/img/settings-overview-light.png";
-import settingsDark from "@site/static/img/settings-overview-dark.png";
-import modelsLight from "@site/static/img/local-model-manager-light.png";
-import modelsDark from "@site/static/img/local-model-manager-dark.png";
+import settingsLight from "@site/static/img/settings-overview-light.webp";
+import settingsDark from "@site/static/img/settings-overview-dark.webp";
+import modelsLight from "@site/static/img/local-model-manager-light.webp";
+import modelsDark from "@site/static/img/local-model-manager-dark.webp";
 
 # Settings
 
@@ -10,7 +10,7 @@ Phlox is configured almost entirely through the in-app **Settings** page. Config
 
 Settings is divided into three top-level panels: **User Settings**, **Model Settings**, and **Prompt Settings**.
 
-{/* Screenshot: capture 1600x1000, light + dark; files: settings-overview-{light,dark}.png */}
+{/* Screenshot: capture 1600x1000, light + dark; files: settings-overview-{light,dark}.webp */}
 <ThemedShot light={settingsLight} dark={settingsDark} alt="Settings page" width={500} />
 
 ## User Settings
@@ -33,7 +33,7 @@ On desktop you can run inference locally. The panel toggles between **Local** an
 
 - **Models tab** — download and manage the bundled models: the primary **AI model** (with smart recommendations based on your RAM/cores, plus an estimated processing time), the **transcription** model (Omi Med STT v1), and the optional **embeddings** model (Qwen3-Embedding) used for RAG. A system-specs banner shows your available RAM and CPU cores, and a "Reset All Models" action is available.
 
-{/* Screenshot: capture 1600x1000, light + dark; files: local-model-manager-{light,dark}.png */}
+{/* Screenshot: capture 1600x1000, light + dark; files: local-model-manager-{light,dark}.webp */}
 <ThemedShot light={modelsLight} dark={modelsDark} alt="Local Model Manager" width={500} />
 - **Tools tab** — see [Tools](#tools) below.
 

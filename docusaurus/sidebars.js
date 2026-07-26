@@ -14,6 +14,7 @@ const sidebars = {
         "features/templates",
         "features/task-manager",
         "features/correspondence",
+        "features/knowledge-base",
         "features/pdf-forms",
         "features/ai",
         "features/dashboard",

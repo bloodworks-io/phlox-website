@@ -1,7 +1,3 @@
-import ThemedShot from "@site/src/components/ThemedShot";
-import auditLight from "@site/static/img/audit-log-light.png";
-import auditDark from "@site/static/img/audit-log-dark.png";
-
 # Security
 
 Phlox is a local-first, single-user application and is **not** a hardened, multi-user clinical system. This page describes the security and privacy controls that do exist so you can deploy it sensibly. Read it alongside [Limitations & Warnings](/limitations), which covers what Phlox is *not*.
@@ -36,10 +32,7 @@ Phlox records an **audit log** of API activity. This is useful for review and ac
 - Every API request is logged: HTTP method, path, status code, actor (from proxy auth), client IP, and duration.
 - **Request and response bodies are never logged** — no PHI is captured in the audit trail.
 - Logs are retained for `AUDIT_RETENTION_DAYS` (default **90 days**) and purged daily.
-- View via the in-app audit view, or export with `GET /api/audit/export?format=csv|json`.
-
-{/* Screenshot: capture 1600x900, light + dark; files: audit-log-{light,dark}.png */}
-<ThemedShot light={auditLight} dark={auditDark} alt="Audit log" width={500} />
+- Audit data is **API-only** — read it with `GET /api/audit` or export with `GET /api/audit/export?format=csv|json`. There is currently **no in-app UI** for browsing the audit log.
 
 > Audit logging is enabled automatically. It is not a substitute for the regulatory controls described in [Limitations & Warnings](/limitations).
 

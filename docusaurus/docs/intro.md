@@ -5,8 +5,8 @@ sidebar_label: Overview
 ---
 
 import ThemedShot from "@site/src/components/ThemedShot";
-import heroLight from "@site/static/img/hero-dashboard-light.png";
-import heroDark from "@site/static/img/hero-dashboard-dark.png";
+import heroLight from "@site/static/img/encounter-workspace-light.webp";
+import heroDark from "@site/static/img/encounter-workspace-dark.webp";
 
 # Phlox Overview
 
@@ -14,8 +14,8 @@ Welcome to the Phlox documentation. Phlox is a free, open-source, **local-first 
 
 > **Before using Phlox, read [Limitations & Warnings](/limitations).** Phlox is experimental, is **not** a certified medical device, and is **not** suitable for production clinical use as provided.
 
-{/* Screenshot: capture 1600x1000, light + dark; files: hero-dashboard-{light,dark}.png */}
-<ThemedShot light={heroLight} dark={heroDark} alt="Phlox Agent Dashboard" width={720} />
+{/* Screenshot: capture 1600x1000, light + dark; files: encounter-workspace-{light,dark}.webp */}
+<ThemedShot light={heroLight} dark={heroDark} alt="Phlox encounter workspace" width={720} />
 
 ## What is Phlox?
 
@@ -29,6 +29,7 @@ Phlox is a local-first clinical tool with the following capabilities:
 - **Correspondence** — one-click generation of patient letters from a note or from dictation, with interactive refinement. See [Correspondence](/features/correspondence).
 - **PDF Form Filling** — draw fields on a PDF template (or auto-detect them with vision) and have the AI fill them from encounter data. See [PDF Forms](/features/pdf-forms).
 - **Agentic AI Assistant** — chat with built-in tools (note/transcript/literature search, task management, form filling, and more), interleaved thinking, inline citations, and downloadable artifacts. See [AI Features](/features/ai).
+- **Knowledge Base** — build a local, searchable corpus of reference literature (guidelines, journals) and have chat answer with inline citations. See [Knowledge Base](/features/knowledge-base).
 - **Agent Dashboard** — a chat-driven hub for clinic management with a to-do panel, specialty-aware suggestions, and document upload. See [Agent Dashboard](/features/dashboard).
 - **MCP Server Support** — connect external tool servers via the Model Context Protocol (SSE transport), with optional PHI filtering. See [Settings → Tools](/settings#tool-servers-mcp).
 - **Vision-Enhanced Document Processing** — hybrid pipeline that uses vision models directly when available, falling back to text extraction and OCR.

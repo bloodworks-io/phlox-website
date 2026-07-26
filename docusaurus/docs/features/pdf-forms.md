@@ -1,6 +1,6 @@
 import ThemedShot from "@site/src/components/ThemedShot";
-import formBuilderLight from "@site/static/img/form-builder-light.png";
-import formBuilderDark from "@site/static/img/form-builder-dark.png";
+import formBuilderLight from "@site/static/img/form-builder-light.webp";
+import formBuilderDark from "@site/static/img/form-builder-dark.webp";
 
 # PDF Form Templates
 
@@ -18,7 +18,7 @@ PDF Form Templates are managed alongside your document collections on the **Docu
    - **Date** — date value
    - **Number** — numeric value
 
-{/* Screenshot: capture 1600x1000, light + dark; files: form-builder-{light,dark}.png */}
+{/* Screenshot: capture 1600x1000, light + dark; files: form-builder-{light,dark}.webp */}
 <ThemedShot light={formBuilderLight} dark={formBuilderDark} alt="PDF form builder" width={500} />
 4. Name each field so the AI can map encounter data to it. Field names should be descriptive (e.g. `patient_name`, `date_of_birth`, `referring_clinic`).
 5. Save the template.

@@ -1,22 +1,22 @@
 import ThemedShot from "@site/src/components/ThemedShot";
-import dashboardLight from "@site/static/img/agent-dashboard-light.png";
-import dashboardDark from "@site/static/img/agent-dashboard-dark.png";
+import dashboardLight from "@site/static/img/agent-dashboard-light.webp";
+import dashboardDark from "@site/static/img/agent-dashboard-dark.webp";
 
 # Agent Dashboard
 
 The **Agent Dashboard** (the app's home screen) is a chat-driven hub for clinic management. It combines a conversational AI interface with a workspace to-do panel and specialty-aware suggestions.
 
-{/* Screenshot: capture 1600x1000, light + dark; files: agent-dashboard-{light,dark}.png */}
+{/* Screenshot: capture 1600x1000, light + dark; files: agent-dashboard-{light,dark}.webp */}
 <ThemedShot light={dashboardLight} dark={dashboardDark} alt="Agent Dashboard" width={500} />
 
 ## Chat Interface
 
 - Ask questions about patients, clinical notes, and medical literature.
-- **Attach files** — drag and drop PDFs or images (PNG/JPEG/GIF) into the chat, or use the attachment button. Files are processed using your configured [document processing mode](/features/transcription#document-processing).
+- **Attach files** — drag and drop PDFs or images (PNG/JPEG/GIF) into the chat, or use the attachment button. Files are processed using your configured [document/image processing mode](/features/transcription#document-upload).
 - Get responses with **inline citations** and a sources footer — see [Citations](/features/ai#citations).
 - Receive downloadable **artifacts** (binary files and PDF form-fills) — see [Artifacts](/features/ai#artifacts).
 - Watch the AI work via the collapsible **activity trace** (thinking + tool calls).
-- The dashboard uses RAG-mode chat (general medical chat with access to your knowledge base).
+- The dashboard uses RAG-mode chat (general medical chat with access to your [knowledge base](/features/knowledge-base)).
 
 ### Specialty-aware suggestions
 

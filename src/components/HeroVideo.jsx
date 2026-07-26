@@ -1,24 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Flex, Circle, Text, Icon, HStack } from "@chakra-ui/react";
 import { FaLock } from "react-icons/fa";
-import MediaPlaceholder from "./MediaPlaceholder";
 import { shadows } from "../theme";
 
-const VIDEO_SRC = `${process.env.PUBLIC_URL}/videos/hero-demo.mp4`;
-const POSTER_SRC = `${process.env.PUBLIC_URL}/images/hero-poster.webp`;
+// TEMP (stand-in for the hero demo video — it's late).
+// Showing a static image instead of <video>. To restore the demo video later:
+//   1. drop public/videos/hero-demo.mp4 (1920x1080, ~30-60s) + public/images/hero-poster.webp
+//   2. replace the <Box as="img"> below with the original <video> element
+//      (autoPlay, muted, loop, playsInline, poster, onError fallback).
+const IMAGE_SRC = `${process.env.PUBLIC_URL}/screenshot.webp`;
 
 /**
- * Browser-chrome framed hero demo video.
- *
- * Drop the real files in and this upgrades automatically — no code change:
- *   public/videos/hero-demo.mp4     1920×1080, ~30–60s, no audio needed
- *   public/images/hero-poster.webp  1920×1080 first-frame / dashboard shot
- *
- * Until then, a sized placeholder describes exactly what to record.
+ * Browser-chrome framed hero media. Currently renders a static screenshot
+ * (see IMAGE_SRC) instead of the demo video.
  */
 const HeroVideo = () => {
-  const [videoFailed, setVideoFailed] = useState(false);
-
   return (
     <Box position="relative" w="100%" maxW="1100px" mx="auto">
       {/* Warm glow bleeding out from under the frame */}
@@ -92,34 +88,16 @@ const HeroVideo = () => {
           <Box w="52px" display={{ base: "none", sm: "block" }} />
         </Flex>
 
-        {/* Video / placeholder */}
-        {videoFailed ? (
-          <Box p={{ base: 3, md: 4 }}>
-            <MediaPlaceholder
-              dark
-              ratio={16 / 9}
-              label="Hero Demo Video"
-              dimensions="1920 × 1080 · MP4 · ~30–60s"
-              description="Screen recording of the web app at localhost:5000: hit record → speak → live transcript → generate note → review tasks → generate letter. Record fullscreen in dark mode with a 1920×1080 viewport, cropped to the page (no real browser chrome — the frame above provides it). No audio needed; zoom/pan edits welcome. Save as public/videos/hero-demo.mp4 with a first-frame poster at public/images/hero-poster.webp"
-            />
-          </Box>
-        ) : (
-          <Box
-            as="video"
-            src={VIDEO_SRC}
-            poster={POSTER_SRC}
-            autoPlay
-            muted
-            loop
-            playsInline
-            display="block"
-            w="100%"
-            sx={{ aspectRatio: "16 / 9" }}
-            objectFit="cover"
-            onError={() => setVideoFailed(true)}
-            aria-label="Phlox UI demo video"
-          />
-        )}
+        {/* Static image stand-in (temp) */}
+        <Box
+          as="img"
+          src={IMAGE_SRC}
+          alt="Phlox app demo"
+          display="block"
+          w="100%"
+          sx={{ aspectRatio: "16 / 9" }}
+          objectFit="cover"
+        />
       </Box>
     </Box>
   );

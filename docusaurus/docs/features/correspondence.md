@@ -1,12 +1,18 @@
-import correspondenceImg from '@site/static/img/correspondence.png';
+import ThemedShot from "@site/src/components/ThemedShot";
+import correspondenceLight from "@site/static/img/correspondence-light.webp";
+import correspondenceDark from "@site/static/img/correspondence-dark.webp";
 
 # Correspondence
 
 Generate patient letters from clinical notes (or by dictation), refine them interactively, and manage standard letter templates.
 
+{/* Screenshot: 1000x800, light + dark; files: correspondence-{light,dark}.webp */}
+<ThemedShot light={correspondenceLight} dark={correspondenceDark} alt="Letter Generation" width={500} />
+
+
 ## Generating a Letter
 
-Open the Letter panel from an encounter. There are two modes:
+Open the **Letter** button in the [Floating Action Menu](/features/patients#floating-action-menu) (available after saving the encounter). There are two modes:
 
 - **Draft** — generates a letter from the current encounter note, using either a selected template or **Custom** instructions you type in.
 - **Dictate** — record yourself dictating the letter; Phlox transcribes it and the LLM formats it into a proper correspondence letter using the dedicated **Dictation** letter template.
@@ -30,7 +36,3 @@ Letter templates are managed separately from note templates, in [Settings → Us
 - The **Dictation** template is protected (used by Dictate mode).
 - You can set a **default letter template** for quick generation.
 - Create custom templates with specific instructions.
-
-<p align="center">
-<img src={correspondenceImg} width="500px" alt="Letter Generation"/>
-</p>

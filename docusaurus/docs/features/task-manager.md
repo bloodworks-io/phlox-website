@@ -1,7 +1,8 @@
-import jobsImg from '@site/static/img/jobs.png';
+import jobsLight from "@site/static/img/jobs-light.webp";
+import jobsDark from "@site/static/img/jobs-dark.webp";
 import ThemedShot from "@site/src/components/ThemedShot";
-import wrapUpLight from "@site/static/img/wrap-up-modal-light.png";
-import wrapUpDark from "@site/static/img/wrap-up-modal-dark.png";
+import wrapUpLight from "@site/static/img/wrap-up-modal-light.webp";
+import wrapUpDark from "@site/static/img/wrap-up-modal-dark.webp";
 
 # Task Manager
 
@@ -23,7 +24,7 @@ Jobs are auto-generated when you save an encounter. The extraction distinguishes
 
 The **Wrap Up** modal is the intended way to finish an encounter. It runs job extraction, shows the proposed action items and any excluded follow-up items, and lets you confirm and finish. Confirming also triggers the [adaptive refinement](/features/ai#adaptive-refinement) feedback pass.
 
-{/* Screenshot: capture 1200x1000, light + dark; files: wrap-up-modal-{light,dark}.png */}
+{/* Screenshot: capture 1200x1000, light + dark; files: wrap-up-modal-{light,dark}.webp */}
 <ThemedShot light={wrapUpLight} dark={wrapUpDark} alt="Wrap Up modal" width={500} />
 
 ## Workspace To-Dos
@@ -38,6 +39,9 @@ Separately, the dashboard has a general to-do list (managed in the [Agent Dashbo
 
 Mark jobs complete by clicking their checkboxes. Completed rows dim; when all jobs for an encounter are done the row reflects that. You can also **reset jobs** for an encounter.
 
+{/* Screenshot: 1745x1091, light + dark; files: jobs-{light,dark}.webp */}
+<ThemedShot light={jobsLight} dark={jobsDark} alt="Task Manager" width={500} />
+
 ## Agent Integration
 
 The AI chat can manage tasks through tool calls — listing patients with outstanding jobs, completing specific jobs, and searching patient notes for related information:
@@ -45,7 +49,3 @@ The AI chat can manage tasks through tool calls — listing patients with outsta
 - `list_outstanding_jobs` / `get_patient_jobs` — find incomplete jobs.
 - `complete_job` — mark a job done.
 - `todo_list` — manage workspace to-dos.
-
-<p align="center">
-<img src={jobsImg} width="500px" alt="Task Manager"/>
-</p>

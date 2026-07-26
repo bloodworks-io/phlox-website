@@ -1,6 +1,9 @@
 import ThemedShot from "@site/src/components/ThemedShot";
-import demographicsLight from "@site/static/img/demographics-modal-light.png";
-import demographicsDark from "@site/static/img/demographics-modal-dark.png";
+import InlineIcon from "@site/src/components/InlineIcon";
+import { FaFileUpload, FaClock, FaAtom, FaEnvelope } from "react-icons/fa";
+import { FiMessageSquare } from "react-icons/fi";
+import demographicsLight from "@site/static/img/demographics-modal-light.webp";
+import demographicsDark from "@site/static/img/demographics-modal-dark.webp";
 
 # Patients, Encounters & Demographics
 
@@ -29,13 +32,25 @@ An **encounter** is a single clinical visit. Each encounter contains:
 
 Creating a new note for an existing UR number links the new encounter to that patient's history.
 
+## Floating Action Menu
+
+The **Floating Action Menu** (FAB) is the vertical action menu on the right side of the encounter workspace. It opens a panel for each common encounter action:
+
+- <InlineIcon icon={FaFileUpload} label="Document Upload" /> **Document Upload** — upload a PDF, Word, or .txt document to extract text into the current note. See [Document Upload](/features/transcription#document-upload).
+- <InlineIcon icon={FaClock} label="Previous Visit" /> **Previous Visit** — open the patient's previous encounter for reference.
+- <InlineIcon icon={FiMessageSquare} label="Chat" /> **Chat** — the [reference / agentic chat](/features/ai#reference-chat) for this patient.
+- <InlineIcon icon={FaAtom} label="Chart Insights" /> **Chart Insights** — generate [Chart Insights](/features/ai#chart-insights) for the encounter. Available after the encounter has been saved.
+- <InlineIcon icon={FaEnvelope} label="Letter" /> **Letter** — generate [correspondence](/features/correspondence) from the encounter. Available after the encounter has been saved.
+
+Chat, Chart Insights, and Letter are shown when the AI chat is enabled; Chart Insights and Letter additionally require the encounter to be saved first.
+
 ## Demographics
 
 ### Manual entry
 
 Demographics can be entered or edited via the **Demographics** modal on the encounter workspace. A specialty-aware field set is used.
 
-{/* Screenshot: capture 1200x1000, light + dark; files: demographics-modal-{light,dark}.png */}
+{/* Screenshot: capture 1200x1000, light + dark; files: demographics-modal-{light,dark}.webp */}
 <ThemedShot light={demographicsLight} dark={demographicsDark} alt="Demographics modal" width={500} />
 
 ### Auto-fill from a dropped document

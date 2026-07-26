@@ -1,6 +1,10 @@
 import ThemedShot from "@site/src/components/ThemedShot";
-import scribeLight from "@site/static/img/scribe-pillbox-light.png";
-import scribeDark from "@site/static/img/scribe-pillbox-dark.png";
+import InlineIcon from "@site/src/components/InlineIcon";
+import { FaComments, FaKeyboard } from "react-icons/fa";
+import scribeLight from "@site/static/img/scribe-pillbox-light.webp";
+import scribeDark from "@site/static/img/scribe-pillbox-dark.webp";
+import documentsLight from "@site/static/img/documents-light.webp";
+import documentsDark from "@site/static/img/documents-dark.webp";
 
 # Medical Transcription
 
@@ -8,12 +12,12 @@ Phlox converts audio recordings into structured clinical notes. You can record a
 
 ## Scribing Modes
 
-- **Ambient** — record the encounter; Phlox transcribes and generates the note.
-- **Dictate** — dictate content that the LLM formats into the note fields.
+- <InlineIcon icon={FaComments} label="Ambient mode" /> **Ambient** — record the encounter; Phlox transcribes and generates the note.
+- <InlineIcon icon={FaKeyboard} label="Dictate mode" /> **Dictate** — dictate content that the LLM formats into the note fields.
 
 Toggle between modes in the scribe controls on the encounter workspace. You can also **drag and drop an audio file** directly onto the scribe pill box to transcribe it.
 
-{/* Screenshot: capture 1200x500, light + dark; files: scribe-pillbox-{light,dark}.png */}
+{/* Screenshot: capture 1200x500, light + dark; files: scribe-pillbox-{light,dark}.webp */}
 <ThemedShot light={scribeLight} dark={scribeDark} alt="Scribe pill box" width={500} />
 
 ### Transcription engines
@@ -29,7 +33,7 @@ If **Require patient consent for ambient scribing** is enabled in [Settings → 
 
 1. **Record / upload / dictate**
    - Use in-browser recording (with pause/resume) or drag-and-drop an audio file, or switch to Dictate mode.
-   - You can also upload documents (PDF, Word, images) or paste text — see [Document processing](#document-processing) below.
+   - You can also upload a document (PDF, Word, or .txt) via the **Document Upload** button in the [Floating Action Menu](/features/patients#floating-action-menu) — see [Document Upload](#document-upload) below.
 2. **Generate the note**
    - Audio is transcribed (Whisper/parakeet.cpp).
    - The LLM processes the transcript into a structured note based on the selected template.
@@ -42,14 +46,19 @@ If **Require patient consent for ambient scribing** is enabled in [Settings → 
 
 If transcription fails, the scribe controls offer **Retry**, **Download audio** (so the recording isn't lost), and **Dismiss**. You can also **reprocess** a raw transcript from the transcription panel (for example, after changing templates or models) without re-recording.
 
-## Document Processing
+## Document Upload
 
-Phlox supports uploading PDFs, images, and text documents for note generation and demographics extraction. The processing pipeline is configurable in [Settings → Model Settings → LLM tab → Document/Image Processing Mode](/settings#document-and-image-processing-mode):
+The **Document Upload** button in the [Floating Action Menu](/features/patients#floating-action-menu) opens a per-encounter panel that pulls content out of a document and into the current note. (This is distinct from your [knowledge base](/features/knowledge-base) of reference literature, and from [demographics auto-fill](/features/patients#demographics).)
 
-- **Auto (default):** probes the model for vision capability. If supported, document page images are sent directly to the vision model. Falls back to text extraction + OCR if not.
-- **Vision only:** always renders document pages as images and sends them to the vision model. Requires a vision-capable model.
-- **OCR only:** extracts text using pypdf with Tesseract OCR fallback. Works with any model but may miss content in scanned documents or images. **Tesseract is Docker-only** — desktop builds have no OCR fallback.
+{/* Screenshot: 1745x1091, light + dark; files: documents-{light,dark}.webp */}
+<ThemedShot light={documentsLight} dark={documentsDark} alt="Document Upload" width={500} />
 
-Use the **Test Vision Support** button in the same tab to check whether your configured model is vision-capable; the result is cached and shown as a badge.
+It accepts **PDF, Word (.doc/.docx), or .txt** (file picker or drag-and-drop). When you process a document, Phlox extracts the text and presents it **per note-template field**, each with a **Use / Using** toggle that injects the content into that field — nothing is auto-filled, you choose field by field.
 
-After extraction, each document's text can be toggled into individual note fields with per-field **Use / Using** controls.
+How a document is decoded depends on the global **Document/Image Processing Mode** in [Settings → Model Settings → LLM tab](/settings#document-and-image-processing-mode), combined with a runtime vision-capability probe:
+
+- **Auto (default):** uses the PDF text layer when usable; otherwise sends page images to the vision model if capable, falling back to text extraction (+ OCR on Docker).
+- **Vision only:** always renders pages as images and sends them to the vision model. Requires a vision-capable model.
+- **OCR only:** text extraction (pypdf) with Tesseract OCR fallback. Works with any model but may miss content in scanned documents. **Tesseract is Docker-only** — desktop builds have no OCR fallback.
+
+Use **Test Vision Support** in the same tab to check whether your model is vision-capable; the result is cached and shown as a badge.
