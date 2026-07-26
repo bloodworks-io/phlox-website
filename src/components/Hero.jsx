@@ -21,6 +21,7 @@ import {
 import HeroVideo from "./HeroVideo";
 import { aurora, textures, gradients } from "../theme";
 import { LATEST_VERSION } from "../version";
+import { docsHref, docsIsExternal } from "../docsLink";
 
 const words = ["Scribe.", "Organizer.", "Assistant.", "Knowledge Base."];
 const TYPING_SPEED = 90;
@@ -221,8 +222,8 @@ const Hero = () => {
           </Button>
           <Button
             as={Link}
-            href="https://github.com/bloodworks-io/phlox/tree/main/docs"
-            isExternal
+            href={docsHref}
+            isExternal={docsIsExternal}
             size="lg"
             variant="ghostDark"
             leftIcon={<FaBook />}
