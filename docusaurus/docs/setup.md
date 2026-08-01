@@ -39,7 +39,7 @@ Phlox needs an LLM that **supports tool calling**.
 
 ### Transcription endpoint
 
-Phlox needs a Whisper-compatible transcription service. On the **desktop app**, the bundled parakeet.cpp engine (Omi Med STT v1) is used by default — no external service required. For Docker, or to use a different engine:
+Phlox needs a Whisper-compatible transcription service. On the **desktop app**, the bundled parakeet.cpp engine (Omi Med STT v1) is used by default — no external service required. The bundled model is English-only; selecting a non-English [language](/features/language) offers a downloadable multilingual model. For Docker, or to use a different engine:
 
 - **[Parakeet Diarized](https://github.com/jfgonsalves/parakeet-diarized)** — NVIDIA Parakeet-TDT 0.6B v2 + Pyannote diarization. Diarization improves comprehension for downstream tasks but has relatively steep VRAM requirements. See [Parakeet-Diarized setup](#parakeet-diarized-setup).
 - **[Speaches](https://github.com/speaches-ai/speaches)** — lightweight Dockerized Whisper server.

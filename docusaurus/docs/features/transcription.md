@@ -22,8 +22,8 @@ Toggle between modes in the scribe controls on the encounter workspace. You can 
 
 ### Transcription engines
 
-- **Desktop app:** uses the bundled **parakeet.cpp** engine (Omi Med STT v1) by default — no external service required.
-- **Docker / custom:** point Phlox at any Whisper-compatible endpoint in [Settings → Model Settings → Whisper](/settings#remote-mode).
+- **Desktop app:** uses the bundled **parakeet.cpp** engine (Omi Med STT v1) by default — no external service required. The default model is English-only; selecting a non-English [language](/features/language) offers a downloadable multilingual Parakeet model (25 European languages).
+- **Docker / custom:** point Phlox at any Whisper-compatible endpoint in [Settings → Model Settings → Whisper](/settings#remote-mode). Remote endpoints support any language.
 
 ### Consent
 

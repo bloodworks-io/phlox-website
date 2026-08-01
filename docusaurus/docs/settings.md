@@ -17,11 +17,15 @@ Settings is divided into three top-level panels: **User Settings**, **Model Sett
 
 | Tab | What you configure |
 |---|---|
-| **General** | Your **name** and **specialty** (provided as context to the LLM and used for specialty-aware suggestions); your **default note template** and **default letter template**. |
+| **General** | Your **name** and **specialty** (provided as context to the LLM and used for specialty-aware suggestions); your **default note template** and **default letter template**; your clinic **language** (see [Language Support](/features/language)). |
 | **Note Templates** | Create, edit, and delete [note templates](/features/templates). |
 | **Letter Templates** | Manage [correspondence](/features/correspondence) templates, including the protected "Dictation" template. |
 | **Quick Chat** | Configure up to three quick-chat buttons (label + prompt) shown in the chat surfaces. |
 | **Advanced** | `Store Original PDFs` (keep uploaded PDF binaries) and `Require patient consent for ambient scribing` (see [Patients](/features/patients#ambient-scribe-consent)). |
+
+### Language
+
+The General tab also sets your clinic **language**, which drives transcription, note/letter/chat output, and date formatting. On desktop, selecting a non-English language offers to download a multilingual transcription model. See [Language Support](/features/language) for details and limitations.
 
 ## Model Settings
 

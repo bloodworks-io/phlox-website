@@ -23,6 +23,7 @@ Phlox is a local-first clinical tool with the following capabilities:
 
 - **Patient Profiles & Encounters** — stable demographics per patient, with individual encounter notes, transcripts, and tasks grouped by UR number. See [Patients](/features/patients).
 - **Ambient Medical Transcription** — record or upload audio; Phlox transcribes it and generates a structured note from your chosen template. Uses Whisper-compatible endpoints or the bundled parakeet.cpp engine. See [Transcription](/features/transcription).
+- **Multilingual** — transcribe and generate notes, letters, and chat in your clinic's language. Desktop offers a downloadable multilingual transcription model; remote endpoints support any language. See [Language Support](/features/language).
 - **Adaptive Refinement** — Phlox learns from the edits you make to generated notes and adapts future output to your style. See [AI Features → Adaptive Refinement](/features/ai#adaptive-refinement).
 - **Flexible Templates** — customisable note and letter templates with per-field prompts, formatting rules, and persistence. Generate templates automatically from an example note. See [Templates](/features/templates).
 - **Task Manager** — action items are extracted from the Plan section of notes and tracked per patient; plus a separate workspace to-do list. See [Task Manager](/features/task-manager).

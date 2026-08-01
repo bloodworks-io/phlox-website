@@ -11,6 +11,7 @@ const sidebars = {
       items: [
         "features/patients",
         "features/transcription",
+        "features/language",
         "features/templates",
         "features/task-manager",
         "features/correspondence",
