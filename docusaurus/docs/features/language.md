@@ -23,4 +23,4 @@ Output language is applied automatically — no per-template or per-prompt confi
 
 ## Application interface
 
-The Phlox **interface itself is currently English-only**. Selecting another language localises transcription, output, and formatting today, and the in-app language selector is ready for interface translations as they are contributed. If you'd like to help translate, see [Contributing → Adding a language](https://github.com/bloodworks-io/phlox/blob/development/.github/CONTRIBUTING.md#adding-a-language).
+The Phlox **interface is currently English-only** — the language selector lists only languages with a complete interface translation, so **English** is the only option today. Multilingual transcription and output are fully implemented and activate as soon as your language appears in the selector. Interface translations are contributed by the community; if you'd like to add yours, see [Contributing → Adding a language](https://github.com/bloodworks-io/phlox/blob/development/.github/CONTRIBUTING.md#adding-a-language).

@@ -25,7 +25,7 @@ Settings is divided into three top-level panels: **User Settings**, **Model Sett
 
 ### Language
 
-The General tab also sets your clinic **language**, which drives transcription, note/letter/chat output, and date formatting. On desktop, selecting a non-English language offers to download a multilingual transcription model. See [Language Support](/features/language) for details and limitations.
+The General tab also sets your clinic **language**, which drives transcription, note/letter/chat output, and date formatting. On desktop, selecting a non-English language offers to download a multilingual transcription model *(available once the language appears in the selector)*. See [Language Support](/features/language) for details and limitations.
 
 ## Model Settings
 
