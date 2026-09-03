@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex, Circle, Text, Icon, HStack } from "@chakra-ui/react";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaPlay, FaRegClock } from "react-icons/fa";
 import { shadows } from "../theme";
 
-// TEMP (stand-in for the hero demo video — it's late).
-// Showing a static image instead of <video>. To restore the demo video later:
-//   1. drop public/videos/hero-demo.mp4 (1920x1080, ~30-60s) + public/images/hero-poster.webp
-//   2. replace the <Box as="img"> below with the original <video> element
-//      (autoPlay, muted, loop, playsInline, poster, onError fallback).
+// The hero shows the app screenshot with a play-button overlay; clicking it
+// swaps in the promo video (with sound, started by the user's click).
 const IMAGE_SRC = `${process.env.PUBLIC_URL}/screenshot.webp`;
+const VIDEO_SRC = `${process.env.PUBLIC_URL}/videos/phlox-promo.mp4`;
 
 /**
- * Browser-chrome framed hero media. Currently renders a static screenshot
- * (see IMAGE_SRC) instead of the demo video.
+ * Browser-chrome framed hero media: screenshot poster + play button,
+ * replaced by the promo video on click.
  */
 const HeroVideo = () => {
+  const [playing, setPlaying] = useState(false);
   return (
     <Box position="relative" w="100%" maxW="1100px" mx="auto">
       {/* Warm glow bleeding out from under the frame */}
@@ -88,16 +87,83 @@ const HeroVideo = () => {
           <Box w="52px" display={{ base: "none", sm: "block" }} />
         </Flex>
 
-        {/* Static image stand-in (temp) */}
-        <Box
-          as="img"
-          src={IMAGE_SRC}
-          alt="Phlox app demo"
-          display="block"
-          w="100%"
-          sx={{ aspectRatio: "16 / 9" }}
-          objectFit="cover"
-        />
+        {/* Poster with play button, or the promo video once started */}
+        {playing ? (
+          <Box
+            as="video"
+            src={VIDEO_SRC}
+            controls
+            autoPlay
+            playsInline
+            poster={IMAGE_SRC}
+            display="block"
+            w="100%"
+            sx={{ aspectRatio: "16 / 9" }}
+            bg="#181926"
+          />
+        ) : (
+          <Box
+            position="relative"
+            role="group"
+            cursor="pointer"
+            onClick={() => setPlaying(true)}
+            title="Play the Phlox promo (46s, with sound)"
+          >
+            <Box
+              as="img"
+              src={IMAGE_SRC}
+              alt="Phlox app demo"
+              display="block"
+              w="100%"
+              sx={{ aspectRatio: "16 / 9" }}
+              objectFit="cover"
+            />
+            {/* Play button */}
+            <Flex
+              position="absolute"
+              inset={0}
+              align="center"
+              justify="center"
+              bg="rgba(24,25,38,0.25)"
+              transition="background 0.25s ease"
+              _groupHover={{ bg: "rgba(24,25,38,0.45)" }}
+            >
+              <Flex
+                align="center"
+                justify="center"
+                w={{ base: "72px", md: "92px" }}
+                h={{ base: "72px", md: "92px" }}
+                borderRadius="full"
+                bg="linear-gradient(135deg, #f5a97f 0%, #ff8c42 100%)"
+                boxShadow="0 12px 44px rgba(255,140,66,0.45)"
+                transition="transform 0.25s ease"
+                _groupHover={{ transform: "scale(1.08)" }}
+              >
+                <Icon as={FaPlay} color="#181926" boxSize={{ base: 6, md: 8 }} ml={1} />
+              </Flex>
+              {/* Duration pill */}
+              <Flex
+                position="absolute"
+                bottom={{ base: 3, md: 5 }}
+                right={{ base: 3, md: 5 }}
+                align="center"
+                gap={2}
+                px={3}
+                py={1.5}
+                borderRadius="full"
+                bg="rgba(24,25,38,0.75)"
+                border="1px solid"
+                borderColor="whiteAlpha.200"
+                backdropFilter="blur(6px)"
+              >
+                <Icon as={FaRegClock} boxSize={3} color="whiteAlpha.700" />
+                <Text fontSize="xs" color="whiteAlpha.800" fontFamily="'Space Grotesk', sans-serif">
+                  0:47
+                </Text>
+              </Flex>
+            </Flex>
+          </Box>
+        )}
       </Box>
     </Box>
   );
