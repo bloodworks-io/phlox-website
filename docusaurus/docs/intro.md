@@ -22,8 +22,9 @@ Welcome to the Phlox documentation. Phlox is a free, open-source, **local-first 
 Phlox is a local-first clinical tool with the following capabilities:
 
 - **Patient Profiles & Encounters** — stable demographics per patient, with individual encounter notes, transcripts, and tasks grouped by UR number. See [Patients](/features/patients).
+- **Multi-User Accounts** — username/password login with admin and clinician roles; each user's encounters, letters, templates, and knowledge base stay their own. See [Users & Authentication](/authentication).
 - **Ambient Medical Transcription** — record or upload audio; Phlox transcribes it and generates a structured note from your chosen template. Uses Whisper-compatible endpoints or the bundled parakeet.cpp engine. See [Transcription](/features/transcription).
-- **Multilingual** — transcribe and generate notes, letters, and chat in your clinic's language. Desktop offers a downloadable multilingual transcription model; remote endpoints support any language. See [Language Support](/features/language).
+- **Multilingual** — transcribe and generate notes, letters, and chat in your language, with the preferred language set per user. Desktop offers a downloadable multilingual transcription model; remote endpoints support any language. See [Language Support](/features/language).
 - **Adaptive Refinement** — Phlox learns from the edits you make to generated notes and adapts future output to your style. See [AI Features → Adaptive Refinement](/features/ai#adaptive-refinement).
 - **Flexible Templates** — customisable note and letter templates with per-field prompts, formatting rules, and persistence. Generate templates automatically from an example note. See [Templates](/features/templates).
 - **Task Manager** — action items are extracted from the Plan section of notes and tracked per patient; plus a separate workspace to-do list. See [Task Manager](/features/task-manager).
@@ -34,7 +35,7 @@ Phlox is a local-first clinical tool with the following capabilities:
 - **Agent Dashboard** — a chat-driven hub for clinic management with a to-do panel, specialty-aware suggestions, and document upload. See [Agent Dashboard](/features/dashboard).
 - **MCP Server Support** — connect external tool servers via the Model Context Protocol (SSE transport), with optional PHI filtering. See [Settings → Tools](/settings#tool-servers-mcp).
 - **Vision-Enhanced Document Processing** — hybrid pipeline that uses vision models directly when available, falling back to text extraction and OCR.
-- **100% Local & Private** — runs entirely on your machine; all data stays local. Optional local LLM (bundled llama.cpp), transcription (bundled parakeet.cpp), and embedding (bundled Qwen3-Embedding) servers.
+- **100% Local & Private** — runs on your own machine or server; all data stays under your control. Optional local LLM (bundled llama.cpp), transcription (bundled parakeet.cpp), and embedding (bundled Qwen3-Embedding) servers.
 
 ## Design
 

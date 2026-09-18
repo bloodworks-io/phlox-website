@@ -26,13 +26,25 @@ const FAQ = ({ bgColor }) => {
     {
       question: "What is Phlox?",
       answer:
-        "A free, open-source (MIT), local-first AI scribe with a built-in patient management system, agentic AI tools, and document/PDF processing. It runs entirely on your machine — no account, no cloud.",
+        "A free, open-source (MIT), local-first AI scribe with a built-in patient management system, agentic AI tools, and document/PDF processing. It runs on your own machine or server — no cloud, and your data stays under your control.",
       link: { label: "Overview", to: docsHref },
+    },
+    {
+      question: "Can multiple clinicians use one Phlox instance?",
+      answer:
+        "Yes. Docker deployments have built-in username/password accounts with admin and clinician roles. The first visit runs a setup wizard to create the admin, and each user's encounters, letters, templates, and knowledge-base collections stay their own. The desktop app remains single-user.",
+      link: { label: "Users & Authentication", to: `${docsHref}/authentication` },
+    },
+    {
+      question: "What languages does Phlox support?",
+      answer:
+        "Transcription, notes, letters, and chat can be generated in multiple languages, with the preferred language set per user. The desktop app offers a downloadable multilingual transcription model (25 European languages); remote Whisper endpoints support any language.",
+      link: { label: "Language Support", to: `${docsHref}/features/language` },
     },
     {
       question: "Does any of my data leave my machine?",
       answer:
-        "No — Phlox is local-first and your clinical data (patients, notes) stays on your machine, encrypted at rest. Uploaded reference literature (journal articles, guidelines) lives in a separate, unencrypted file, so keep PHI out of document collections. External web tools (PubMed, Wikipedia) and MCP servers are disabled by default, with a per-server PHI filter that strips identifiers when you do enable them.",
+        "No — Phlox is local-first and your clinical data (patients, notes) stays on your machine or server, encrypted at rest. Uploaded reference literature (journal articles, guidelines) lives in a separate, unencrypted file, so keep PHI out of document collections. External web tools (PubMed, Wikipedia) and MCP servers are disabled by default; when enabled, outbound queries are filtered to strip patient identifiers (best-effort) and MCP servers have a per-server PHI filter.",
       link: { label: "Security", to: `${docsHref}/security` },
     },
     {

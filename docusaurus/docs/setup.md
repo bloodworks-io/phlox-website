@@ -53,16 +53,18 @@ Pre-built binaries are available from [GitHub Releases](https://github.com/blood
 - **macOS (Apple Silicon)** — `.dmg` / `.app` build.
 - **Linux** — Flatpak (Vulkan).
 
-The desktop app comes bundled with the LLM, transcription, and embedding inference engines. **Models are downloaded from within the application** on first run (or from Settings → Model Settings → Models).
+The desktop app comes bundled with the LLM, transcription, and embedding inference engines. **Models are downloaded from within the application** on first run (or from Settings → Admin Settings → Models).
 
 ### First run
 
 1. Launch Phlox.
 2. Set a **database passphrase** (minimum 12 characters). This encrypts your database — you will need to re-enter it on every launch (Phlox does not cache it in the keychain, by design).
 3. The splash wizard guides you through: **About You** (name & specialty), **Templates**, and **AI Models** (download the models you want).
-4. Once models are downloaded, Phlox is ready. You can switch between **Local** and **Remote** inference in [Settings → Model Settings](/settings).
+4. Once models are downloaded, Phlox is ready. You can switch between **Local** and **Remote** inference in [Settings → Admin Settings](/settings).
 {/* Screenshot: capture 1200x1000, light + dark; files: splash-models-{light,dark}.webp */}
 {/* <ThemedShot light={splashLight} dark={splashDark} alt="Onboarding wizard — AI Models step" width={500} /> */}
+
+The desktop app is a single-user install — it runs as one implicit admin and has no login screen. Multi-user accounts are a Docker/web feature; see [Users & Authentication](/authentication).
 
 ## Option 2 — Docker / Podman
 
@@ -88,6 +90,8 @@ services:
       # - PROXY_AUTH_ENABLED=true
       # - PROXY_AUTH_USER_HEADER=X-Forwarded-User
       # - PROXY_AUTH_ALLOWED_USERS=user1,user2
+      # - TRUSTED_PROXY_IPS=172.16.0.2 # Required with PROXY_AUTH_ENABLED:
+      #   IPs/CIDRs of EVERY proxy hop between Phlox and clients.
       # - RATE_LIMIT_ENABLED=true
     volumes:
       - ./data:/usr/src/app/data    # Persistent data (database, vectors)
@@ -95,6 +99,8 @@ services:
 ```
 
 Then `docker compose up -d` and open [http://localhost:5000](http://localhost:5000).
+
+**Authentication is required.** On first visit, a setup wizard walks you through creating the **admin account**; afterwards everyone signs in with username/password. Add further users (admin or clinician roles) from Settings → Users — see [Users & Authentication](/authentication). The `PHLOX_PASSPHRASE` variable from earlier releases is deprecated and ignored.
 
 > The Docker image has **no inference or transcription capability built in**. You must point it at external OpenAI-compatible endpoints for both LLM and transcription in Settings.
 
@@ -109,23 +115,26 @@ Create a `.env` file (or set the environment directly). The variables Phlox read
 | `PORT` | `5000` | Port the server binds to (Docker mode). |
 | `SERVER_HOST` | `0.0.0.0` | Bind host (Docker mode). |
 | `LLM_EXTRA_BODY` | — | JSON string merged into every **non-streaming** LLM request, e.g. `{"chat_template_kwargs":{"thinking":true}}`. Does not apply to streaming requests. |
-| `PROXY_AUTH_ENABLED` | `false` | Enable reverse-proxy header authentication. |
+| `PHLOX_ALLOW_UNAUTHENTICATED` | `false` | ⚠️ **Insecure** — disables login and resolves every request as implicit admin. Explicit risk acceptance for local testing only; never use on a network-reachable instance. |
+| `PROXY_AUTH_ENABLED` | `false` | Enable reverse-proxy header authentication (instead of built-in accounts). |
 | `PROXY_AUTH_USER_HEADER` | `X-Forwarded-User` | Header containing the authenticated username. |
 | `PROXY_AUTH_ALLOWED_USERS` | _(empty = any)_ | Comma-separated allow-list. |
+| `TRUSTED_PROXY_IPS` | _(empty)_ | **Required with `PROXY_AUTH_ENABLED`**: IPs/CIDRs of every proxy hop between Phlox and clients. Untrusted headers are rejected. Also used for client-IP resolution behind proxies. |
 | `RATE_LIMIT_ENABLED` | `false` | Enable per-path rate limiting. |
 | `RATE_LIMIT_DESKTOP_MULTIPLIER` | `3` | Multiplier applied to limits outside Docker. |
 | `PHLOX_DEMO_MODE` | `false` | ⚠️ **Destructive** — deletes all patients, encounters, and templates and replaces them with demo data. Desktop only. |
 | `PHLOX_PARENT_PID` | — | Desktop only: server self-terminates if this parent PID dies. |
 
+> **Deprecated:** `PHLOX_PASSPHRASE` (formerly the shared login passphrase for Docker) is ignored — user accounts replace it. Remove it from your environment; Phlox logs a warning if it is set.
+
 ### Critical security warning
 
 ⚠️ **The default `docker-compose.yml` publishes port 5000 on all host interfaces.** To restrict to localhost, change the port mapping to `"127.0.0.1:5000:5000"`.
 
-**If exposed to the internet without protection:**
-- Anyone can access your instance
-- All data could be stolen
+Login is required, but Phlox is still **not** a hardened clinical system:
 
-**Never expose Phlox to the open internet without a reverse proxy (Nginx/Caddy) or VPN.** For production behind a proxy, enable proxy authentication (see [Security](/security#authentication)).
+- The built-in accounts protect the UI and API, but there is no HTTPS, brute-force protection beyond a basic login lockout, or compliance-grade access control.
+- **Never expose Phlox directly to the open internet.** Put it behind a reverse proxy (Nginx/Caddy) or VPN with TLS, which can also handle authentication via [proxy auth](/security#authentication).
 
 ### Parakeet-Diarized setup
 
@@ -142,7 +151,7 @@ pip install -r requirements.txt
 ./run.sh --hf-token "your_hf_token" --port 8000
 ```
 
-Then point Phlox's Whisper endpoint at it in [Settings → Model Settings → Whisper](/settings#remote-mode).
+Then point Phlox's Whisper endpoint at it in [Settings → Admin Settings → Whisper](/settings#remote-mode).
 
 ### Configuration tips
 

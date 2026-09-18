@@ -4,7 +4,7 @@ import knowledgeBaseDark from "@site/static/img/knowledge-base-dark.webp";
 
 # Knowledge Base
 
-The **knowledge base** is a local, searchable corpus of your own reference material — clinical guidelines, journal articles, protocols — that Phlox uses to ground its chat answers. It lives in `documents.sqlite` as vector embeddings (via sqlite-vec) and stays on your machine.
+The **knowledge base** is a local, searchable corpus of your own reference material — clinical guidelines, journal articles, protocols — that Phlox uses to ground its chat answers. It lives in `documents.sqlite` as vector embeddings (via sqlite-vec) and stays on your machine. Collections are **scoped per user**: each account's uploads and embeddings are visible only to them (see [Users & Authentication](/authentication#per-user-data)).
 
 There is **no separate "document chat" screen**. You build the knowledge base on the **Documents** page, and the chat surfaces (the [Agent Dashboard](/features/dashboard) and the patient [Reference Chat](/features/ai#reference-chat)) query it automatically.
 
@@ -19,7 +19,7 @@ Open the **Documents** page and go to the **Knowledge Base** tab. There you can:
 - Each document is **auto-classified** (by the LLM) into a disease-named **collection**, with a title, source, and focus area (e.g. guidelines, diagnosis, treatment). You can override these before committing, and edit them later.
 - **Rename** collections, **delete** individual documents or whole collections, and **download** the original PDFs.
 
-When you change your embedding model, re-embed everything from [Settings → Model Settings → RAG](/settings#remote-mode).
+When you change your embedding model, re-embed everything from [Settings → Admin Settings → RAG](/settings#remote-mode).
 
 > The knowledge base is intended for **non-PHI reference material**. It is stored in a separate, **unencrypted** database — keep clinical data out of it. See [Security](/security#encryption-at-rest).
 

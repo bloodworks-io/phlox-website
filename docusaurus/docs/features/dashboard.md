@@ -24,11 +24,11 @@ When the chat is empty, Phlox shows suggestion chips tailored to the **specialty
 
 ### Disclaimer
 
-Once per session, a **disclaimer modal** reminds you that Phlox is experimental software, is not a certified medical device, has no authentication by default, and is not HIPAA/GDPR compliant. You must acknowledge it before continuing. (See [Limitations & Warnings](/limitations).)
+Once per session, a **disclaimer modal** reminds you that Phlox is experimental software, is not a certified medical device, and is not HIPAA/GDPR compliant. You must acknowledge it before continuing. (See [Limitations & Warnings](/limitations).)
 
 ## To-Do Panel
 
-The collapsible to-do panel holds your **workspace to-dos** (general tasks, not patient encounter jobs):
+The collapsible to-do panel holds your **workspace to-dos** (general tasks, not patient encounter jobs). To-dos belong to the signed-in user — each account has its own list:
 
 - Add, complete, and delete items.
 - Filter between active and all tasks.

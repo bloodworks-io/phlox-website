@@ -23,7 +23,7 @@ Toggle between modes in the scribe controls on the encounter workspace. You can 
 ### Transcription engines
 
 - **Desktop app:** uses the bundled **parakeet.cpp** engine (Omi Med STT v1) by default — no external service required. The default model is English-only; selecting a non-English [language](/features/language) offers a downloadable multilingual Parakeet model (25 European languages).
-- **Docker / custom:** point Phlox at any Whisper-compatible endpoint in [Settings → Model Settings → Whisper](/settings#remote-mode). Remote endpoints support any language.
+- **Docker / custom:** point Phlox at any Whisper-compatible endpoint in [Settings → Admin Settings → Whisper](/settings#remote-mode). Remote endpoints support any language.
 
 ### Consent
 
@@ -55,7 +55,7 @@ The **Document Upload** button in the [Floating Action Menu](/features/patients#
 
 It accepts **PDF, Word (.doc/.docx), or .txt** (file picker or drag-and-drop). When you process a document, Phlox extracts the text and presents it **per note-template field**, each with a **Use / Using** toggle that injects the content into that field — nothing is auto-filled, you choose field by field.
 
-How a document is decoded depends on the global **Document/Image Processing Mode** in [Settings → Model Settings → LLM tab](/settings#document-and-image-processing-mode), combined with a runtime vision-capability probe:
+How a document is decoded depends on the global **Document/Image Processing Mode** in [Settings → Admin Settings → LLM tab](/settings#document-and-image-processing-mode), combined with a runtime vision-capability probe:
 
 - **Auto (default):** uses the PDF text layer when usable; otherwise sends page images to the vision model if capable, falling back to text extraction (+ OCR on Docker).
 - **Vision only:** always renders pages as images and sends them to the vision model. Requires a vision-capable model.

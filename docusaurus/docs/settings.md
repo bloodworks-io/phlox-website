@@ -8,7 +8,7 @@ import modelsDark from "@site/static/img/local-model-manager-dark.webp";
 
 Phlox is configured almost entirely through the in-app **Settings** page. Configuration lives in the encrypted database (not in files), so changes persist with your data. Most settings autosave.
 
-Settings is divided into three top-level panels: **User Settings**, **Model Settings**, and **Prompt Settings**.
+Settings is divided into three top-level panels: **User Settings** (per user), plus **Admin Settings** and **Prompt Settings**, which are only visible to admins — global model endpoints, prompts, and options are admin-only writes (see [Users & Authentication](/authentication#roles)). On the single-user desktop app you are always the admin, so all panels show.
 
 {/* Screenshot: capture 1600x1000, light + dark; files: settings-overview-{light,dark}.webp */}
 <ThemedShot light={settingsLight} dark={settingsDark} alt="Settings page" width={500} />
@@ -17,7 +17,7 @@ Settings is divided into three top-level panels: **User Settings**, **Model Sett
 
 | Tab | What you configure |
 |---|---|
-| **General** | Your **name** and **specialty** (provided as context to the LLM and used for specialty-aware suggestions); your **default note template** and **default letter template**; your clinic **language** (see [Language Support](/features/language)). |
+| **General** | Your **name** and **specialty** (provided as context to the LLM and used for specialty-aware suggestions); your **default note template** and **default letter template**; your **preferred language** (per user — see [Language Support](/features/language)). |
 | **Note Templates** | Create, edit, and delete [note templates](/features/templates). |
 | **Letter Templates** | Manage [correspondence](/features/correspondence) templates, including the protected "Dictation" template. |
 | **Quick Chat** | Configure up to three quick-chat buttons (label + prompt) shown in the chat surfaces. |
@@ -25,11 +25,15 @@ Settings is divided into three top-level panels: **User Settings**, **Model Sett
 
 ### Language
 
-The General tab also sets your clinic **language**, which drives transcription, note/letter/chat output, and date formatting. On desktop, selecting a non-English language offers to download a multilingual transcription model *(available once the language appears in the selector)*. See [Language Support](/features/language) for details and limitations.
+The General tab also sets your **preferred language** — a per-user setting that drives transcription, note/letter/chat output, and date formatting. On desktop, selecting a non-English language offers to download a multilingual transcription model *(available once the language appears in the selector)*. See [Language Support](/features/language) for details and limitations.
 
-## Model Settings
+## Admin Settings
 
-The Model Settings panel behaves differently depending on whether you run a **desktop (Tauri)** build or a **Docker/web** build.
+The Admin Settings panel (formerly "Model Settings") contains the model configuration and the **Users** tab; it is only visible to admins. It behaves differently depending on whether you run a **desktop (Tauri)** build or a **Docker/web** build.
+
+### Users
+
+Admin-only. Create user accounts (admin or clinician), reset passwords, and disable accounts. See [Users & Authentication](/authentication#managing-users).
 
 ### Local mode (desktop only)
 

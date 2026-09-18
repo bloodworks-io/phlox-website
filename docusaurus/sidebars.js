@@ -3,6 +3,7 @@ const sidebars = {
   docs: [
     "intro",
     "setup",
+    "authentication",
     "settings",
     {
       type: "category",

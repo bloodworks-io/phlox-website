@@ -17,9 +17,11 @@ import {
   FaTasks,
   FaRobot,
   FaEnvelope,
-  FaRss,
+  FaTachometerAlt,
   FaDatabase,
   FaUserMd,
+  FaUsers,
+  FaLanguage,
 } from "react-icons/fa";
 import SectionHeading from "./SectionHeading";
 import MediaPlaceholder from "./MediaPlaceholder";
@@ -174,10 +176,10 @@ const Features = ({ bgColor }) => {
       icon: FaEnvelope,
     },
     {
-      title: "Dashboard & RSS",
+      title: "Agent Dashboard",
       description:
-        "LLM-summarized articles from medical RSS feeds and your recent activity at a glance.",
-      icon: FaRss,
+        "A chat-driven hub with a workspace to-do panel and specialty-aware suggestions.",
+      icon: FaTachometerAlt,
     },
     {
       title: "Patient Records",
@@ -191,13 +193,25 @@ const Features = ({ bgColor }) => {
         "Automatically extract key findings from encounters into clear, structured documentation.",
       icon: FaUserMd,
     },
+    {
+      title: "Multi-User Accounts",
+      description:
+        "Username/password login with admin and clinician roles — each user's encounters, templates, and knowledge base stay their own.",
+      icon: FaUsers,
+    },
+    {
+      title: "Multilingual",
+      description:
+        "Transcribe and generate notes and letters in multiple languages, with the preferred language set per user.",
+      icon: FaLanguage,
+    },
   ];
 
   return (
     <Box as="section" py={{ base: 16, md: 24 }} bg={bgColor} id="features">
       <SectionHeading
         eyebrow="Features"
-        title="Everything runs locally"
+        title="Everything runs on your hardware"
         subtext="A complete clinical documentation toolkit built on free and open-source tools."
       />
       <Grid

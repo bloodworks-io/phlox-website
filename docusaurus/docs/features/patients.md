@@ -32,6 +32,8 @@ An **encounter** is a single clinical visit. Each encounter contains:
 
 Creating a new note for an existing UR number links the new encounter to that patient's history.
 
+> **Per-user ownership:** encounters, jobs, letters, and chat context belong to the user who created them — clinicians don't see each other's encounters for the same patient. Admins can flip a sidebar toggle to view *all* patients and encounters. See [Users & Authentication](/authentication#per-user-data).
+
 ## Floating Action Menu
 
 The **Floating Action Menu** (FAB) is the vertical action menu on the right side of the encounter workspace. It opens a panel for each common encounter action:
