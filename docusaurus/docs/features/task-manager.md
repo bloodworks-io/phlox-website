@@ -27,6 +27,8 @@ The **Wrap Up** modal is the intended way to finish an encounter. It runs job ex
 {/* Screenshot: capture 1200x1000, light + dark; files: wrap-up-modal-{light,dark}.webp */}
 <ThemedShot light={wrapUpLight} dark={wrapUpDark} alt="Wrap Up modal" width={500} />
 
+During a [live agent](/features/live-agent#ending-the-visit) session, ending the visit (by voice or with the stop button) opens Wrap-Up automatically, and you can curate the job list **by voice** — *"just keep the 'email CDU' job"* — with the checkboxes updating live as you speak.
+
 ## Workspace To-Dos
 
 Separately, the dashboard has a general to-do list (managed in the [Agent Dashboard](/features/dashboard) to-do panel). These are not tied to any patient or encounter. Add, complete, filter, and delete them from the panel, or ask the chat agent to manage them via the `todo_list` tool.

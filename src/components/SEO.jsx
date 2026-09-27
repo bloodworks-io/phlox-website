@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 const SEO = () => {
   const siteTitle = "Phlox - Free AI Medical Scribe";
   const siteDescription =
-    "A free, open source AI medical scribe that runs entirely on your computer.";
+    "A free, open source AI medical scribe with real-time live scribing that runs entirely on your computer.";
   const siteUrl = "https://phlox.bloodworks.io"; // This can remain as is or be updated if the URL changes
 
   const structuredData = {
@@ -19,7 +19,7 @@ const SEO = () => {
       priceCurrency: "USD",
     },
     description:
-      "A free, open source AI medical scribe that runs entirely on your computer.", // Updated
+      "A free, open source AI medical scribe with real-time live scribing that runs entirely on your computer.", // Updated
   };
 
   return (
@@ -28,7 +28,7 @@ const SEO = () => {
       <meta name="description" content={siteDescription} />
       <meta
         name="keywords"
-        content="AI medical scribe, medical transcription, clinical notes, AI scribe, free medical scribe, local AI, open source medical software, patient notes, medical documentation" // Updated
+        content="AI medical scribe, medical transcription, clinical notes, AI scribe, real-time AI scribe, live medical scribe, ambient scribe, free medical scribe, local AI, open source medical software, patient notes, medical documentation" // Updated
       />
       <link rel="canonical" href={siteUrl} />
 

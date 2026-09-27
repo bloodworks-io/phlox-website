@@ -33,6 +33,7 @@ Phlox records an **audit log** of API activity. This is useful for review and ac
 
 - Every API request is logged: HTTP method, path, status code, actor (the signed-in user, or the proxy-authenticated username), client IP, and duration.
 - **Request and response bodies are never logged** — no PHI is captured in the audit trail.
+- **Exception:** [live agent](/features/live-agent) audio chunk uploads are not individually logged — they arrive every few seconds during a live session and would flood the trail. They still pass authentication and rate limiting.
 - Logs are retained for `AUDIT_RETENTION_DAYS` (default **90 days**) and purged daily.
 - Audit data is **API-only** — read it with `GET /api/audit` or export with `GET /api/audit/export?format=csv|json`. There is currently **no in-app UI** for browsing the audit log.
 
@@ -40,11 +41,11 @@ Phlox records an **audit log** of API activity. This is useful for review and ac
 
 ## Network security headers
 
-The server enforces a **strict Content-Security-Policy** and sets `X-Frame-Options: DENY` and related security headers. In Tauri builds the global Tauri API surface is disabled except for the specific commands Phlox uses, and the API key fields are masked in configuration responses.
+The server enforces a **strict Content-Security-Policy** and sets `X-Frame-Options: DENY` and related security headers. The CSP allows `wasm-unsafe-eval` solely so the live agent's voice-activity-detection WebAssembly worker can run; no other `eval` form is permitted. In Tauri builds the global Tauri API surface is disabled except for the specific commands Phlox uses, and the API key fields are masked in configuration responses.
 
 ## Rate limiting and request limits
 
-Rate limiting protects against abuse. It is **off by default**; enable it with `RATE_LIMIT_ENABLED=true`. When enabled, per-path sliding-window limits apply (e.g. transcription and chat endpoints are more tightly limited than configuration reads), with a burst allowance in the first 10 seconds. Desktop (Tauri) builds apply a multiplier (`RATE_LIMIT_DESKTOP_MULTIPLIER`, default 3) to the limits.
+Rate limiting protects against abuse. It is **off by default**; enable it with `RATE_LIMIT_ENABLED=true`. When enabled, per-path sliding-window limits apply (e.g. transcription and chat endpoints are more tightly limited than configuration reads; the [live agent](/features/live-agent) API gets a higher 120 req/min allowance because audio segments arrive every few seconds), with a burst allowance in the first 10 seconds. Desktop (Tauri) builds apply a multiplier (`RATE_LIMIT_DESKTOP_MULTIPLIER`, default 3) to the limits.
 
 Independently of rate limiting, the server caps request sizes and document processing to protect against accidental or malicious oversized payloads: request bodies are limited to **100 MB** (**1 GB** for audio uploads), PDFs are processed up to a maximum of **200 pages**, and images above **40 megapixels** are rejected.
 

@@ -1,6 +1,6 @@
 # Third-Party Models, Runtimes, and Licenses
 
-Phlox bundles inference runtimes and downloads a number of third-party models whose licenses require attribution. Models are **not bundled in the app artifacts** — they are downloaded on demand from HuggingFace on first use.
+Phlox bundles inference runtimes and downloads a number of third-party models whose licenses require attribution. Models are **not bundled in the app artifacts** — they are downloaded on demand from HuggingFace on first use (the speaker embedding model below is the exception: it is fetched at build time from its GitHub release).
 
 ## Large Language Models
 
@@ -27,6 +27,14 @@ Phlox bundles inference runtimes and downloads a number of third-party models wh
 - **Derivative of:** [nvidia/parakeet-tdt-0.6b-v2](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) (CC-BY-4.0).
 - Used by the bundled transcription engine.
 
+### CAM++ Speaker Embedding (3D-Speaker, ONNX)
+
+- **Creator:** Speech Lab, Alibaba Group (the [3D-Speaker](https://github.com/modelscope/3D-Speaker) project); ONNX export via the [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) speaker-recognition model release.
+- **Model:** `3dspeaker_speech_campplus_sv_zh-cn_16k-common.onnx` (192-dimensional embeddings).
+- **Source:** https://github.com/k2-fsa/sherpa-onnx/releases/tag/speaker-recongition-models
+- **License:** [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0).
+- Used by the live agent for best-effort speaker diarization during consultations. Fetched (pinned by SHA256) at build time rather than on first use.
+
 ## Bundled Inference Runtimes (desktop)
 
 ### parakeet.cpp (patched)
@@ -43,6 +51,13 @@ Phlox bundles inference runtimes and downloads a number of third-party models wh
 - Phlox runs two llama.cpp server processes on desktop: one for the LLM (with optional vision projector) and one in `--embedding` mode for embeddings.
 
 ## System Components
+
+### TEN VAD (WebAssembly)
+
+- **Creator:** Agora / the [TEN Framework](https://github.com/TEN-framework) project.
+- **Source:** https://github.com/TEN-framework/ten-vad
+- **License:** [Apache-2.0 with additional conditions](https://github.com/TEN-framework/ten-vad/blob/main/LICENSE) — notably a non-compete clause regarding Agora's offerings. Derivative works remain subject to these conditions; the upstream `NOTICES` file covers BSD-2/BSD-3-licensed derived code.
+- The VAD wasm artifacts are **vendored into the app** and run in a Web Worker to segment live-agent utterances on-device.
 
 ### SQLCipher
 
@@ -65,6 +80,7 @@ The following Apache-2.0 / copyleft dependencies are used by Phlox. Each retains
 - [mcp](https://github.com/modelcontextprotocol/python-sdk) — MIT
 - [pytesseract](https://github.com/madmaze/pytesseract) — Apache-2.0 (Docker only)
 - [pypdf](https://github.com/py-pdf/pypdf) — BSD-3-Clause
+- [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) — Apache-2.0 (ONNX Runtime speech stack; runs the CAM++ speaker embedding model above on CPU)
 
 **JavaScript:**
 - [pdfjs-dist](https://github.com/mozilla/pdf.js) — Apache-2.0

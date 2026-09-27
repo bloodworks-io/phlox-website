@@ -81,6 +81,32 @@ Example flow for a single field:
 Audio → Raw Transcription → JSON Extraction → Refinement (style + adaptive rules) → Final Output
 ```
 
+### Live Agent
+
+The [live agent](/features/live-agent) streams the consultation and drafts the note in real time. It is a separate hot loop around the same building blocks (transcription, LLM, tools), tuned for latency and prompt-cache friendliness.
+
+#### Client audio pipeline
+- The recorder feeds a Web Worker running the bundled **TEN VAD** (voice-activity detection) WebAssembly module — no audio leaves the machine to detect speech.
+- An utterance segmenter closes a segment after **400 ms of silence** or **15 s** maximum, emitting one WAV blob per utterance; the tail is flushed when the session stops.
+- Utterances are uploaded as they complete; session events (status, activity, artifacts, transcript) stream back over **SSE**, with reconnect replay that restores state without re-triggering the note-field animations.
+
+#### Server engine (`/api/agent-live`)
+- Session lifecycle endpoints (`POST /sessions`, `.../audio`, `GET .../events` for SSE, plus feedback/jobs/tidy/stop), rate-limited to 120 req/min because audio segments arrive every few seconds during a visit. Idle sessions are pruned after 4 h.
+- Each session keeps an **append-only conversation** so the LLM's prompt cache stays warm; caches are pre-warmed when the session starts (the "Warming up the agent…" state).
+
+#### The hot loop
+Each utterance passes through:
+
+1. **Transcription** — the configured Whisper endpoint (live utterances can be routed to a separate `WHISPER_STREAM_URL`, e.g. a faster streaming model).
+2. **Speaker labelling** — lightweight local diarization with the CAM++ embedding model (sherpa-onnx, CPU): per-session speaker centroids matched by cosine similarity (≥ 0.62), updated with exponential moving averages, capped at four speakers (S1–S4, with S? for unattributed speech).
+3. **Gate** — a cheap single-token classification (temperature 0) labels the utterance **SKIP** (not for the note), **NOTE**, or **ACT** (a spoken request). It runs on the secondary model when one is configured (e.g. a small Qwen on Docker), falling back to the primary model. It prefers a top-logprob readout of the three option tokens — computed in one decode step, with token-prefix matching to absorb tokenizer splits — falling back to one-word generation on providers without logprobs. Because small models systematically under-call SKIP at argmax, a NOTE verdict of ≤ 8 words carrying SKIP probability mass ≥ 0.05 is downgraded to SKIP (never the reverse, never to ACT). On gate failure it fails *open* to NOTE on local models (a redundant tick is cheap) and *closed* to SKIP on cloud providers (cost control).
+4. **Agent tick** — NOTE/ACT utterances run a free-form tool-calling loop on the primary model, with live-session tools (`update_note_field`, `append_to_field`, `stage_artifact`, `stage_letter`, `save_letter`, `get_jobs`/`set_jobs`, `wrap_up`) alongside the full chat tool registry including MCP servers.
+
+A **debounce backstop** (45 s / 40 words; 12 s / 15 words at the start of the visit; hard cap 400 words) re-sends SKIP-classified content if enough speech accumulates, bounding missed note content; queued speech surfaces as the backlog counter in the live panel. Every ~3 minutes a **tidy tick** consolidates the note and matches each field's style example — never touching fields the clinician has edited by hand (the agent may only append to those).
+
+#### Local inference note
+On desktop local mode there is a single model, so the gate shares it with the agent loop: the bundled llama.cpp server runs **2 slots with continuous batching and one unified 32k KV pool**. Gate calls run (and stay KV-cached) alongside a long agent tick instead of queueing behind it or evicting its prompt cache, and the unified pool means neither sequence is capped at half the context.
+
 ### RAG (sqlite-vec)
 - Vector search over your uploaded reference literature, kept in a **separate `documents.sqlite`** file (not the encrypted clinical database). Intended for **non-PHI** material such as journal articles and guidelines.
 - **Collections are scoped per user** — each user's uploads and embeddings are visible only to them.

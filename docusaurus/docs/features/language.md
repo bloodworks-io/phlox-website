@@ -15,6 +15,8 @@ The transcription language you can actually use depends on your speech-to-text e
 - **Desktop (bundled engine)** — the default **Omi Med STT v1** model is **English-only**. When you select a non-English language, Phlox offers to download the **multilingual Parakeet TDT 0.6B v3** model, which understands **25 European languages** and auto-detects the spoken language. Downloading it switches it to the active model. Until it is active, non-English recordings fall back to English.
 - **Remote (Whisper-compatible)** — point Phlox at any endpoint in [Settings → Admin Settings → Whisper](/settings#remote-mode); remote endpoints generally support any language.
 
+> [Live agent](/features/live-agent) sessions use the same engine as recordings. On Docker, setting `WHISPER_STREAM_URL` routes live utterances to a separate endpoint (see [Setup](/setup#configuration-tips)) — that endpoint receives the language hint the same way.
+
 > See [Transcription](/features/transcription) for the full recording and dictation workflow.
 
 ## Notes, letters, and chat

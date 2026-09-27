@@ -154,7 +154,7 @@ const Hero = () => {
           leftIcon={<Icon as={FaTag} color="#f5a97f" boxSize={3} />}
           rightIcon={<Box as="span">→</Box>}
         >
-          {LATEST_VERSION} is here — multi-user accounts & multilingual notes
+          New: Live Agent — real-time scribing
         </Button>
 
         {/* Headline */}
@@ -197,9 +197,10 @@ const Hero = () => {
           lineHeight="1.7"
           mb={10}
         >
-          Free, open-source patient management with AI transcription, clinical
-          note generation, and a built-in assistant — running on your own
-          hardware, alone or with your team. Your data never leaves it.
+          Free, open-source patient management with AI transcription,
+          real-time live scribing, clinical note generation, and a built-in
+          assistant — running on your own hardware, alone or with your team.
+          Your data never leaves it.
         </Text>
 
         {/* CTAs */}

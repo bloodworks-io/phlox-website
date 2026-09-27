@@ -115,6 +115,7 @@ Create a `.env` file (or set the environment directly). The variables Phlox read
 | `PORT` | `5000` | Port the server binds to (Docker mode). |
 | `SERVER_HOST` | `0.0.0.0` | Bind host (Docker mode). |
 | `LLM_EXTRA_BODY` | — | JSON string merged into every **non-streaming** LLM request, e.g. `{"chat_template_kwargs":{"thinking":true}}`. Does not apply to streaming requests. |
+| `WHISPER_STREAM_URL` | — | Optional full URL of a transcription endpoint used **only for live agent utterances** (e.g. a faster streaming model). Reuses the configured Whisper API key. |
 | `PHLOX_ALLOW_UNAUTHENTICATED` | `false` | ⚠️ **Insecure** — disables login and resolves every request as implicit admin. Explicit risk acceptance for local testing only; never use on a network-reachable instance. |
 | `PROXY_AUTH_ENABLED` | `false` | Enable reverse-proxy header authentication (instead of built-in accounts). |
 | `PROXY_AUTH_USER_HEADER` | `X-Forwarded-User` | Header containing the authenticated username. |
@@ -138,6 +139,8 @@ Login is required, but Phlox is still **not** a hardened clinical system:
 
 ### Parakeet-Diarized setup
 
+> **Two kinds of speaker labelling.** The [live agent](/features/live-agent#speaker-labels) labels speakers **out of the box** using a lightweight bundled model (CAM++ via sherpa-onnx) — no setup or GPU required, best-effort quality, capped at four speakers. The Parakeet-Diarized server below is an *optional, heavier* alternative for **Ambient recordings**: full Pyannote diarization with higher accuracy (and VRAM needs) that produces speaker-aware transcripts.
+
 ```bash
 # Install the Parakeet diarized server
 git clone https://github.com/jfgonsalves/parakeet-diarized
@@ -158,6 +161,7 @@ Then point Phlox's Whisper endpoint at it in [Settings → Admin Settings → Wh
 - Enable diarization in Phlox settings for speaker-aware transcripts.
 - Use shorter audio segments (\<5 minutes) for best diarization accuracy.
 - For multi-speaker clinics, diarization significantly improves note quality.
+- Optionally set `WHISPER_STREAM_URL` (Docker) to route **live agent** utterances to a different, faster transcription endpoint than the one used for Ambient recordings (reuses the same API key; no diarization is applied on this path — the live agent labels speakers itself).
 
 ## Post-Installation
 

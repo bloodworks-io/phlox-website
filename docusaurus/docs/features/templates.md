@@ -22,6 +22,16 @@ Templates are managed in [Settings → User Settings → Note Templates](/settin
 
 > Phlox ships with a set of protected default templates (e.g. `phlox_*`, `soap_*`, `progress_*`). Defaults can be used and selected but not deleted.
 
+## Template Families & Versioning
+
+Behind the scenes, every template is a member of a **family**. A family is the base template plus all of its versions — updated defaults ship as new versions of the same family (keys like `phlox_1`, `phlox_2`, …), and versions compare numerically (`phlox_10` is newer than `phlox_9`).
+
+- **Your forks outrank the defaults.** When you customise a template, your fork belongs to the same family and takes precedence over *every* protected version of it — app updates never silently override your customisations.
+- **Historical encounters stay locked.** A saved encounter keeps the exact template it was created with, even if newer versions have since replaced it.
+- **Returning patients upgrade within the family.** A new encounter for a returning patient whose previous template is no longer active (e.g. you deleted your fork or a newer default shipped) automatically uses the newest member of that family — your fork first — and tells you with a toast. Brand-new encounters use your default template.
+
+Changing your default template takes effect immediately everywhere.
+
 ## Template Fields
 
 Each field is configured with:

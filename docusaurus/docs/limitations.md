@@ -14,6 +14,7 @@ sidebar_label: Limitations & Warnings
 
     - **Critical Verification:** **ALL AI-generated outputs from Phlox (clinical notes, summaries, correspondence, reference searches, chart insights, etc.) MUST be independently verified by qualified medical professionals using trusted, primary sources.**  Do not rely solely on AI-generated information for clinical documentation.
     - **Risk of Misinformation:** AI-generated content may contain inaccurate medical information or misinterpret clinical context.  **Using unverified AI output in clinical practice could lead to patient harm.**
+    - **Speaker labels are best-effort:** the live agent's speaker tags (S1–S4) are heuristic hints, not authoritative attribution — they can mislabel or miss speakers, especially with overlapping speech or similar voices.
 
 3.  **Not a Certified Medical Device:** Phlox is **not a certified medical device** and has not been evaluated or approved by any regulatory bodies (e.g. FDA, TGA, MHRA).  It most likely does not meet the regulatory requirements for medical devices in any jurisdiction.
 

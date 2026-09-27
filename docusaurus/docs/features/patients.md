@@ -67,10 +67,14 @@ Review the extracted values before saving — AI extraction can make mistakes.
 
 ## Ambient Scribe Consent
 
-If **Require patient consent for ambient scribing** is enabled in [Settings → User Settings → Advanced](/settings#user-settings), Phlox will prompt for explicit patient consent before starting an ambient recording on a given encounter.
+If **Require patient consent for ambient scribing** is enabled in [Settings → Admin Settings → Policy](/settings#policy), Phlox will prompt for explicit patient consent before starting **any mode that records the consultation** — an Ambient recording or a [Live agent](/features/live-agent) session.
 
-- The consent prompt appears the first time you start the scribe for that encounter.
-- The consent state is persisted per encounter so you are not re-prompted mid-visit.
+- The consent prompt appears the first time you start the scribe for that patient.
+- The consent state is remembered **per patient**, so you are not re-prompted on subsequent encounters.
 - This is intended to support workflows where documented patient consent is required before recording.
 
 > Even with consent captured, you remain responsible for ensuring that making any recording is lawful in your jurisdiction. See [Limitations & Warnings](/limitations).
+
+## Switching Patients
+
+If the current note or letter has unsaved changes when you switch to another patient in the workspace, Phlox asks you to confirm before discarding them. A running [live agent](/features/live-agent) session is stopped automatically on switch.

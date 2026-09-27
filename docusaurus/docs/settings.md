@@ -8,7 +8,7 @@ import modelsDark from "@site/static/img/local-model-manager-dark.webp";
 
 Phlox is configured almost entirely through the in-app **Settings** page. Configuration lives in the encrypted database (not in files), so changes persist with your data. Most settings autosave.
 
-Settings is divided into three top-level panels: **User Settings** (per user), plus **Admin Settings** and **Prompt Settings**, which are only visible to admins — global model endpoints, prompts, and options are admin-only writes (see [Users & Authentication](/authentication#roles)). On the single-user desktop app you are always the admin, so all panels show.
+Settings is divided into two top-level panels: **User Settings** (per user) and **Admin Settings**, which is only visible to admins — global model endpoints, system prompts, and policies are admin-only writes (see [Users & Authentication](/authentication#roles)). On the single-user desktop app you are always the admin, so everything shows.
 
 {/* Screenshot: capture 1600x1000, light + dark; files: settings-overview-{light,dark}.webp */}
 <ThemedShot light={settingsLight} dark={settingsDark} alt="Settings page" width={500} />
@@ -21,7 +21,6 @@ Settings is divided into three top-level panels: **User Settings** (per user), p
 | **Note Templates** | Create, edit, and delete [note templates](/features/templates). |
 | **Letter Templates** | Manage [correspondence](/features/correspondence) templates, including the protected "Dictation" template. |
 | **Quick Chat** | Configure up to three quick-chat buttons (label + prompt) shown in the chat surfaces. |
-| **Advanced** | `Store Original PDFs` (keep uploaded PDF binaries) and `Require patient consent for ambient scribing` (see [Patients](/features/patients#ambient-scribe-consent)). |
 
 ### Language
 
@@ -43,6 +42,7 @@ On desktop you can run inference locally. The panel toggles between **Local** an
 
 {/* Screenshot: capture 1600x1000, light + dark; files: local-model-manager-{light,dark}.webp */}
 <ThemedShot light={modelsLight} dark={modelsDark} alt="Local Model Manager" width={500} />
+- **Chat / Summary tabs** — the [system prompt](#system-prompts) editors.
 - **Tools tab** — see [Tools](#tools) below.
 
 ### Remote mode
@@ -50,9 +50,16 @@ On desktop you can run inference locally. The panel toggles between **Local** an
 When using external endpoints (required for Docker; optional on desktop):
 
 - **Whisper tab** — transcription API base URL, model name, and API key. A live status indicator shows endpoint reachability.
-- **LLM tab** — OpenAI-compatible / Ollama base URL, API key, **primary model**, **secondary model**, the [document/image processing mode](#document-and-image-processing-mode), and a [vision capability probe](#vision-capability-probe).
+- **LLM tab** — OpenAI-compatible / Ollama base URL, API key, **primary model**, **secondary model**, the [document/image processing mode](#document-and-image-processing-mode), a [vision capability probe](#vision-capability-probe), and **Letter Generation Temperature** (0–2, default 0.6 — the sampling temperature used when generating [letters](/features/correspondence); higher values produce more varied writing, with a reset-to-default).
 - **RAG tab** — choose the embedding model. Changing it triggers a re-embedding pass across all document collections, with a progress indicator.
 - **Tools tab** — see [Tools](#tools) below.
+
+### Policy
+
+Practice-level system policy, applied to every user:
+
+- **Store Original PDFs** — keep uploaded PDF binaries in the database (increases storage usage).
+- **Require patient consent for ambient scribing** — prompt for the patient's consent before any consultation recording (Ambient or [Live agent](/features/live-agent)). Consent is remembered per patient. See [Patients → Ambient Scribe Consent](/features/patients#ambient-scribe-consent).
 
 #### Document and Image Processing Mode
 
@@ -90,11 +97,8 @@ Connect external tool servers via the **Model Context Protocol** (SSE transport)
 
 Discovered MCP tools appear alongside the built-in tools in chat.
 
-## Prompt Settings
+## System Prompts
 
-Power users can customise the system prompts Phlox sends to the LLM:
+Power users can customise the system prompts Phlox sends to the LLM. The editors live as tabs inside the Admin Settings panel — **Chat** (chat interactions) and **Summary** (patient summary generation) — each an editable system-prompt text area with a **Reset to Default** button.
 
-- **Refinement**, **Summary**, **Chat**, **Letter** — editable system-prompt text areas, each with a reset-to-default.
-- **Advanced** — `num_ctx` for the primary and secondary models, and the letter `temperature`.
-
-> A warning in this panel reminds you that the defaults are carefully tuned. Change them only if you understand the impact on output quality.
+> A warning in these tabs reminds you that the defaults are carefully tuned. Change them only if you understand the impact on output quality.

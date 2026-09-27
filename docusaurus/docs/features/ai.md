@@ -48,6 +48,8 @@ Each tool can be toggled in [Settings → Tools](/settings#built-in-tools). Tool
 
 `transcript_search` and `direct_response` are chat-only (excluded from the Chart Insights agent).
 
+The same tool registry — including connected MCP servers — powers the [live agent](/features/live-agent), which adds session tools for drafting the note in real time, staging artifacts, and curating the wrap-up job list by voice.
+
 ### MCP Server Integration
 
 Connect external tool servers via the **Model Context Protocol** (SSE transport):
@@ -104,7 +106,7 @@ Adaptive Refinement is how Phlox learns your documentation style. It runs **auto
 
 1. **Snapshot at transcription time.** When a fresh transcription produces note fields, Phlox stashes a copy of what the AI generated. (Restored or reprocessed transcripts are **not** snapshotted — only the first transcription after starting or editing an encounter.)
 2. **You edit the note.** As you refine the generated fields in the Summary panel, your edits are tracked.
-3. **Diff at save time.** When you click **Save Encounter** or finish via **Wrap Up → Confirm & Finish**, Phlox compares each template field's original AI output against your edited version. Only fields where **both** versions exist **and** meaningfully differ (whitespace-only changes are ignored) produce a signal.
+3. **Diff at save time.** When you click **Save Encounter** or finish via **Wrap Up → Confirm & Finish**, Phlox compares each template field's original AI output against your edited version. Only fields where **both** versions exist **and** the change exceeds a Levenshtein-based change-ratio threshold (0.4 — smaller edits are ignored) produce a signal.
 4. **The server learns.** For each changed field, the before/after text is sent to the LLM, which issues a single instruction update (`replace` / `modify` / `add` / `keep_unchanged`). These instructions are attached to the template field and steer future generations toward your style.
 5. **Consolidation.** Per-field instructions are consolidated automatically once they reach a maximum (8). They are managed automatically and aren't shown in the UI.
 

@@ -30,6 +30,12 @@ const FAQ = ({ bgColor }) => {
       link: { label: "Overview", to: docsHref },
     },
     {
+      question: "What is Live Agent mode?",
+      answer:
+        "A real-time scribing mode. Instead of recording the consult and generating the note afterwards, the live agent listens as the consultation happens, drafts the note while you talk, and acts on spoken requests — drafting letters, filling PDF forms, running calculations. Ending the visit opens a wrap-up flow you can curate entirely by voice.",
+      link: { label: "Live Agent", to: `${docsHref}/features/live-agent` },
+    },
+    {
       question: "Can multiple clinicians use one Phlox instance?",
       answer:
         "Yes. Docker deployments have built-in username/password accounts with admin and clinician roles. The first visit runs a setup wizard to create the admin, and each user's encounters, letters, templates, and knowledge-base collections stay their own. The desktop app remains single-user.",

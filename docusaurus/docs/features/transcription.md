@@ -1,6 +1,6 @@
 import ThemedShot from "@site/src/components/ThemedShot";
 import InlineIcon from "@site/src/components/InlineIcon";
-import { FaComments, FaKeyboard } from "react-icons/fa";
+import { FaComments, FaKeyboard, FaBolt } from "react-icons/fa";
 import scribeLight from "@site/static/img/scribe-pillbox-light.webp";
 import scribeDark from "@site/static/img/scribe-pillbox-dark.webp";
 import documentsLight from "@site/static/img/documents-light.webp";
@@ -8,14 +8,15 @@ import documentsDark from "@site/static/img/documents-dark.webp";
 
 # Medical Transcription
 
-Phlox converts audio recordings into structured clinical notes. You can record ambient audio, dictate, or upload audio files; in each case the audio is transcribed and the transcript is turned into a note based on your selected [template](/features/templates).
+Phlox converts audio recordings into structured clinical notes. You can record ambient audio, dictate, run the live agent, or upload audio files; in each case the audio is transcribed and the transcript is turned into a note based on your selected [template](/features/templates).
 
 ## Scribing Modes
 
 - <InlineIcon icon={FaComments} label="Ambient mode" /> **Ambient** — record the encounter; Phlox transcribes and generates the note.
 - <InlineIcon icon={FaKeyboard} label="Dictate mode" /> **Dictate** — dictate content that the LLM formats into the note fields.
+- <InlineIcon icon={FaBolt} label="Live agent mode" /> **Live agent** — drafts the note in realtime while the consultation happens, and acts on spoken requests. See the dedicated [Live Agent](/features/live-agent) page.
 
-Toggle between modes in the scribe controls on the encounter workspace. You can also **drag and drop an audio file** directly onto the scribe pill box to transcribe it.
+Switch modes with the **mode dial** (the left button) on the scribe pill box in the encounter workspace; your choice is remembered between visits. The mode dial is locked while a recording or live session is in progress. You can also **drag and drop an audio file** directly onto the pill box to transcribe it.
 
 {/* Screenshot: capture 1200x500, light + dark; files: scribe-pillbox-{light,dark}.webp */}
 <ThemedShot light={scribeLight} dark={scribeDark} alt="Scribe pill box" width={500} />
@@ -27,12 +28,16 @@ Toggle between modes in the scribe controls on the encounter workspace. You can 
 
 ### Consent
 
-If **Require patient consent for ambient scribing** is enabled in [Settings → Advanced](/settings#user-settings), Phlox prompts for explicit patient consent before starting an ambient recording for an encounter. See [Patients → Ambient Scribe Consent](/features/patients#ambient-scribe-consent).
+If **Require patient consent for ambient scribing** is enabled in [Settings → Admin Settings → Policy](/settings#policy), Phlox prompts for explicit patient consent before starting **any mode that records the consultation** — Ambient or Live agent. See [Patients → Ambient Scribe Consent](/features/patients#ambient-scribe-consent).
+
+### Recording requirements
+
+To start any recording (or a live session) the encounter needs a patient **name, date of birth, and UR number** — the pill box's record button stays disabled until they're present.
 
 ## Usage
 
-1. **Record / upload / dictate**
-   - Use in-browser recording (with pause/resume) or drag-and-drop an audio file, or switch to Dictate mode.
+1. **Record / upload / dictate / go live**
+   - Use in-browser recording (with pause/resume), drag-and-drop an audio file, switch to Dictate mode, or start a [live agent](/features/live-agent) session.
    - You can also upload a document (PDF, Word, or .txt) via the **Document Upload** button in the [Floating Action Menu](/features/patients#floating-action-menu) — see [Document Upload](#document-upload) below.
 2. **Generate the note**
    - Audio is transcribed (Whisper/parakeet.cpp).

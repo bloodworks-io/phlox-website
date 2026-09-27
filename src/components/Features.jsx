@@ -22,6 +22,7 @@ import {
   FaUserMd,
   FaUsers,
   FaLanguage,
+  FaBolt,
 } from "react-icons/fa";
 import SectionHeading from "./SectionHeading";
 import MediaPlaceholder from "./MediaPlaceholder";
@@ -157,6 +158,12 @@ const Features = ({ bgColor }) => {
   ];
 
   const smallFeatures = [
+    {
+      title: "Live Agent Scribing",
+      description:
+        "Drafts the note in realtime while you consult — spoken commands, letters by voice, and a voice-driven wrap-up.",
+      icon: FaBolt,
+    },
     {
       title: "Flexible Templates",
       description:

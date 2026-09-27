@@ -23,11 +23,18 @@ PDF Form Templates are managed alongside your document collections on the **Docu
 4. Name each field so the AI can map encounter data to it. Field names should be descriptive (e.g. `patient_name`, `date_of_birth`, `referring_clinic`).
 5. Save the template.
 
+While you edit, the builder renders a **live WYSIWYG preview**: each field shows its sample text exactly as it will print (same font metrics and shrink-to-fit behaviour as the final fill), and any field whose content **overflows** is outlined in red and flagged with a ⚠ next to its name. A compact field inventory alongside the page lets you jump to or delete any field.
+
 ### Auto-detecting Fields
 
-If your configured model supports vision, click **Auto-detect Fields**. Phlox renders the PDF with a ruler overlay and asks the vision model to identify fillable fields and their types automatically. You can then review and adjust the detected fields before saving.
+Click **Auto-detect Fields** and Phlox works in two passes:
 
-> The auto-detect feature requires a vision-capable model. See [Settings](/settings#document-and-image-processing-mode) to check or probe vision support.
+1. **AcroForm first (no AI):** pages that already contain PDF form widgets have their fields harvested directly from the PDF with **exact geometry** — precise, immediate, and model-free.
+2. **Vision for the rest:** pages without widgets are rendered and sent to the vision model — one request per page, in parallel — which identifies the *fillable regions* (input boxes, underlines, cells) rather than the printed labels. Detected regions land as fractional coordinates converted against each page's real dimensions.
+
+You can then review and adjust the detected fields before saving.
+
+> Vision detection requires a vision-capable model. See [Settings](/settings#document-and-image-processing-mode) to check or probe vision support. AcroForm harvesting works with any configuration.
 
 ### Replacing the Underlying PDF
 
@@ -47,7 +54,9 @@ The primary flow is through the chat interface. When you ask the agent to fill a
 
 ### 2. Manual
 
-A manual fill modal is available from the Form Templates tab for ad-hoc fills, though the AI-driven flow is the intended path for everyday use.
+A manual fill modal is available from the Form Templates tab for ad-hoc fills, though the AI-driven flow is the intended path for everyday use. The modal includes a **Preview** button that renders the filled PDF pages exactly as they will download, so you can check the result before generating the file.
+
+> During a [live agent](/features/live-agent) session you can also ask for a form by voice (*"fill the CDU referral form"*); the agent stages the filled PDF under **Prepared for review**, where it can be downloaded directly.
 
 ## Notes
 

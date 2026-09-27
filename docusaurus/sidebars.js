@@ -12,6 +12,7 @@ const sidebars = {
       items: [
         "features/patients",
         "features/transcription",
+        "features/live-agent",
         "features/language",
         "features/templates",
         "features/task-manager",
