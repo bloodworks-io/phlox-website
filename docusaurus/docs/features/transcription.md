@@ -26,6 +26,12 @@ Switch modes with the **mode dial** (the left button) on the scribe pill box in 
 - **Desktop app:** uses the bundled **parakeet.cpp** engine (Omi Med STT v1) by default — no external service required. The default model is English-only; selecting a non-English [language](/features/language) offers a downloadable multilingual Parakeet model (25 European languages).
 - **Docker / custom:** point Phlox at any Whisper-compatible endpoint in [Settings → Admin Settings → Whisper](/settings#remote-mode). Remote endpoints support any language.
 
+### Streaming capture
+
+On the desktop app, Ambient and Dictate recordings are transcribed **while you record**: speech is segmented into utterances on-device and each one is transcribed (and speaker-labeled) as it finalizes. The growing transcript also pre-warms the local model's prompt cache. If anything goes wrong mid-recording, Phlox automatically falls back to transcribing the full recording at stop.
+
+In Docker deployments this is off by default (some practices prefer a single batch call to their transcription server); administrators can enable **Streaming capture** in [Settings → Admin Settings → Policy](/settings#policy). When enabled, speaker labels come from Phlox itself, so a plain non-diarizing Whisper endpoint is sufficient for Ambient mode.
+
 ### Consent
 
 If **Require patient consent for ambient scribing** is enabled in [Settings → Admin Settings → Policy](/settings#policy), Phlox prompts for explicit patient consent before starting **any mode that records the consultation** — Ambient or Live agent. See [Patients → Ambient Scribe Consent](/features/patients#ambient-scribe-consent).

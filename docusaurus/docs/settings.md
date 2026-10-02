@@ -60,6 +60,8 @@ Practice-level system policy, applied to every user:
 
 - **Store Original PDFs** — keep uploaded PDF binaries in the database (increases storage usage).
 - **Require patient consent for ambient scribing** — prompt for the patient's consent before any consultation recording (Ambient or [Live agent](/features/live-agent)). Consent is remembered per patient. See [Patients → Ambient Scribe Consent](/features/patients#ambient-scribe-consent).
+- **Streaming capture** — transcribe Ambient and Dictate recordings utterance-by-utterance while recording, with speaker labels from Phlox itself, so the note is ready faster at stop. Docker-only setting (always on in the desktop app); see [Streaming capture](/features/transcription#streaming-capture).
+- **Prompt cache warming** — pre-warm the note-generation prompt with the transcript as it grows. On by default with the bundled local model; enabling it overrides that for any endpoint. Useful for self-hosted inference (vLLM, Ollama, llama.cpp servers), but be aware it multiplies billed input tokens on metered cloud APIs.
 
 #### Document and Image Processing Mode
 
