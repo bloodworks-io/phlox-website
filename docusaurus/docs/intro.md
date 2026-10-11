@@ -14,6 +14,12 @@ Welcome to the Phlox documentation. Phlox is a free, open-source, **local-first 
 
 > **Before using Phlox, read [Limitations & Warnings](/limitations).** Phlox is experimental, is **not** a certified medical device, and is **not** suitable for production clinical use as provided.
 
+:::tip Try it in your browser
+
+**[Phlox Web](https://phlox-web.bloodworks.io)** is the browser edition: the scribe, transcription and letter generation run entirely in your browser on your own GPU. No install, no server, nothing uploaded. A Chrome-based browser is recommended for GPU acceleration; elsewhere it falls back to slower CPU execution.
+
+:::
+
 {/* Screenshot: capture 1600x1000, light + dark; files: encounter-workspace-{light,dark}.webp */}
 <ThemedShot light={heroLight} dark={heroDark} alt="Phlox encounter workspace" width={720} />
 

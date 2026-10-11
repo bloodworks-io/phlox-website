@@ -13,6 +13,7 @@ import {
 import {
   FaDownload,
   FaBook,
+  FaGlobe,
   FaLock,
   FaCodeBranch,
   FaTag,
@@ -200,7 +201,7 @@ const Hero = () => {
           Free, open-source patient management with AI transcription,
           real-time live scribing, clinical note generation, and a built-in
           assistant — running on your own hardware, alone or with your team.
-          Your data never leaves it.
+          Your data never leaves your machine.
         </Text>
 
         {/* CTAs */}
@@ -220,6 +221,17 @@ const Hero = () => {
             _hover={{ textDecoration: "none" }}
           >
             Download {LATEST_VERSION}
+          </Button>
+          <Button
+            as={Link}
+            href="https://phlox-web.bloodworks.io"
+            isExternal
+            size="lg"
+            variant="ghostDark"
+            leftIcon={<FaGlobe />}
+            _hover={{ textDecoration: "none" }}
+          >
+            Free Web Version
           </Button>
           <Button
             as={Link}

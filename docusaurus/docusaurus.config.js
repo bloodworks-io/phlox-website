@@ -76,6 +76,12 @@ const config = {
             target: "_self",
           },
           {
+            href: "https://phlox-web.bloodworks.io",
+            label: "Phlox Web",
+            position: "right",
+            target: "_blank",
+          },
+          {
             href: "https://github.com/bloodworks-io/phlox",
             label: "GitHub",
             position: "right",
